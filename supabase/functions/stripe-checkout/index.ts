@@ -11,7 +11,6 @@ const stripe = new Stripe(stripeSecret, {
   },
 });
 
-// Helper function to create responses with CORS headers
 function corsResponse(body: string | object | null, status = 200) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -19,7 +18,6 @@ function corsResponse(body: string | object | null, status = 200) {
     'Access-Control-Allow-Headers': '*',
   };
 
-  // For 204 No Content, don't include Content-Type or body
   if (status === 204) {
     return new Response(null, { status, headers });
   }
@@ -43,13 +41,24 @@ Deno.serve(async (req) => {
       return corsResponse({ error: 'Method not allowed' }, 405);
     }
 
-    const { price_id, success_url, cancel_url, mode } = await req.json();
+    const { price_id, price_ids, success_url, cancel_url, mode } = await req.json();
+
+    if (!price_id && !price_ids) {
+      return corsResponse({ error: 'Missing required parameter: price_id or price_ids' }, 400);
+    }
+
+    if (price_ids && !Array.isArray(price_ids)) {
+      return corsResponse({ error: 'Expected parameter price_ids to be an array' }, 400);
+    }
+
+    if (price_ids && price_ids.length === 0) {
+      return corsResponse({ error: 'price_ids array cannot be empty' }, 400);
+    }
 
     const error = validateParameters(
-      { price_id, success_url, cancel_url, mode },
+      { success_url, cancel_url, mode },
       {
         cancel_url: 'string',
-        price_id: 'string',
         success_url: 'string',
         mode: { values: ['payment', 'subscription'] },
       },
@@ -159,14 +168,13 @@ Deno.serve(async (req) => {
       }
     }
 
+    const lineItems = price_ids
+      ? price_ids.map((id: string) => ({ price: id, quantity: 1 }))
+      : [{ price: price_id, quantity: 1 }];
+
     const sessionConfig: any = {
       payment_method_types: ['card'],
-      line_items: [
-        {
-          price: price_id,
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       mode,
       success_url,
       cancel_url,

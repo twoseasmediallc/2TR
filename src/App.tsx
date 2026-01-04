@@ -9,7 +9,7 @@ import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
 import { stripeProducts } from './stripe-config';
-import { createCheckoutSession, getUserSubscription, type UserSubscription } from './lib/stripe';
+import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscription, type UserSubscription } from './lib/stripe';
 
 function MainApp() {
   const { user, signOut } = useAuth();
@@ -1119,13 +1119,17 @@ function MainApp() {
                         if (cartItems.length === 0) return;
                         setCheckoutLoading('cart');
                         try {
-                          for (const rug of cartItems) {
-                            if (rug.stripe_price_id) {
-                              const { url } = await createCheckoutSession(rug.stripe_price_id, 'payment');
-                              window.location.href = url;
-                              return;
-                            }
+                          const priceIds = cartItems
+                            .map(rug => rug.stripe_price_id)
+                            .filter((id): id is string => id !== null && id !== undefined);
+
+                          if (priceIds.length === 0) {
+                            alert('No valid items in cart');
+                            return;
                           }
+
+                          const { url } = await createCheckoutSessionForCart(priceIds, 'payment');
+                          window.location.href = url;
                         } catch (error) {
                           console.error('Checkout error:', error);
                           alert('Unable to process checkout. Please try again.');

@@ -1,47 +1,52 @@
-import { supabase } from './supabase';
+import { createClient } from '@supabase/supabase-js';
 
-export async function signUp(email: string, password: string, name?: string) {
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export interface AuthUser {
+  id: string;
+  email: string;
+}
+
+export interface AuthState {
+  user: AuthUser | null;
+  loading: boolean;
+}
+
+export const signUp = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: {
-        name: name || '',
-      },
-    },
+      emailRedirectTo: undefined
+    }
   });
+  
+  return { data, error };
+};
 
-  if (error) {
-    return { success: false, error: error.message };
-  }
-
-  return { success: true, user: data.user };
-}
-
-export async function signIn(email: string, password: string) {
+export const signIn = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
-    password,
+    password
   });
+  
+  return { data, error };
+};
 
-  if (error) {
-    return { success: false, error: error.message };
-  }
-
-  return { success: true, user: data.user };
-}
-
-export async function signOut() {
+export const signOut = async () => {
   const { error } = await supabase.auth.signOut();
+  return { error };
+};
 
-  if (error) {
-    return { success: false, error: error.message };
-  }
+export const getCurrentUser = async () => {
+  const { data: { user }, error } = await supabase.auth.getUser();
+  return { user, error };
+};
 
-  return { success: true };
-}
-
-export async function getCurrentUser() {
-  const { data: { user } } = await supabase.auth.getUser();
-  return user;
-}
+export const getSession = async () => {
+  const { data: { session }, error } = await supabase.auth.getSession();
+  return { session, error };
+};

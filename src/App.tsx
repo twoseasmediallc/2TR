@@ -1,10 +1,18 @@
 import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './components/AuthProvider';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { LoginPage } from './pages/LoginPage';
+import { SuccessPage } from './pages/SuccessPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
+import { stripeProducts } from './stripe-config';
+import { createCheckoutSession, getUserSubscription, type UserSubscription } from './lib/stripe';
 
-function App() {
+function MainApp() {
+  const { user, signOut } = useAuth();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [selectedDimension, setSelectedDimension] = useState<string>('');
   const [customWidth, setCustomWidth] = useState('');
@@ -29,6 +37,8 @@ function App() {
   const [trackingInfo, setTrackingInfo] = useState<TrackingInfo | null>(null);
   const [trackingError, setTrackingError] = useState<string | null>(null);
   const [isTrackingLoading, setIsTrackingLoading] = useState(false);
+  const [subscription, setSubscription] = useState<UserSubscription | null>(null);
+  const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
 
   const formatInchesToFeet = (inches: string) => {
     const totalInches = parseInt(inches);
@@ -42,7 +52,18 @@ function App() {
 
   useEffect(() => {
     loadPremadeRugs();
+    if (user) {
+      loadUserSubscription();
+    }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      loadUserSubscription();
+    } else {
+      setSubscription(null);
+    }
+  }, [user]);
 
   const loadPremadeRugs = async () => {
     setIsLoadingRugs(true);
@@ -56,8 +77,43 @@ function App() {
     setIsLoadingRugs(false);
   };
 
+  const loadUserSubscription = async () => {
+    try {
+      const userSubscription = await getUserSubscription();
+      setSubscription(userSubscription);
+    } catch (error) {
+      console.error('Error loading subscription:', error);
+    }
+  };
+
   const handleAddToCart = (rug: PremadeRug) => {
-    setCartItems([...cartItems, rug]);
+    if (!user) {
+      window.location.href = '/login';
+      return;
+    }
+    handleStripeCheckout(rug.stripe_price_id!);
+  };
+
+  const handleStripeCheckout = async (priceId: string) => {
+    if (!user) {
+      window.location.href = '/login';
+      return;
+    }
+
+    setCheckoutLoading(priceId);
+    
+    try {
+      const product = stripeProducts.find(p => p.priceId === priceId);
+      const mode = product?.mode || 'payment';
+      
+      const { url } = await createCheckoutSession(priceId, mode);
+      window.location.href = url;
+    } catch (error) {
+      console.error('Checkout error:', error);
+      // You could show an error message here
+    } finally {
+      setCheckoutLoading(null);
+    }
   };
 
   const handleTrackShipment = async (e: React.FormEvent) => {
@@ -208,6 +264,28 @@ function App() {
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 lg:ml-4 flex-shrink-0">
+                {user ? (
+                  <>
+                    {subscription && subscription.subscription_status !== 'not_started' && (
+                      <div className="hidden sm:block text-xs text-orange-400 font-medium">
+                        {subscription.subscription_status === 'active' ? 'Premium' : subscription.subscription_status}
+                      </div>
+                    )}
+                    <button
+                      onClick={signOut}
+                      className="text-gray-100 hover:text-orange-500 transition-colors text-sm font-medium"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <a
+                    href="/login"
+                    className="text-gray-100 hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Sign In
+                  </a>
+                )}
                 <button
                   onClick={() => setShowCartModal(true)}
                   className="text-gray-100 hover:text-orange-500 transition-colors relative"
@@ -263,6 +341,25 @@ function App() {
                 >
                   Custom Rugs
                 </a>
+                {user ? (
+                  <button
+                    onClick={() => {
+                      setShowMobileMenu(false);
+                      signOut();
+                    }}
+                    className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2 text-left"
+                  >
+                    Sign Out
+                  </button>
+                ) : (
+                  <a
+                    href="/login"
+                    onClick={() => setShowMobileMenu(false)}
+                    className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
+                  >
+                    Sign In
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -525,8 +622,16 @@ function App() {
                         <button
                           onClick={() => handleAddToCart(rug)}
                           className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                          disabled={checkoutLoading === rug.stripe_price_id}
                         >
-                          Add to Cart
+                          {checkoutLoading === rug.stripe_price_id ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
+                              Processing...
+                            </>
+                          ) : (
+                            'Buy Now'
+                          )}
                         </button>
                       </div>
                     </div>
@@ -1014,59 +1119,45 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <div className="space-y-3 sm:space-y-4 mb-6">
-                    {cartItems.map((item, index) => (
+                  <div className="space-y-4 mb-6">
+                    {stripeProducts.map((product) => (
                       <div
-                        key={index}
-                        className="flex gap-3 sm:gap-4 bg-gray-800/30 rounded-lg sm:rounded-xl p-3 sm:p-4 border-2 border-gray-800"
+                        key={product.priceId}
+                        className="flex gap-4 bg-gray-800/30 rounded-xl p-4 border-2 border-gray-800"
                       >
-                        <div className="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 rounded-lg overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
-                          {item.image ? (
-                            <img
-                              src={item.image}
-                              alt={item.title || 'Rug'}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <Package className="w-8 h-8 sm:w-12 sm:h-12 text-gray-700" strokeWidth={1.5} />
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-base sm:text-xl font-semibold text-white mb-1 sm:mb-2 truncate">
-                            {item.title || 'Untitled Rug'}
+                        <div className="flex-1">
+                          <h4 className="text-xl font-semibold text-white mb-2">
+                            {product.name}
                           </h4>
-                          <p className="text-gray-400 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">
-                            {item.description || 'No description available'}
+                          <p className="text-gray-400 text-sm mb-3">
+                            {product.description}
                           </p>
-                          <p className="text-lg sm:text-2xl font-bold text-orange-500">
-                            ${item.price ? parseFloat(item.price).toFixed(2) : '0.00'}
+                          <p className="text-2xl font-bold text-orange-500">
+                            ${product.price.toFixed(2)}
                           </p>
                         </div>
                         <button
-                          onClick={() => setCartItems(cartItems.filter((_, i) => i !== index))}
-                          className="text-gray-400 hover:text-red-500 transition-colors self-start"
+                          onClick={() => handleStripeCheckout(product.priceId)}
+                          disabled={checkoutLoading === product.priceId}
+                          className="px-6 py-3 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors"
                         >
-                          <X className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                          {checkoutLoading === product.priceId ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
+                              Processing...
+                            </>
+                          ) : (
+                            'Buy Now'
+                          )}
                         </button>
                       </div>
                     ))}
                   </div>
 
-                  <div className="border-t-2 border-gray-800 pt-4 sm:pt-6">
-                    <div className="flex items-center justify-between mb-4 sm:mb-6">
-                      <span className="text-xl sm:text-2xl font-semibold text-white">Total:</span>
-                      <span className="text-2xl sm:text-3xl font-bold text-orange-500">
-                        ${cartItems.reduce((total, item) => total + (item.price ? parseFloat(item.price) : 0), 0).toFixed(2)}
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => window.location.href = 'https://buy.stripe.com/test_cNi7sKdGa0vo8vQ1st8EM00'}
-                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-base sm:text-lg"
-                    >
-                      Proceed to Checkout
-                    </button>
+                  <div className="text-center">
+                    <p className="text-gray-400 mb-4">
+                      Select a product above to purchase
+                    </p>
                   </div>
                 </>
               )}
@@ -1083,6 +1174,25 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/success" element={
+            <ProtectedRoute>
+              <SuccessPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/" element={<MainApp />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

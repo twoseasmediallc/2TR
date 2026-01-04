@@ -282,7 +282,7 @@ function MainApp() {
         </div>
 
         {showMobileMenu && (
-          <div className="lg:hidden border-t border-gray-800 bg-black/95 backdrop-blur-sm">
+          <div className="lg:hidden border-t border-gray-800 bg-black/95 backdrop-blur-sm max-h-[calc(100vh-120px)] overflow-y-auto">
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-4">
                 <a

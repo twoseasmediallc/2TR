@@ -91,7 +91,16 @@ function MainApp() {
       alert('This rug is not available for purchase at this time.');
       return;
     }
-    handleStripeCheckout(rug.stripe_price_id);
+    const isAlreadyInCart = cartItems.some(item => item.id === rug.id);
+    if (isAlreadyInCart) {
+      alert('This item is already in your cart!');
+      return;
+    }
+    setCartItems([...cartItems, rug]);
+  };
+
+  const handleRemoveFromCart = (rugId: number) => {
+    setCartItems(cartItems.filter(item => item.id !== rugId));
   };
 
   const handleStripeCheckout = async (priceId: string) => {
@@ -256,28 +265,6 @@ function MainApp() {
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 lg:ml-4 flex-shrink-0">
-                {user ? (
-                  <>
-                    {subscription && subscription.subscription_status !== 'not_started' && (
-                      <div className="hidden sm:block text-xs text-orange-400 font-medium">
-                        {subscription.subscription_status === 'active' ? 'Premium' : subscription.subscription_status}
-                      </div>
-                    )}
-                    <button
-                      onClick={signOut}
-                      className="text-gray-100 hover:text-orange-500 transition-colors text-sm font-medium"
-                    >
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <a
-                    href="/login"
-                    className="text-gray-100 hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    Sign In
-                  </a>
-                )}
                 <button
                   onClick={() => setShowCartModal(true)}
                   className="text-gray-100 hover:text-orange-500 transition-colors relative"
@@ -333,25 +320,6 @@ function MainApp() {
                 >
                   Custom Rugs
                 </a>
-                {user ? (
-                  <button
-                    onClick={() => {
-                      setShowMobileMenu(false);
-                      signOut();
-                    }}
-                    className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2 text-left"
-                  >
-                    Sign Out
-                  </button>
-                ) : (
-                  <a
-                    href="/login"
-                    onClick={() => setShowMobileMenu(false)}
-                    className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
-                  >
-                    Sign In
-                  </a>
-                )}
               </div>
             </div>
           </div>
@@ -614,16 +582,8 @@ function MainApp() {
                         <button
                           onClick={() => handleAddToCart(rug)}
                           className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
-                          disabled={checkoutLoading === rug.stripe_price_id}
                         >
-                          {checkoutLoading === rug.stripe_price_id ? (
-                            <>
-                              <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
-                              Processing...
-                            </>
-                          ) : (
-                            'Buy Now'
-                          )}
+                          Add to Cart
                         </button>
                       </div>
                     </div>
@@ -1112,44 +1072,79 @@ function MainApp() {
               ) : (
                 <>
                   <div className="space-y-4 mb-6">
-                    {stripeProducts.map((product) => (
+                    {cartItems.map((rug) => (
                       <div
-                        key={product.priceId}
+                        key={rug.id}
                         className="flex gap-4 bg-gray-800/30 rounded-xl p-4 border-2 border-gray-800"
                       >
+                        {rug.image && (
+                          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0">
+                            <img
+                              src={rug.image}
+                              alt={rug.title || 'Rug'}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
                         <div className="flex-1">
                           <h4 className="text-xl font-semibold text-white mb-2">
-                            {product.name}
+                            {rug.title || 'Untitled Rug'}
                           </h4>
-                          <p className="text-gray-400 text-sm mb-3">
-                            {product.description}
+                          <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+                            {rug.description || 'No description available'}
                           </p>
                           <p className="text-2xl font-bold text-orange-500">
-                            ${product.price.toFixed(2)}
+                            ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
                           </p>
                         </div>
                         <button
-                          onClick={() => handleStripeCheckout(product.priceId)}
-                          disabled={checkoutLoading === product.priceId}
-                          className="px-6 py-3 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors"
+                          onClick={() => handleRemoveFromCart(rug.id)}
+                          className="text-gray-400 hover:text-red-500 transition-colors self-start"
                         >
-                          {checkoutLoading === product.priceId ? (
-                            <>
-                              <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
-                              Processing...
-                            </>
-                          ) : (
-                            'Buy Now'
-                          )}
+                          <X className="w-6 h-6" strokeWidth={1.5} />
                         </button>
                       </div>
                     ))}
                   </div>
 
-                  <div className="text-center">
-                    <p className="text-gray-400 mb-4">
-                      Select a product above to purchase
-                    </p>
+                  <div className="border-t-2 border-gray-800 pt-6">
+                    <div className="flex justify-between items-center mb-6">
+                      <span className="text-xl text-gray-300">Total:</span>
+                      <span className="text-3xl font-bold text-orange-500">
+                        ${cartItems.reduce((sum, rug) => sum + (rug.price ? parseFloat(rug.price) : 0), 0).toFixed(2)}
+                      </span>
+                    </div>
+                    <button
+                      onClick={async () => {
+                        if (cartItems.length === 0) return;
+                        setCheckoutLoading('cart');
+                        try {
+                          for (const rug of cartItems) {
+                            if (rug.stripe_price_id) {
+                              const { url } = await createCheckoutSession(rug.stripe_price_id, 'payment');
+                              window.location.href = url;
+                              return;
+                            }
+                          }
+                        } catch (error) {
+                          console.error('Checkout error:', error);
+                          alert('Unable to process checkout. Please try again.');
+                        } finally {
+                          setCheckoutLoading(null);
+                        }
+                      }}
+                      disabled={checkoutLoading === 'cart'}
+                      className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg"
+                    >
+                      {checkoutLoading === 'cart' ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin inline mr-2" />
+                          Processing...
+                        </>
+                      ) : (
+                        'Proceed to Checkout'
+                      )}
+                    </button>
                   </div>
                 </>
               )}

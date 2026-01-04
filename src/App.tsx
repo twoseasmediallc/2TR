@@ -87,30 +87,22 @@ function MainApp() {
   };
 
   const handleAddToCart = (rug: PremadeRug) => {
-    if (!user) {
-      window.location.href = '/login';
+    if (!rug.stripe_price_id) {
+      alert('This rug is not available for purchase at this time.');
       return;
     }
-    handleStripeCheckout(rug.stripe_price_id!);
+    handleStripeCheckout(rug.stripe_price_id);
   };
 
   const handleStripeCheckout = async (priceId: string) => {
-    if (!user) {
-      window.location.href = '/login';
-      return;
-    }
-
     setCheckoutLoading(priceId);
-    
+
     try {
-      const product = stripeProducts.find(p => p.priceId === priceId);
-      const mode = product?.mode || 'payment';
-      
-      const { url } = await createCheckoutSession(priceId, mode);
+      const { url } = await createCheckoutSession(priceId, 'payment');
       window.location.href = url;
     } catch (error) {
       console.error('Checkout error:', error);
-      // You could show an error message here
+      alert('Unable to process checkout. Please try again.');
     } finally {
       setCheckoutLoading(null);
     }

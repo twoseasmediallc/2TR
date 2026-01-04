@@ -9,6 +9,9 @@ export interface PremadeRug {
   price: string | null;
   date_sold: string | null;
   updated_at: string | null;
+  is_available: boolean;
+  stripe_price_id: string | null;
+  stripe_prod_id: string | null;
 }
 
 export async function fetchPremadeRugs(): Promise<{
@@ -19,7 +22,7 @@ export async function fetchPremadeRugs(): Promise<{
     const { data, error } = await supabase
       .from('Pre-made Rugs')
       .select('*')
-      .is('date_sold', null)
+      .eq('is_available', true)
       .order('created_at', { ascending: false });
 
     if (error) {

@@ -39,6 +39,7 @@ function MainApp() {
   const [isTrackingLoading, setIsTrackingLoading] = useState(false);
   const [subscription, setSubscription] = useState<UserSubscription | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
+  const [showLimitModal, setShowLimitModal] = useState(false);
 
   const formatInchesToFeet = (inches: string) => {
     const totalInches = parseInt(inches);
@@ -91,16 +92,21 @@ function MainApp() {
       alert('This rug is not available for purchase at this time.');
       return;
     }
-    const isAlreadyInCart = cartItems.some(item => item.id === rug.id);
-    if (isAlreadyInCart) {
-      alert('This item is already in your cart!');
+    const quantityInCart = cartItems.filter(item => item.id === rug.id).length;
+    if (quantityInCart >= 2) {
+      setShowLimitModal(true);
       return;
     }
     setCartItems([...cartItems, rug]);
   };
 
   const handleRemoveFromCart = (rugId: number) => {
-    setCartItems(cartItems.filter(item => item.id !== rugId));
+    const index = cartItems.findIndex(item => item.id === rugId);
+    if (index !== -1) {
+      const updatedCart = [...cartItems];
+      updatedCart.splice(index, 1);
+      setCartItems(updatedCart);
+    }
   };
 
   const handleStripeCheckout = async (priceId: string) => {
@@ -1072,39 +1078,47 @@ function MainApp() {
               ) : (
                 <>
                   <div className="space-y-4 mb-6">
-                    {cartItems.map((rug) => (
-                      <div
-                        key={rug.id}
-                        className="flex gap-4 bg-gray-800/30 rounded-xl p-4 border-2 border-gray-800"
-                      >
-                        {rug.image && (
-                          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0">
-                            <img
-                              src={rug.image}
-                              alt={rug.title || 'Rug'}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        )}
-                        <div className="flex-1">
-                          <h4 className="text-xl font-semibold text-white mb-2">
-                            {rug.title || 'Untitled Rug'}
-                          </h4>
-                          <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-                            {rug.description || 'No description available'}
-                          </p>
-                          <p className="text-2xl font-bold text-orange-500">
-                            ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => handleRemoveFromCart(rug.id)}
-                          className="text-gray-400 hover:text-red-500 transition-colors self-start"
+                    {Array.from(new Map(cartItems.map(item => [item.id, item])).values()).map((rug) => {
+                      const quantity = cartItems.filter(item => item.id === rug.id).length;
+                      return (
+                        <div
+                          key={rug.id}
+                          className="flex gap-4 bg-gray-800/30 rounded-xl p-4 border-2 border-gray-800"
                         >
-                          <X className="w-6 h-6" strokeWidth={1.5} />
-                        </button>
-                      </div>
-                    ))}
+                          {rug.image && (
+                            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0">
+                              <img
+                                src={rug.image}
+                                alt={rug.title || 'Rug'}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          )}
+                          <div className="flex-1">
+                            <h4 className="text-xl font-semibold text-white mb-2">
+                              {rug.title || 'Untitled Rug'}
+                            </h4>
+                            <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+                              {rug.description || 'No description available'}
+                            </p>
+                            <div className="flex items-center gap-4">
+                              <p className="text-2xl font-bold text-orange-500">
+                                ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
+                              </p>
+                              <p className="text-gray-400 text-sm">
+                                Quantity: {quantity}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => handleRemoveFromCart(rug.id)}
+                            className="text-gray-400 hover:text-red-500 transition-colors self-start"
+                          >
+                            <X className="w-6 h-6" strokeWidth={1.5} />
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <div className="border-t-2 border-gray-800 pt-6">
@@ -1152,6 +1166,28 @@ function MainApp() {
                   </div>
                 </>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showLimitModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-gray-900 rounded-xl border-2 border-orange-600 max-w-md w-full p-6">
+            <div className="text-center">
+              <div className="mx-auto mb-4 w-12 h-12 bg-orange-600/20 rounded-full flex items-center justify-center">
+                <AlertCircle className="w-6 h-6 text-orange-500" strokeWidth={2} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Quantity Limit Reached</h3>
+              <p className="text-gray-300 mb-6">
+                You can only add a maximum of 2 of the same rug to your cart.
+              </p>
+              <button
+                onClick={() => setShowLimitModal(false)}
+                className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+              >
+                OK
+              </button>
             </div>
           </div>
         </div>

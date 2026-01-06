@@ -11,11 +11,6 @@ export interface TrackingInfo {
   cut_option: string;
   created_at: string;
   updated_at: string;
-  is_order_placed: boolean;
-  is_in_production: boolean;
-  is_quality_check: boolean;
-  is_shipped: boolean;
-  is_delivered: boolean;
 }
 
 export async function lookupTracking(trackingNumber: string): Promise<{
@@ -43,13 +38,10 @@ export async function lookupTracking(trackingNumber: string): Promise<{
   }
 }
 
-export function getOrderStageIndex(trackingInfo: TrackingInfo): number {
-  if (trackingInfo.is_delivered) return 4;
-  if (trackingInfo.is_shipped) return 3;
-  if (trackingInfo.is_quality_check) return 2;
-  if (trackingInfo.is_in_production) return 1;
-  if (trackingInfo.is_order_placed) return 0;
-  return 0;
+export function getOrderStageIndex(status: string): number {
+  const stages = ['pending', 'in_production', 'quality_check', 'shipped', 'delivered'];
+  const index = stages.indexOf(status.toLowerCase());
+  return index === -1 ? 0 : index;
 }
 
 export function getOrderStageLabel(status: string): string {

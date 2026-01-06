@@ -494,7 +494,7 @@ function MainApp() {
                   { stage: 3, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped' },
                   { stage: 4, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered' }
                 ].map(({ stage, title, description, status }) => {
-                  const currentStage = trackingInfo ? getOrderStageIndex(trackingInfo) : -1;
+                  const currentStage = trackingInfo ? getOrderStageIndex(trackingInfo.status) : -1;
                   const isActive = stage <= currentStage;
                   const isCurrent = stage === currentStage;
 

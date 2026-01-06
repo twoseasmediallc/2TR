@@ -396,7 +396,7 @@ function MainApp() {
                   </p>
                   <p>
                    Every rug tells a story, and we're here to help you tell yours. 
-                   Too tough to tear, too beautiful to ignore! We are Two Tuft!
+                   Too tough to tear, too beautiful to ignore! We are, Two Tuft!
                   </p>
                 </div>
               </div>

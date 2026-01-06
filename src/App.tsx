@@ -1,10 +1,11 @@
 import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './components/AuthProvider';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { LoginPage } from './pages/LoginPage';
 import { SuccessPage } from './pages/SuccessPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, fetchCollectionRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
@@ -13,6 +14,7 @@ import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscriptio
 
 function MainApp() {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [selectedDimension, setSelectedDimension] = useState<string>('');
   const [customWidth, setCustomWidth] = useState('');
@@ -1234,39 +1236,14 @@ function MainApp() {
                       </span>
                     </div>
                     <button
-                      onClick={async () => {
+                      onClick={() => {
                         if (cartItems.length === 0) return;
-                        setCheckoutLoading('cart');
-                        try {
-                          const priceIds = cartItems
-                            .map(rug => rug.stripe_price_id)
-                            .filter((id): id is string => id !== null && id !== undefined);
-
-                          if (priceIds.length === 0) {
-                            alert('No valid items in cart');
-                            return;
-                          }
-
-                          const { url } = await createCheckoutSessionForCart(priceIds, 'payment');
-                          window.location.href = url;
-                        } catch (error) {
-                          console.error('Checkout error:', error);
-                          alert('Unable to process checkout. Please try again.');
-                        } finally {
-                          setCheckoutLoading(null);
-                        }
+                        navigate('/checkout', { state: { cartItems } });
+                        setShowCartModal(false);
                       }}
-                      disabled={checkoutLoading === 'cart'}
-                      className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg"
+                      className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
                     >
-                      {checkoutLoading === 'cart' ? (
-                        <>
-                          <Loader2 className="w-5 h-5 animate-spin inline mr-2" />
-                          Processing...
-                        </>
-                      ) : (
-                        'Proceed to Checkout'
-                      )}
+                      Proceed to Checkout
                     </button>
                   </div>
                 </>
@@ -1315,6 +1292,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/success" element={
             <ProtectedRoute>
               <SuccessPage />

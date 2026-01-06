@@ -54,6 +54,10 @@ Deno.serve(async (req: Request) => {
     const customer = session.customer as Stripe.Customer;
     const lineItems = session.line_items?.data || [];
 
+    const currentYear = new Date().getFullYear();
+    const yearPrefix = currentYear.toString().slice(-2);
+    const formattedOrderNumber = `${yearPrefix}-${orderData.orderId}`;
+
     const itemsHtml = lineItems
       .map((item) => {
         const product = item.price?.product as Stripe.Product;
@@ -94,7 +98,7 @@ Deno.serve(async (req: Request) => {
           <div class="container">
             <div class="header">
               <h1>🎨 New Pre-made Rug Order</h1>
-              <p>Order #${orderData.orderId}</p>
+              <p>Order #${formattedOrderNumber}</p>
             </div>
             <div class="content">
               <div class="field">
@@ -157,7 +161,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Two Tuft Rugs <orders@twotuftrugs.com>",
         to: ["orders@twotuftrugs.com"],
-        subject: `New Pre-made Rug Order #${orderData.orderId} - ${customer.name || customer.email}`,
+        subject: `New Pre-made Rug Order #${formattedOrderNumber} - ${customer.name || customer.email}`,
         html: emailHtml,
       }),
     });

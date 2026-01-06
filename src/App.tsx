@@ -436,6 +436,9 @@ function MainApp() {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
               <p className="text-gray-400 text-base sm:text-lg px-4">
+                [Custom Rugs Only]
+              </p>
+              <p className="text-gray-400 text-base sm:text-lg px-4">
                 Enter your tracking number to see the status of your custom rug
               </p>
             </div>
@@ -1224,7 +1227,7 @@ function MainApp() {
       <footer className="bg-black border-t border-gray-800 py-6 px-4">
         <div className="container mx-auto text-center">
           <p className="text-gray-400 text-sm">
-            Designed, created, and powered by Two Tier Tech LLC (2025)
+            Designed, created, and powered by Two Tier Tech LLC (2026)
           </p>
         </div>
       </footer>

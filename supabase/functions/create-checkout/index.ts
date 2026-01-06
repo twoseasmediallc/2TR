@@ -17,7 +17,8 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { priceId, priceIds, mode, userId, userEmail } = await req.json();
+    const body = await req.json();
+    const { priceId, priceIds, items, mode, userId, userEmail } = body;
 
     const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeSecretKey) {
@@ -71,7 +72,12 @@ Deno.serve(async (req: Request) => {
       line_items: [],
     };
 
-    if (priceIds && Array.isArray(priceIds)) {
+    if (items && Array.isArray(items)) {
+      sessionConfig.line_items = items.map((item: { priceId: string; quantity: number }) => ({
+        price: item.priceId,
+        quantity: item.quantity,
+      }));
+    } else if (priceIds && Array.isArray(priceIds)) {
       sessionConfig.line_items = priceIds.map((id: string) => ({
         price: id,
         quantity: 1,
@@ -84,7 +90,7 @@ Deno.serve(async (req: Request) => {
         },
       ];
     } else {
-      throw new Error("Either priceId or priceIds must be provided");
+      throw new Error("Either priceId, priceIds, or items must be provided");
     }
 
     const session = await stripe.checkout.sessions.create(sessionConfig);

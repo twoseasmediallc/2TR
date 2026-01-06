@@ -14,7 +14,7 @@ export interface UserSubscription {
 
 export async function createCheckoutSession(priceId: string, mode: 'payment' | 'subscription') {
   const { data: { user } } = await supabase.auth.getUser();
-  
+
   if (!user) {
     throw new Error('User must be authenticated');
   }
@@ -34,7 +34,9 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
   });
 
   if (!response.ok) {
-    throw new Error('Failed to create checkout session');
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    console.error('Checkout error response:', errorData);
+    throw new Error(errorData.error || 'Failed to create checkout session');
   }
 
   const data = await response.json();
@@ -43,7 +45,7 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
 
 export async function createCheckoutSessionForCart(items: Array<{ priceId: string; quantity: number }>) {
   const { data: { user } } = await supabase.auth.getUser();
-  
+
   if (!user) {
     throw new Error('User must be authenticated');
   }
@@ -63,7 +65,9 @@ export async function createCheckoutSessionForCart(items: Array<{ priceId: strin
   });
 
   if (!response.ok) {
-    throw new Error('Failed to create checkout session');
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    console.error('Checkout error response:', errorData);
+    throw new Error(errorData.error || 'Failed to create checkout session');
   }
 
   const data = await response.json();

@@ -41,14 +41,12 @@ export function CheckoutPage() {
 
     setIsLoading(true);
     try {
-      // Group items by price ID and count quantities
       const itemCounts = cartItems.reduce((acc, item) => {
         const priceId = item.stripe_price_id;
         acc[priceId] = (acc[priceId] || 0) + 1;
         return acc;
       }, {} as Record<string, number>);
 
-      // Convert to format expected by checkout function
       const checkoutItems = Object.entries(itemCounts).map(([priceId, quantity]) => ({
         priceId,
         quantity
@@ -58,7 +56,8 @@ export function CheckoutPage() {
       window.location.href = url;
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Unable to process checkout. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Unable to process checkout';
+      alert(errorMessage);
     } finally {
       setIsLoading(false);
     }

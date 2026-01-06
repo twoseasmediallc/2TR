@@ -112,6 +112,12 @@ function MainApp() {
   };
 
   const handleStripeCheckout = async (priceId: string) => {
+    if (!user) {
+      alert('Please log in to complete your purchase');
+      navigate('/login');
+      return;
+    }
+
     setCheckoutLoading(priceId);
 
     try {
@@ -119,7 +125,8 @@ function MainApp() {
       window.location.href = url;
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Unable to process checkout. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Unable to process checkout';
+      alert(errorMessage);
     } finally {
       setCheckoutLoading(null);
     }

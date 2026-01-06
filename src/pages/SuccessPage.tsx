@@ -1,87 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle, Package, ArrowLeft } from 'lucide-react';
-import { getUserSubscription, type UserSubscription } from '../lib/stripe';
-import { stripeProducts } from '../stripe-config';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { CheckCircle, Package, ArrowRight } from 'lucide-react';
+import { useAuth } from '../components/AuthProvider';
 
 export function SuccessPage() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [searchParams] = useSearchParams();
-  const [subscription, setSubscription] = useState<UserSubscription | null>(null);
-  const sessionId = searchParams.get('session_id');
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
   useEffect(() => {
-    loadUserSubscription();
-  }, []);
-
-  const loadUserSubscription = async () => {
-    try {
-      const userSubscription = await getUserSubscription();
-      setSubscription(userSubscription);
-    } catch (error) {
-      console.error('Error loading subscription:', error);
+    if (!user) {
+      navigate('/login');
+      return;
     }
-  };
 
-  const getSubscriptionPlanName = () => {
-    if (!subscription?.price_id) return null;
-    
-    const product = stripeProducts.find(p => p.priceId === subscription.price_id);
-    return product?.name || 'Unknown Plan';
-  };
+    const session = searchParams.get('session_id');
+    if (!session) {
+      navigate('/');
+      return;
+    }
+
+    setSessionId(session);
+  }, [user, searchParams, navigate]);
+
+  if (!user || !sessionId) {
+    return null;
+  }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4">
-      <div className="max-w-2xl w-full">
-        <div className="bg-gray-900 rounded-2xl border-2 border-gray-800 p-8 text-center">
+    <div className="min-h-screen bg-black pt-28 sm:pt-36 lg:pt-60">
+      <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
           <div className="mb-8">
-            <div className="w-20 h-20 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-green-500" />
+            <div className="mx-auto mb-6 w-24 h-24 bg-green-600/20 rounded-full flex items-center justify-center">
+              <CheckCircle className="w-12 h-12 text-green-500" strokeWidth={2} />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-4">Payment Successful!</h1>
-            <p className="text-gray-400 text-lg">
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Payment Successful!</h1>
+            <p className="text-xl text-gray-300 mb-8">
               Thank you for your purchase. Your order has been confirmed.
             </p>
           </div>
 
-          {sessionId && (
-            <div className="bg-gray-800/50 rounded-lg p-6 mb-8">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Package className="w-6 h-6 text-orange-500" />
-                <h2 className="text-xl font-semibold text-white">Order Details</h2>
-              </div>
-              <div className="text-gray-300">
-                <p className="mb-2">Session ID: <span className="font-mono text-sm">{sessionId}</span></p>
-                <p className="text-sm">You will receive an email confirmation shortly.</p>
-              </div>
+          <div className="bg-gray-900/50 rounded-xl border-2 border-gray-800 p-8 mb-8 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center mb-6">
+              <Package className="w-8 h-8 text-orange-500 mr-3" />
+              <h2 className="text-2xl font-semibold text-white">Order Details</h2>
             </div>
-          )}
-
-          {subscription && subscription.subscription_status === 'active' && (
-            <div className="bg-orange-600/20 border-2 border-orange-600 rounded-lg p-6 mb-8">
-              <h3 className="text-xl font-semibold text-white mb-2">Active Subscription</h3>
-              <p className="text-orange-400">
-                Plan: {getSubscriptionPlanName()}
-              </p>
-              {subscription.current_period_end && (
-                <p className="text-gray-400 text-sm mt-2">
-                  Next billing: {new Date(subscription.current_period_end * 1000).toLocaleDateString()}
-                </p>
-              )}
-            </div>
-          )}
-
-          <div className="space-y-4">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              Return to Home
-            </Link>
             
-            <div className="text-gray-400 text-sm">
-              <p>Need help? Contact us at orders@twotuftrugs.com</p>
+            <div className="space-y-4 text-left">
+              <div className="flex justify-between py-2 border-b border-gray-700">
+                <span className="text-gray-400">Session ID:</span>
+                <span className="text-white font-mono text-sm">{sessionId}</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-gray-700">
+                <span className="text-gray-400">Payment Status:</span>
+                <span className="text-green-500 font-medium">Completed</span>
+              </div>
+              <div className="flex justify-between py-2">
+                <span className="text-gray-400">Email Confirmation:</span>
+                <span className="text-white">{user.email}</span>
+              </div>
             </div>
+          </div>
+
+          <div className="bg-blue-900/20 border-2 border-blue-600 rounded-xl p-6 mb-8 max-w-2xl mx-auto">
+            <h3 className="text-xl font-semibold text-white mb-3">What's Next?</h3>
+            <div className="text-gray-300 space-y-2">
+              <p>• You'll receive an email confirmation shortly</p>
+              <p>• Your rugs will be carefully packaged and shipped</p>
+              <p>• Track your order using the tracking information in your email</p>
+              <p>• Delivery typically takes 5-7 business days</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => navigate('/')}
+              className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              Continue Shopping
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => navigate('/#tracker')}
+              className="px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <Package className="w-5 h-5" />
+              Track Orders
+            </button>
           </div>
         </div>
       </div>

@@ -1158,7 +1158,7 @@ function MainApp() {
                       }}
                       className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
                     >
-                      Proceed to Checkout
+                      Proceed to Payment
                     </button>
                   </div>
                 </>

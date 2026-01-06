@@ -332,7 +332,7 @@ function MainApp() {
                   onClick={() => setShowMobileMenu(false)}
                   className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
                 >
-                  Shop Rugs
+                  Shop Pre-Made Rugs
                 </a>
                 <a
                   href="#custom"

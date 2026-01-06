@@ -390,12 +390,13 @@ function MainApp() {
                   <p>
                     Founded with a vision to transform spaces through artful textile creations,
                     we specialize in both custom orders and carefully curated pre-made designs.
-                    Every rug tells a story, and we're here to help you tell yours.
-                  </p>
-                  <p>
                     Our workshop is where creativity meets craftsmanship. From concept to completion,
                     we work closely with our clients to ensure every detail reflects their vision
                     and personality.
+                  </p>
+                  <p>
+                   Every rug tells a story, and we're here to help you tell yours. 
+                   Too tough to tear, too beautiful to ignore!
                   </p>
                 </div>
               </div>

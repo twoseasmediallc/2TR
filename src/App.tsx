@@ -552,9 +552,9 @@ function MainApp() {
         <section id="collection-rugs" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-black scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Collection Rugs</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-Made Rugs</h2>
               <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
-                Browse our collection of unique handcrafted rugs, available for immediate purchase
+                Browse our collection of unique handcrafted rugs, ready to transform your space, and available for immediate purchase!
               </p>
             </div>
 

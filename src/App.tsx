@@ -6,7 +6,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { LoginPage } from './pages/LoginPage';
 import { SuccessPage } from './pages/SuccessPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
-import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
+import { fetchPremadeRugs, fetchCollectionRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
 import { stripeProducts } from './stripe-config';
 import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscription, type UserSubscription } from './lib/stripe';
@@ -32,6 +32,9 @@ function MainApp() {
   const [premadeRugs, setPremadeRugs] = useState<PremadeRug[]>([]);
   const [isLoadingRugs, setIsLoadingRugs] = useState(true);
   const [rugsError, setRugsError] = useState<string | null>(null);
+  const [collectionRugs, setCollectionRugs] = useState<PremadeRug[]>([]);
+  const [isLoadingCollection, setIsLoadingCollection] = useState(true);
+  const [collectionError, setCollectionError] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<PremadeRug[]>([]);
   const [showCartModal, setShowCartModal] = useState(false);
   const [trackingInfo, setTrackingInfo] = useState<TrackingInfo | null>(null);
@@ -54,6 +57,7 @@ function MainApp() {
 
   useEffect(() => {
     loadPremadeRugs();
+    loadCollectionRugs();
     if (user) {
       loadUserSubscription();
     }
@@ -77,6 +81,18 @@ function MainApp() {
       setPremadeRugs(data);
     }
     setIsLoadingRugs(false);
+  };
+
+  const loadCollectionRugs = async () => {
+    setIsLoadingCollection(true);
+    setCollectionError(null);
+    const { data, error } = await fetchCollectionRugs();
+    if (error) {
+      setCollectionError(error);
+    } else if (data) {
+      setCollectionRugs(data);
+    }
+    setIsLoadingCollection(false);
   };
 
   const loadUserSubscription = async () => {
@@ -566,38 +582,60 @@ function MainApp() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-              {stripeProducts.map((product) => (
-                <div key={product.id} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
-                  <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
-                    <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
-                  </div>
-                  <div className="p-4 sm:p-6">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{product.name}</h3>
-                    <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-3">{product.description}</p>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                      <span className="text-2xl sm:text-3xl font-bold text-orange-500">
-                        ${product.price.toFixed(2)}
-                      </span>
-                      <button
-                        onClick={() => handleStripeCheckout(product.priceId)}
-                        disabled={checkoutLoading === product.priceId}
-                        className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
-                      >
-                        {checkoutLoading === product.priceId ? (
-                          <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            Processing...
-                          </>
-                        ) : (
-                          'Buy Now'
-                        )}
-                      </button>
+            {isLoadingCollection ? (
+              <div className="flex justify-center items-center py-24">
+                <Loader2 className="w-16 h-16 text-orange-500 animate-spin" />
+              </div>
+            ) : collectionError ? (
+              <div className="bg-red-900/20 border-2 border-red-600 rounded-2xl p-8 text-center">
+                <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+                <p className="text-red-400 text-lg">{collectionError}</p>
+                <button
+                  onClick={loadCollectionRugs}
+                  className="mt-4 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : collectionRugs.length === 0 ? (
+              <div className="bg-gray-900/30 border-2 border-gray-800 rounded-2xl p-12 text-center">
+                <Package className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                <p className="text-gray-400 text-lg">No rugs available at the moment. Check back soon!</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+                {collectionRugs.map((rug) => (
+                  <div key={rug.id} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
+                    <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
+                      {rug.image ? (
+                        <img
+                          src={rug.image}
+                          alt={rug.title || 'Rug'}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
+                      )}
+                    </div>
+                    <div className="p-4 sm:p-6">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{rug.title || 'Untitled Rug'}</h3>
+                      <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-3">{rug.description || 'No description available'}</p>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+                        <span className="text-2xl sm:text-3xl font-bold text-orange-500">
+                          ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
+                        </span>
+                        <button
+                          onClick={() => handleAddToCart(rug)}
+                          className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

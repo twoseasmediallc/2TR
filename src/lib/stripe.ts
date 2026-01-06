@@ -43,7 +43,7 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
 
 export async function createCheckoutSessionForCart(priceIds: string[], mode: 'payment' | 'subscription') {
   const { data: { user } } = await supabase.auth.getUser();
-  
+
   if (!user) {
     throw new Error('User must be authenticated');
   }
@@ -63,7 +63,8 @@ export async function createCheckoutSessionForCart(priceIds: string[], mode: 'pa
   });
 
   if (!response.ok) {
-    throw new Error('Failed to create checkout session');
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(errorData.error || 'Failed to create checkout session. Please ensure Stripe is configured.');
   }
 
   const data = await response.json();

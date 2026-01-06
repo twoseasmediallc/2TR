@@ -44,11 +44,17 @@ export function CheckoutPage() {
         return;
       }
 
-      const { url } = await createCheckoutSessionForCart(priceIds, 'payment');
-      window.location.href = url;
+      const result = await createCheckoutSessionForCart(priceIds, 'payment');
+
+      if (!result || !result.url) {
+        throw new Error('Failed to create checkout session. Please ensure Stripe is properly configured.');
+      }
+
+      window.location.href = result.url;
     } catch (err) {
       console.error('Checkout error:', err);
-      setError(err instanceof Error ? err.message : 'Unable to process checkout. Please try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Unable to process checkout. Please try again.';
+      setError(errorMessage);
       setIsProcessing(false);
     }
   };

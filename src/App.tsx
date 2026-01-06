@@ -1,16 +1,18 @@
 import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './components/AuthProvider';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { LoginPage } from './pages/LoginPage';
 import { SuccessPage } from './pages/SuccessPage';
-import { CheckoutPage } from './pages/CheckoutPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
-import { fetchCollectionRugs, type PremadeRug } from './lib/premadeRugs';
+import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
 import { stripeProducts } from './stripe-config';
-import { createCheckoutSession } from './lib/stripe';
+import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscription, type UserSubscription } from './lib/stripe';
 
 function MainApp() {
-  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [selectedDimension, setSelectedDimension] = useState<string>('');
   const [customWidth, setCustomWidth] = useState('');
@@ -27,14 +29,15 @@ function MainApp() {
     email: '',
     description: '',
   });
-  const [collectionRugs, setCollectionRugs] = useState<PremadeRug[]>([]);
-  const [isLoadingCollection, setIsLoadingCollection] = useState(true);
-  const [collectionError, setCollectionError] = useState<string | null>(null);
+  const [premadeRugs, setPremadeRugs] = useState<PremadeRug[]>([]);
+  const [isLoadingRugs, setIsLoadingRugs] = useState(true);
+  const [rugsError, setRugsError] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<PremadeRug[]>([]);
   const [showCartModal, setShowCartModal] = useState(false);
   const [trackingInfo, setTrackingInfo] = useState<TrackingInfo | null>(null);
   const [trackingError, setTrackingError] = useState<string | null>(null);
   const [isTrackingLoading, setIsTrackingLoading] = useState(false);
+  const [subscription, setSubscription] = useState<UserSubscription | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [showLimitModal, setShowLimitModal] = useState(false);
 
@@ -49,19 +52,39 @@ function MainApp() {
   };
 
   useEffect(() => {
-    loadCollectionRugs();
+    loadPremadeRugs();
+    if (user) {
+      loadUserSubscription();
+    }
   }, []);
 
-  const loadCollectionRugs = async () => {
-    setIsLoadingCollection(true);
-    setCollectionError(null);
-    const { data, error } = await fetchCollectionRugs();
-    if (error) {
-      setCollectionError(error);
-    } else if (data) {
-      setCollectionRugs(data);
+  useEffect(() => {
+    if (user) {
+      loadUserSubscription();
+    } else {
+      setSubscription(null);
     }
-    setIsLoadingCollection(false);
+  }, [user]);
+
+  const loadPremadeRugs = async () => {
+    setIsLoadingRugs(true);
+    setRugsError(null);
+    const { data, error } = await fetchPremadeRugs();
+    if (error) {
+      setRugsError(error);
+    } else if (data) {
+      setPremadeRugs(data);
+    }
+    setIsLoadingRugs(false);
+  };
+
+  const loadUserSubscription = async () => {
+    try {
+      const userSubscription = await getUserSubscription();
+      setSubscription(userSubscription);
+    } catch (error) {
+      console.error('Error loading subscription:', error);
+    }
   };
 
   const handleAddToCart = (rug: PremadeRug) => {
@@ -94,8 +117,7 @@ function MainApp() {
       window.location.href = url;
     } catch (error) {
       console.error('Checkout error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unable to process checkout';
-      alert(errorMessage);
+      alert('Unable to process checkout. Please try again.');
     } finally {
       setCheckoutLoading(null);
     }
@@ -126,7 +148,6 @@ function MainApp() {
 
     setIsTrackingLoading(false);
   };
-
 
   const handleCustomOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -242,8 +263,8 @@ function MainApp() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 lg:absolute lg:right-0">
-              <a href="#stripe-rugs" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
-                Shop Pre-Made Rugs
+              <a href="#premade" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+                Pre-made Rugs
               </a>
               <a href="#custom" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Custom Rugs
@@ -292,11 +313,11 @@ function MainApp() {
                   Shipment Tracker
                 </a>
                 <a
-                  href="#stripe-rugs"
+                  href="#premade"
                   onClick={() => setShowMobileMenu(false)}
                   className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
                 >
-                  Shop Rugs
+                  Pre-made Rugs
                 </a>
                 <a
                   href="#custom"
@@ -340,7 +361,7 @@ function MainApp() {
                   </p>
                   <p>
                     Founded with a vision to transform spaces through artful textile creations,
-                    we specialize in custom orders and unique designs.
+                    we specialize in both custom orders and carefully curated pre-made designs.
                     Every rug tells a story, and we're here to help you tell yours.
                   </p>
                   <p>
@@ -513,39 +534,38 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="stripe-rugs" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
-        <section id="collection-rugs" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-black scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-Made Rugs</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
               <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
-                Browse our collection of unique handcrafted rugs, ready to transform your space, and available for immediate purchase!
+                Explore our curated collection of handcrafted rugs, ready to ship and transform your space
               </p>
             </div>
 
-            {isLoadingCollection ? (
+            {isLoadingRugs ? (
               <div className="flex justify-center items-center py-24">
                 <Loader2 className="w-16 h-16 text-orange-500 animate-spin" />
               </div>
-            ) : collectionError ? (
+            ) : rugsError ? (
               <div className="bg-red-900/20 border-2 border-red-600 rounded-2xl p-8 text-center">
                 <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-                <p className="text-red-400 text-lg">{collectionError}</p>
+                <p className="text-red-400 text-lg">{rugsError}</p>
                 <button
-                  onClick={loadCollectionRugs}
+                  onClick={loadPremadeRugs}
                   className="mt-4 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
                 >
                   Try Again
                 </button>
               </div>
-            ) : collectionRugs.length === 0 ? (
+            ) : premadeRugs.length === 0 ? (
               <div className="bg-gray-900/30 border-2 border-gray-800 rounded-2xl p-12 text-center">
                 <Package className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                 <p className="text-gray-400 text-lg">No rugs available at the moment. Check back soon!</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                {collectionRugs.map((rug) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {premadeRugs.map((rug) => (
                   <div key={rug.id} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
                     <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
                       {rug.image ? (
@@ -560,7 +580,7 @@ function MainApp() {
                     </div>
                     <div className="p-4 sm:p-6">
                       <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{rug.title || 'Untitled Rug'}</h3>
-                      <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-3">{rug.description || 'No description available'}</p>
+                      <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">{rug.description || 'No description available'}</p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <span className="text-2xl sm:text-3xl font-bold text-orange-500">
                           ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
@@ -579,50 +599,8 @@ function MainApp() {
             )}
           </div>
         </section>
-          <div className="container mx-auto max-w-7xl">
-            <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Stripe Products</h2>
-              <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
-                Browse our Stripe product catalog with secure checkout
-              </p>
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-              {stripeProducts.map((product) => (
-                <div key={product.priceId} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
-                  <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
-                    <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
-                  </div>
-                  <div className="p-4 sm:p-6">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{product.name}</h3>
-                    <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-3">{product.description}</p>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                      <span className="text-2xl sm:text-3xl font-bold text-orange-500">
-                        ${product.price.toFixed(2)}
-                      </span>
-                      <button
-                        onClick={() => handleStripeCheckout(product.priceId)}
-                        disabled={checkoutLoading === product.priceId}
-                        className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
-                      >
-                        {checkoutLoading === product.priceId ? (
-                          <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            Processing...
-                          </>
-                        ) : (
-                          'Buy Now'
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
@@ -1151,14 +1129,39 @@ function MainApp() {
                       </span>
                     </div>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         if (cartItems.length === 0) return;
-                        navigate('/checkout', { state: { cartItems } });
-                        setShowCartModal(false);
+                        setCheckoutLoading('cart');
+                        try {
+                          const priceIds = cartItems
+                            .map(rug => rug.stripe_price_id)
+                            .filter((id): id is string => id !== null && id !== undefined);
+
+                          if (priceIds.length === 0) {
+                            alert('No valid items in cart');
+                            return;
+                          }
+
+                          const { url } = await createCheckoutSessionForCart(priceIds, 'payment');
+                          window.location.href = url;
+                        } catch (error) {
+                          console.error('Checkout error:', error);
+                          alert('Unable to process checkout. Please try again.');
+                        } finally {
+                          setCheckoutLoading(null);
+                        }
                       }}
-                      className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
+                      disabled={checkoutLoading === 'cart'}
+                      className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg"
                     >
-                      Proceed to Checkout
+                      {checkoutLoading === 'cart' ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin inline mr-2" />
+                          Processing...
+                        </>
+                      ) : (
+                        'Proceed to Checkout'
+                      )}
                     </button>
                   </div>
                 </>
@@ -1203,15 +1206,22 @@ function MainApp() {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/success" element={<SuccessPage />} />
-        <Route path="/" element={<MainApp />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/success" element={
+            <ProtectedRoute>
+              <SuccessPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/" element={<MainApp />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
 export default App;
+

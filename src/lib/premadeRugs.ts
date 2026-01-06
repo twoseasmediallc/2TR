@@ -39,29 +39,3 @@ export async function fetchPremadeRugs(): Promise<{
     };
   }
 }
-
-export async function fetchCollectionRugs(): Promise<{
-  data: PremadeRug[] | null;
-  error: string | null
-}> {
-  try {
-    const { data, error } = await supabase
-      .from('Pre-made Collection')
-      .select('*')
-      .eq('is_available', true)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Supabase error:', error);
-      return { data: null, error: error.message };
-    }
-
-    return { data, error: null };
-  } catch (err) {
-    console.error('Unexpected error:', err);
-    return {
-      data: null,
-      error: err instanceof Error ? err.message : 'An unexpected error occurred'
-    };
-  }
-}

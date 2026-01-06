@@ -8,20 +8,6 @@ export interface StripeProduct {
 
 export const stripeProducts: StripeProduct[] = [
   {
-    priceId: 'price_1SmObKCWVSnInCPVJdZUGQ3o',
-    name: 'Test Rug 3',
-    description: 'Test product for development',
-    price: 3.00,
-    mode: 'payment'
-  },
-  {
-    priceId: 'price_1SmOb1CWVSnInCPVHkVZF0VA',
-    name: 'Test Rug 1',
-    description: 'Test product for development',
-    price: 1.00,
-    mode: 'payment'
-  },
-  {
     priceId: 'price_1SlhNlCWVSnInCPVZ9XE2eQ1',
     name: 'Live Music',
     description: '2\' x 2\' Music note on a lively colored staff (background color may vary)',

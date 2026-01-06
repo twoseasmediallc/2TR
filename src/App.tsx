@@ -7,7 +7,7 @@ import { LoginPage } from './pages/LoginPage';
 import { SuccessPage } from './pages/SuccessPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
-import { fetchPremadeRugs, fetchCollectionRugs, type PremadeRug } from './lib/premadeRugs';
+import { fetchCollectionRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
 import { stripeProducts } from './stripe-config';
 import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscription, type UserSubscription } from './lib/stripe';
@@ -31,9 +31,6 @@ function MainApp() {
     email: '',
     description: '',
   });
-  const [premadeRugs, setPremadeRugs] = useState<PremadeRug[]>([]);
-  const [isLoadingRugs, setIsLoadingRugs] = useState(true);
-  const [rugsError, setRugsError] = useState<string | null>(null);
   const [collectionRugs, setCollectionRugs] = useState<PremadeRug[]>([]);
   const [isLoadingCollection, setIsLoadingCollection] = useState(true);
   const [collectionError, setCollectionError] = useState<string | null>(null);
@@ -58,7 +55,6 @@ function MainApp() {
   };
 
   useEffect(() => {
-    loadPremadeRugs();
     loadCollectionRugs();
     if (user) {
       loadUserSubscription();
@@ -72,18 +68,6 @@ function MainApp() {
       setSubscription(null);
     }
   }, [user]);
-
-  const loadPremadeRugs = async () => {
-    setIsLoadingRugs(true);
-    setRugsError(null);
-    const { data, error } = await fetchPremadeRugs();
-    if (error) {
-      setRugsError(error);
-    } else if (data) {
-      setPremadeRugs(data);
-    }
-    setIsLoadingRugs(false);
-  };
 
   const loadCollectionRugs = async () => {
     setIsLoadingCollection(true);
@@ -289,9 +273,6 @@ function MainApp() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 lg:absolute lg:right-0">
-              <a href="#premade" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
-                Pre-made Rugs
-              </a>
               <a href="#stripe-rugs" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Shop Rugs
               </a>
@@ -347,13 +328,6 @@ function MainApp() {
                   Shipment Tracker
                 </a>
                 <a
-                  href="#premade"
-                  onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
-                >
-                  Pre-made Rugs
-                </a>
-                <a
                   href="#stripe-rugs"
                   onClick={() => setShowMobileMenu(false)}
                   className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
@@ -402,7 +376,7 @@ function MainApp() {
                   </p>
                   <p>
                     Founded with a vision to transform spaces through artful textile creations,
-                    we specialize in both custom orders and carefully curated pre-made designs.
+                    we specialize in custom orders and unique designs.
                     Every rug tells a story, and we're here to help you tell yours.
                   </p>
                   <p>
@@ -641,73 +615,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
-          <div className="container mx-auto max-w-7xl">
-            <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
-              <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
-                Explore our curated collection of handcrafted rugs, ready to ship and transform your space
-              </p>
-            </div>
-
-            {isLoadingRugs ? (
-              <div className="flex justify-center items-center py-24">
-                <Loader2 className="w-16 h-16 text-orange-500 animate-spin" />
-              </div>
-            ) : rugsError ? (
-              <div className="bg-red-900/20 border-2 border-red-600 rounded-2xl p-8 text-center">
-                <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-                <p className="text-red-400 text-lg">{rugsError}</p>
-                <button
-                  onClick={loadPremadeRugs}
-                  className="mt-4 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
-                >
-                  Try Again
-                </button>
-              </div>
-            ) : premadeRugs.length === 0 ? (
-              <div className="bg-gray-900/30 border-2 border-gray-800 rounded-2xl p-12 text-center">
-                <Package className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">No rugs available at the moment. Check back soon!</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {premadeRugs.map((rug) => (
-                  <div key={rug.id} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
-                    <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
-                      {rug.image ? (
-                        <img
-                          src={rug.image}
-                          alt={rug.title || 'Rug'}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : (
-                        <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
-                      )}
-                    </div>
-                    <div className="p-4 sm:p-6">
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{rug.title || 'Untitled Rug'}</h3>
-                      <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">{rug.description || 'No description available'}</p>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                        <span className="text-2xl sm:text-3xl font-bold text-orange-500">
-                          ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
-                        </span>
-                        <button
-                          onClick={() => handleAddToCart(rug)}
-                          className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
-                        >
-                          Add to Cart
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>

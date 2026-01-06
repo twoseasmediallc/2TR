@@ -54,9 +54,10 @@ Deno.serve(async (req: Request) => {
     const customer = session.customer as Stripe.Customer;
     const lineItems = session.line_items?.data || [];
 
+    const totalQuantity = lineItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
     const currentYear = new Date().getFullYear();
     const yearPrefix = currentYear.toString().slice(-2);
-    const formattedOrderNumber = `${yearPrefix}-${orderData.orderId}`;
+    const formattedOrderNumber = `${totalQuantity}${yearPrefix}${orderData.orderId}`;
 
     const itemsHtml = lineItems
       .map((item) => {

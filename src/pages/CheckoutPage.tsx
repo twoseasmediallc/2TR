@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Loader2 } from 'lucide-react';
-import { useAuth } from '../components/AuthProvider';
 import { createCheckoutSessionForCart } from '../lib/stripe';
 import { stripeProducts } from '../stripe-config';
 
@@ -17,16 +16,10 @@ interface CartItem {
 export function CheckoutPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
-
     const items = location.state?.cartItems as CartItem[];
     if (!items || items.length === 0) {
       navigate('/');
@@ -34,7 +27,7 @@ export function CheckoutPage() {
     }
 
     setCartItems(items);
-  }, [user, location.state, navigate]);
+  }, [location.state, navigate]);
 
   const handleCheckout = async () => {
     if (!cartItems.length) return;
@@ -79,10 +72,6 @@ export function CheckoutPage() {
 
     return Object.values(itemCounts);
   };
-
-  if (!user) {
-    return null;
-  }
 
   return (
     <div className="min-h-screen bg-black pt-28 sm:pt-36 lg:pt-60">

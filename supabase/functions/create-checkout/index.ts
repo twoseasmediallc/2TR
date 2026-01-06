@@ -1,5 +1,4 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { createClient } from "npm:@supabase/supabase-js@2";
 import Stripe from "npm:stripe@14.21.0";
 
 const corsHeaders = {
@@ -18,7 +17,7 @@ Deno.serve(async (req: Request) => {
 
   try {
     const body = await req.json();
-    const { priceId, priceIds, items, mode, userId, userEmail } = body;
+    const { priceId, priceIds, items, mode } = body;
 
     const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeSecretKey) {
@@ -29,47 +28,12 @@ Deno.serve(async (req: Request) => {
       apiVersion: "2023-10-16",
     });
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
-    if (!supabaseUrl || !supabaseServiceKey) {
-      throw new Error("Supabase configuration is missing");
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-    let customer;
-    const { data: existingCustomer } = await supabase
-      .from("stripe_customers")
-      .select("customer_id")
-      .eq("user_id", userId)
-      .maybeSingle();
-
-    if (existingCustomer) {
-      customer = await stripe.customers.retrieve(existingCustomer.customer_id);
-    } else {
-      customer = await stripe.customers.create({
-        email: userEmail,
-        metadata: {
-          supabase_user_id: userId,
-        },
-      });
-
-      await supabase.from("stripe_customers").insert({
-        user_id: userId,
-        customer_id: customer.id,
-      });
-    }
-
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
-      customer: customer.id,
       mode: mode as "payment" | "subscription",
       success_url: `${req.headers.get("origin")}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/`,
-      metadata: {
-        user_id: userId,
-      },
       line_items: [],
+      customer_creation: "always",
     };
 
     if (items && Array.isArray(items)) {

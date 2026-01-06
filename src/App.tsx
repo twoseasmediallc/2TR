@@ -1,19 +1,15 @@
 import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './components/AuthProvider';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import { LoginPage } from './pages/LoginPage';
 import { SuccessPage } from './pages/SuccessPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchCollectionRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
 import { stripeProducts } from './stripe-config';
-import { createCheckoutSession, getUserSubscription, type UserSubscription } from './lib/stripe';
+import { createCheckoutSession } from './lib/stripe';
 
 function MainApp() {
-  const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [selectedDimension, setSelectedDimension] = useState<string>('');
@@ -39,7 +35,6 @@ function MainApp() {
   const [trackingInfo, setTrackingInfo] = useState<TrackingInfo | null>(null);
   const [trackingError, setTrackingError] = useState<string | null>(null);
   const [isTrackingLoading, setIsTrackingLoading] = useState(false);
-  const [subscription, setSubscription] = useState<UserSubscription | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [showLimitModal, setShowLimitModal] = useState(false);
 
@@ -55,18 +50,7 @@ function MainApp() {
 
   useEffect(() => {
     loadCollectionRugs();
-    if (user) {
-      loadUserSubscription();
-    }
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      loadUserSubscription();
-    } else {
-      setSubscription(null);
-    }
-  }, [user]);
 
   const loadCollectionRugs = async () => {
     setIsLoadingCollection(true);
@@ -78,15 +62,6 @@ function MainApp() {
       setCollectionRugs(data);
     }
     setIsLoadingCollection(false);
-  };
-
-  const loadUserSubscription = async () => {
-    try {
-      const userSubscription = await getUserSubscription();
-      setSubscription(userSubscription);
-    } catch (error) {
-      console.error('Error loading subscription:', error);
-    }
   };
 
   const handleAddToCart = (rug: PremadeRug) => {
@@ -112,12 +87,6 @@ function MainApp() {
   };
 
   const handleStripeCheckout = async (priceId: string) => {
-    if (!user) {
-      alert('Please log in to complete your purchase');
-      navigate('/login');
-      return;
-    }
-
     setCheckoutLoading(priceId);
 
     try {
@@ -158,12 +127,6 @@ function MainApp() {
     setIsTrackingLoading(false);
   };
 
-  const getSubscriptionPlanName = () => {
-    if (!subscription?.price_id) return null;
-    
-    const product = stripeProducts.find(p => p.priceId === subscription.price_id);
-    return product?.name || 'Unknown Plan';
-  };
 
   const handleCustomOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -287,11 +250,6 @@ function MainApp() {
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 lg:ml-4 flex-shrink-0">
-                {user && subscription && subscription.subscription_status === 'active' && (
-                  <div className="hidden lg:block text-orange-400 text-sm font-medium">
-                    {getSubscriptionPlanName()}
-                  </div>
-                )}
                 <button
                   onClick={() => setShowCartModal(true)}
                   className="text-gray-100 hover:text-orange-500 transition-colors relative"
@@ -1245,21 +1203,14 @@ function MainApp() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/success" element={
-            <ProtectedRoute>
-              <SuccessPage />
-            </ProtectedRoute>
-          } />
-          <Route path="/" element={<MainApp />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/" element={<MainApp />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,24 +1,4 @@
-import { supabase } from './supabase';
-
-export interface UserSubscription {
-  customer_id: string | null;
-  subscription_id: string | null;
-  subscription_status: string | null;
-  price_id: string | null;
-  current_period_start: number | null;
-  current_period_end: number | null;
-  cancel_at_period_end: boolean | null;
-  payment_method_brand: string | null;
-  payment_method_last4: string | null;
-}
-
 export async function createCheckoutSession(priceId: string, mode: 'payment' | 'subscription') {
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error('User must be authenticated');
-  }
-
   const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`, {
     method: 'POST',
     headers: {
@@ -28,8 +8,6 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
     body: JSON.stringify({
       priceId,
       mode,
-      userId: user.id,
-      userEmail: user.email,
     }),
   });
 
@@ -44,12 +22,6 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
 }
 
 export async function createCheckoutSessionForCart(items: Array<{ priceId: string; quantity: number }>) {
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error('User must be authenticated');
-  }
-
   const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`, {
     method: 'POST',
     headers: {
@@ -59,8 +31,6 @@ export async function createCheckoutSessionForCart(items: Array<{ priceId: strin
     body: JSON.stringify({
       items,
       mode: 'payment',
-      userId: user.id,
-      userEmail: user.email,
     }),
   });
 
@@ -71,25 +41,5 @@ export async function createCheckoutSessionForCart(items: Array<{ priceId: strin
   }
 
   const data = await response.json();
-  return data;
-}
-
-export async function getUserSubscription(): Promise<UserSubscription | null> {
-  const { data: { user } } = await supabase.auth.getUser();
-  
-  if (!user) {
-    return null;
-  }
-
-  const { data, error } = await supabase
-    .from('stripe_user_subscriptions')
-    .select('*')
-    .single();
-
-  if (error) {
-    console.error('Error fetching subscription:', error);
-    return null;
-  }
-
   return data;
 }

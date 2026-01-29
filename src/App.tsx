@@ -8,23 +8,7 @@ import { SuccessPage } from './pages/SuccessPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
-import { stripeProducts } from './stripe-config';
 import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscription, type UserSubscription } from './lib/stripe';
-
-// Convert stripe products to match PremadeRug interface
-const stripeRugs = stripeProducts.map((product, index) => ({
-  id: index + 1000, // Use high IDs to avoid conflicts
-  image: null, // No images for stripe products
-  title: product.name,
-  description: product.description,
-  price: product.price.toString(),
-  stripe_price_id: product.priceId,
-  stripe_prod_id: null,
-  date_sold: null,
-  is_available: true,
-  created_at: new Date().toISOString(),
-  updated_at: new Date().toISOString()
-}));
 
 function MainApp() {
   const { user, signOut } = useAuth();
@@ -84,25 +68,20 @@ function MainApp() {
   const loadPremadeRugs = async () => {
     setIsLoadingRugs(true);
     setRugsError(null);
-    
+
     try {
-      // Fetch database rugs
       const { data: dbRugs, error } = await fetchPremadeRugs();
       if (error) {
         setRugsError(error);
-        // Still show Stripe products even if DB fails
-        setPremadeRugs(stripeRugs);
+        setPremadeRugs([]);
       } else {
-        // Combine database rugs with Stripe products
-        const allRugs = [...(dbRugs || []), ...stripeRugs];
-        setPremadeRugs(allRugs);
+        setPremadeRugs(dbRugs || []);
       }
     } catch (err) {
       setRugsError('Failed to load products');
-      // Fallback to Stripe products only
-      setPremadeRugs(stripeRugs);
+      setPremadeRugs([]);
     }
-    
+
     setIsLoadingRugs(false);
   };
 

@@ -751,7 +751,7 @@ function MainApp() {
                             : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
                         }`}
                       >
-                        2' x 2'
+                        1' x 1'
                       </button>
                       <button
                         type="button"
@@ -766,7 +766,7 @@ function MainApp() {
                             : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
                         }`}
                       >
-                        3' x 3'
+                        2' x 2'
                       </button>
                       <button
                         type="button"
@@ -781,7 +781,7 @@ function MainApp() {
                             : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
                         }`}
                       >
-                        4' x 4'
+                        3' x 3'
                       </button>
                       <button
                         type="button"

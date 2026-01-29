@@ -829,9 +829,19 @@ function MainApp() {
                               className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white focus:border-orange-500 focus:outline-none transition-colors"
                             >
                               <option value="">Select width</option>
-                              {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => (
-                                <option key={inches} value={inches}>{inches}"</option>
-                              ))}
+                              {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
+                                const isComingSoon = inches > 25;
+                                return (
+                                  <option
+                                    key={inches}
+                                    value={inches}
+                                    disabled={isComingSoon}
+                                    className={isComingSoon ? 'text-gray-500' : ''}
+                                  >
+                                    {inches}" {isComingSoon ? '(Coming Soon)' : ''}
+                                  </option>
+                                );
+                              })}
                             </select>
                           </div>
                           <div>
@@ -842,9 +852,19 @@ function MainApp() {
                               className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white focus:border-orange-500 focus:outline-none transition-colors"
                             >
                               <option value="">Select height</option>
-                              {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => (
-                                <option key={inches} value={inches}>{inches}"</option>
-                              ))}
+                              {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
+                                const isComingSoon = inches > 25;
+                                return (
+                                  <option
+                                    key={inches}
+                                    value={inches}
+                                    disabled={isComingSoon}
+                                    className={isComingSoon ? 'text-gray-500' : ''}
+                                  >
+                                    {inches}" {isComingSoon ? '(Coming Soon)' : ''}
+                                  </option>
+                                );
+                              })}
                             </select>
                           </div>
                         </div>

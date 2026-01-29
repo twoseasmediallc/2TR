@@ -770,16 +770,8 @@ function MainApp() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => {
-                          setSelectedDimension("3' x 3'");
-                          setCustomWidth('');
-                          setCustomHeight('');
-                        }}
-                        className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
-                          selectedDimension === "3' x 3'"
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
-                        }`}
+                        disabled
+                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-gray-900/50 border-gray-800 text-gray-600 cursor-not-allowed opacity-50"
                       >
                         3' x 3'
                       </button>

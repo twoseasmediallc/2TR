@@ -935,12 +935,22 @@ function MainApp() {
                   <p className="text-gray-400 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $200</p>
                 </div>
-                <div className="text-center">
+                <div className="text-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] bg-yellow-500 text-black font-bold text-xs sm:text-sm py-2 px-16 whitespace-nowrap shadow-lg">
+                      COMING SOON
+                    </div>
+                  </div>
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Medium</h4>
                   <p className="text-gray-400 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $350</p>
                 </div>
-                <div className="text-center">
+                <div className="text-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] bg-yellow-500 text-black font-bold text-xs sm:text-sm py-2 px-16 whitespace-nowrap shadow-lg">
+                      COMING SOON
+                    </div>
+                  </div>
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
                   <p className="text-gray-400 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $500</p>

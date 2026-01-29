@@ -971,7 +971,7 @@ function MainApp() {
                 </div>
                 <div className="text-center">
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
-                  <p className="text-gray-400 mb-2 text-sm sm:text-base">4' x 1' to 4 1/2 x 4 1/2</p>
+                  <p className="text-gray-400 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $500</p>
                 </div>
               </div>

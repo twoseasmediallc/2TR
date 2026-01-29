@@ -762,6 +762,21 @@ function MainApp() {
                       <button
                         type="button"
                         onClick={() => {
+                          setSelectedDimension("1' x 1'");
+                          setCustomWidth('');
+                          setCustomHeight('');
+                        }}
+                        className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
+                          selectedDimension === "1' x 1'"
+                            ? 'bg-orange-600 border-orange-600 text-white'
+                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                        }`}
+                      >
+                        2' x 2'
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
                           setSelectedDimension("2' x 2'");
                           setCustomWidth('');
                           setCustomHeight('');
@@ -772,7 +787,7 @@ function MainApp() {
                             : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
                         }`}
                       >
-                        2' x 2'
+                        3' x 3'
                       </button>
                       <button
                         type="button"
@@ -783,21 +798,6 @@ function MainApp() {
                         }}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "3' x 3'"
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
-                        }`}
-                      >
-                        3' x 3'
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSelectedDimension("4' x 4'");
-                          setCustomWidth('');
-                          setCustomHeight('');
-                        }}
-                        className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
-                          selectedDimension === "4' x 4'"
                             ? 'bg-orange-600 border-orange-600 text-white'
                             : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
                         }`}

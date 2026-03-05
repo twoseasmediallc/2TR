@@ -830,7 +830,7 @@ function MainApp() {
                             >
                               <option value="">Select width</option>
                               {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
-                                const isComingSoon = inches > 25;
+                                const isComingSoon = inches > 36;
                                 return (
                                   <option
                                     key={inches}
@@ -853,7 +853,7 @@ function MainApp() {
                             >
                               <option value="">Select height</option>
                               {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
-                                const isComingSoon = inches > 25;
+                                const isComingSoon = inches > 36;
                                 return (
                                   <option
                                     key={inches}

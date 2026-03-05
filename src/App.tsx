@@ -620,6 +620,35 @@ function MainApp() {
               </p>
             </div>
 
+            <div className="bg-gray-900/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800 mb-10 sm:mb-12 lg:mb-16">
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-6 text-center">Pricing Guide</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Small</h4>
+                  <p className="text-gray-400 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $189</p>
+                </div>
+                <div className="text-center">
+                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Medium</h4>
+                  <p className="text-gray-400 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $299</p>
+                </div>
+                <div className="text-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] bg-yellow-500 text-black font-bold text-xs sm:text-sm py-2 px-16 whitespace-nowrap shadow-lg">
+                      COMING SOON
+                    </div>
+                  </div>
+                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
+                  <p className="text-gray-400 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $449</p>
+                </div>
+              </div>
+              <p className="text-gray-400 text-center mt-6 text-sm sm:text-base px-4">
+                Final pricing depends on size, complexity, and materials. We'll provide a detailed quote after consultation. All custom preojects will begin upon receipt of payment and will take a minimum of 1 week for completion.
+              </p>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-12 lg:mb-16">
               <div className="bg-gray-900/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
                 <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6">The Process</h3>
@@ -927,34 +956,6 @@ function MainApp() {
               </div>
             </div>
 
-            <div className="bg-gray-900/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
-              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-6 text-center">Pricing Guide</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Small</h4>
-                  <p className="text-gray-400 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $189</p>
-                </div>
-                <div className="text-center">
-                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Medium</h4>
-                  <p className="text-gray-400 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $299</p>
-                </div>
-                <div className="text-center relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-10">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] bg-yellow-500 text-black font-bold text-xs sm:text-sm py-2 px-16 whitespace-nowrap shadow-lg">
-                      COMING SOON
-                    </div>
-                  </div>
-                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
-                  <p className="text-gray-400 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $449</p>
-                </div>
-              </div>
-              <p className="text-gray-400 text-center mt-6 text-sm sm:text-base px-4">
-                Final pricing depends on size, complexity, and materials. We'll provide a detailed quote after consultation. All custom preojects will begin upon receipt of payment and will take a minimum of 1 week for completion.
-              </p>
-            </div>
           </div>
         </section>
       </main>

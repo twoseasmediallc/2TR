@@ -1292,80 +1292,82 @@ function MainApp() {
 
       {selectedRugForGallery && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm overflow-y-auto"
           onClick={closeGallery}
         >
-          <button
-            onClick={closeGallery}
-            className="absolute top-4 right-4 text-white hover:text-orange-500 transition-colors z-10"
-          >
-            <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={2} />
-          </button>
+          <div className="min-h-screen flex items-center justify-center p-4">
+            <button
+              onClick={closeGallery}
+              className="fixed top-4 right-4 text-white hover:text-orange-500 transition-colors z-10"
+            >
+              <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={2} />
+            </button>
 
-          <div
-            className="relative max-w-6xl w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {getGalleryImages(selectedRugForGallery).length > 0 ? (
-              <>
-                <div className="relative aspect-square sm:aspect-video bg-gray-900 rounded-xl overflow-hidden">
-                  <img
-                    src={getGalleryImages(selectedRugForGallery)[currentImageIndex]}
-                    alt={`${selectedRugForGallery.title || 'Rug'} - Image ${currentImageIndex + 1}`}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+            <div
+              className="relative max-w-6xl w-full my-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {getGalleryImages(selectedRugForGallery).length > 0 ? (
+                <>
+                  <div className="relative aspect-square sm:aspect-video bg-gray-900 rounded-xl overflow-hidden">
+                    <img
+                      src={getGalleryImages(selectedRugForGallery)[currentImageIndex]}
+                      alt={`${selectedRugForGallery.title || 'Rug'} - Image ${currentImageIndex + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
 
-                {getGalleryImages(selectedRugForGallery).length > 1 && (
-                  <>
+                  {getGalleryImages(selectedRugForGallery).length > 1 && (
+                    <>
+                      <button
+                        onClick={previousImage}
+                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                      >
+                        <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
+                      </button>
+
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                      >
+                        <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
+                      </button>
+
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
+                        {currentImageIndex + 1} / {getGalleryImages(selectedRugForGallery).length}
+                      </div>
+                    </>
+                  )}
+
+                  <div className="mt-6 sm:mt-8 text-center pb-8">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                      {selectedRugForGallery.title || 'Untitled Rug'}
+                    </h3>
+                    <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-4">
+                      {selectedRugForGallery.description || 'No description available'}
+                    </p>
+                    <p className="text-3xl sm:text-4xl font-bold text-orange-500 mt-4 mb-6">
+                      ${selectedRugForGallery.price ? parseFloat(selectedRugForGallery.price).toFixed(2) : '0.00'}
+                    </p>
                     <button
-                      onClick={previousImage}
-                      className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(selectedRugForGallery);
+                        closeGallery();
+                      }}
+                      className="px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
                     >
-                      <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
+                      Add to Cart
                     </button>
-
-                    <button
-                      onClick={nextImage}
-                      className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
-                    >
-                      <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
-                    </button>
-
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
-                      {currentImageIndex + 1} / {getGalleryImages(selectedRugForGallery).length}
-                    </div>
-                  </>
-                )}
-
-                <div className="mt-4 text-center">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                    {selectedRugForGallery.title || 'Untitled Rug'}
-                  </h3>
-                  <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-                    {selectedRugForGallery.description || 'No description available'}
-                  </p>
-                  <p className="text-3xl sm:text-4xl font-bold text-orange-500 mt-4">
-                    ${selectedRugForGallery.price ? parseFloat(selectedRugForGallery.price).toFixed(2) : '0.00'}
-                  </p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToCart(selectedRugForGallery);
-                      closeGallery();
-                    }}
-                    className="mt-4 px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
-                  >
-                    Add to Cart
-                  </button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-center text-gray-400 py-12">
+                  <Package className="w-24 h-24 mx-auto mb-4" strokeWidth={1.5} />
+                  <p>No images available</p>
                 </div>
-              </>
-            ) : (
-              <div className="text-center text-gray-400 py-12">
-                <Package className="w-24 h-24 mx-auto mb-4" strokeWidth={1.5} />
-                <p>No images available</p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}

@@ -1029,8 +1029,8 @@ function MainApp() {
       </main>
 
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-gray-900 rounded-xl sm:rounded-2xl border-2 border-gray-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-gray-900 rounded-xl sm:rounded-2xl border-2 border-gray-800 max-w-2xl w-full my-4">
             <div className="sticky top-0 bg-gray-900 border-b-2 border-gray-800 p-4 sm:p-6 flex items-center justify-between">
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Order Summary</h3>
               <button
@@ -1148,8 +1148,8 @@ function MainApp() {
       )}
 
       {showCartModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-gray-900 rounded-xl sm:rounded-2xl border-2 border-gray-800 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-gray-900 rounded-xl sm:rounded-2xl border-2 border-gray-800 max-w-4xl w-full my-4">
             <div className="sticky top-0 bg-gray-900 border-b-2 border-gray-800 p-4 sm:p-6 flex items-center justify-between">
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Shopping Cart</h3>
               <button
@@ -1269,8 +1269,8 @@ function MainApp() {
       )}
 
       {showLimitModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-gray-900 rounded-xl border-2 border-orange-600 max-w-md w-full p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-gray-900 rounded-xl border-2 border-orange-600 max-w-md w-full p-6 my-4">
             <div className="text-center">
               <div className="mx-auto mb-4 w-12 h-12 bg-orange-600/20 rounded-full flex items-center justify-center">
                 <AlertCircle className="w-6 h-6 text-orange-500" strokeWidth={2} />

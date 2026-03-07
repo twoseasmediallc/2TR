@@ -129,25 +129,34 @@ function MainApp() {
   };
 
   const nextImage = () => {
-    if (selectedRugForGallery?.images) {
+    if (selectedRugForGallery) {
+      const images = getGalleryImages(selectedRugForGallery);
       setCurrentImageIndex((prev) =>
-        prev === selectedRugForGallery.images!.length - 1 ? 0 : prev + 1
+        prev === images.length - 1 ? 0 : prev + 1
       );
     }
   };
 
   const previousImage = () => {
-    if (selectedRugForGallery?.images) {
+    if (selectedRugForGallery) {
+      const images = getGalleryImages(selectedRugForGallery);
       setCurrentImageIndex((prev) =>
-        prev === 0 ? selectedRugForGallery.images!.length - 1 : prev - 1
+        prev === 0 ? images.length - 1 : prev - 1
       );
     }
   };
 
   const getGalleryImages = (rug: PremadeRug): string[] => {
-    if (rug.images && rug.images.length > 0) {
-      return rug.images;
+    const images: string[] = [];
+
+    if (rug.modal_image1) images.push(rug.modal_image1);
+    if (rug.modal_image2) images.push(rug.modal_image2);
+    if (rug.modal_image3) images.push(rug.modal_image3);
+
+    if (images.length > 0) {
+      return images;
     }
+
     return rug.image ? [rug.image] : [];
   };
 

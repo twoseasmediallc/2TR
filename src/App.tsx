@@ -1,4 +1,4 @@
-import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu } from 'lucide-react';
+import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './components/AuthProvider';
@@ -39,6 +39,8 @@ function MainApp() {
   const [subscription, setSubscription] = useState<UserSubscription | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [showLimitModal, setShowLimitModal] = useState(false);
+  const [selectedRugForGallery, setSelectedRugForGallery] = useState<PremadeRug | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const formatInchesToFeet = (inches: string) => {
     const totalInches = parseInt(inches);
@@ -114,6 +116,39 @@ function MainApp() {
       updatedCart.splice(index, 1);
       setCartItems(updatedCart);
     }
+  };
+
+  const openGallery = (rug: PremadeRug) => {
+    setSelectedRugForGallery(rug);
+    setCurrentImageIndex(0);
+  };
+
+  const closeGallery = () => {
+    setSelectedRugForGallery(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedRugForGallery?.images) {
+      setCurrentImageIndex((prev) =>
+        prev === selectedRugForGallery.images!.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const previousImage = () => {
+    if (selectedRugForGallery?.images) {
+      setCurrentImageIndex((prev) =>
+        prev === 0 ? selectedRugForGallery.images!.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const getGalleryImages = (rug: PremadeRug): string[] => {
+    if (rug.images && rug.images.length > 0) {
+      return rug.images;
+    }
+    return rug.image ? [rug.image] : [];
   };
 
   const handleStripeCheckout = async (priceId: string) => {
@@ -578,13 +613,23 @@ function MainApp() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {premadeRugs.map((rug) => (
                   <div key={rug.id} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
-                    <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
+                    <div
+                      className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden cursor-pointer relative"
+                      onClick={() => openGallery(rug)}
+                    >
                       {rug.image ? (
-                        <img
-                          src={rug.image}
-                          alt={rug.title || 'Rug'}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                        <>
+                          <img
+                            src={rug.image}
+                            alt={rug.title || 'Rug'}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          {getGalleryImages(rug).length > 1 && (
+                            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
+                              {getGalleryImages(rug).length} photos
+                            </div>
+                          )}
+                        </>
                       ) : (
                         <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
                       )}
@@ -1218,6 +1263,86 @@ function MainApp() {
                 OK
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {selectedRugForGallery && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
+          onClick={closeGallery}
+        >
+          <button
+            onClick={closeGallery}
+            className="absolute top-4 right-4 text-white hover:text-orange-500 transition-colors z-10"
+          >
+            <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={2} />
+          </button>
+
+          <div
+            className="relative max-w-6xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {getGalleryImages(selectedRugForGallery).length > 0 ? (
+              <>
+                <div className="relative aspect-square sm:aspect-video bg-gray-900 rounded-xl overflow-hidden">
+                  <img
+                    src={getGalleryImages(selectedRugForGallery)[currentImageIndex]}
+                    alt={`${selectedRugForGallery.title || 'Rug'} - Image ${currentImageIndex + 1}`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
+                {getGalleryImages(selectedRugForGallery).length > 1 && (
+                  <>
+                    <button
+                      onClick={previousImage}
+                      className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                    >
+                      <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
+                    </button>
+
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                    >
+                      <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
+                    </button>
+
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
+                      {currentImageIndex + 1} / {getGalleryImages(selectedRugForGallery).length}
+                    </div>
+                  </>
+                )}
+
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                    {selectedRugForGallery.title || 'Untitled Rug'}
+                  </h3>
+                  <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                    {selectedRugForGallery.description || 'No description available'}
+                  </p>
+                  <p className="text-3xl sm:text-4xl font-bold text-orange-500 mt-4">
+                    ${selectedRugForGallery.price ? parseFloat(selectedRugForGallery.price).toFixed(2) : '0.00'}
+                  </p>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToCart(selectedRugForGallery);
+                      closeGallery();
+                    }}
+                    className="mt-4 px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="text-center text-gray-400 py-12">
+                <Package className="w-24 h-24 mx-auto mb-4" strokeWidth={1.5} />
+                <p>No images available</p>
+              </div>
+            )}
           </div>
         </div>
       )}

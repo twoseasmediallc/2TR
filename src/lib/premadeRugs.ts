@@ -4,6 +4,7 @@ export interface PremadeRug {
   id: number;
   created_at: string;
   image: string | null;
+  images: string[] | null;
   title: string | null;
   description: string | null;
   price: string | null;

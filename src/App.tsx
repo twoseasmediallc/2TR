@@ -41,6 +41,7 @@ function MainApp() {
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [selectedRugForGallery, setSelectedRugForGallery] = useState<PremadeRug | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const formatInchesToFeet = (inches: string) => {
     const totalInches = parseInt(inches);
@@ -66,6 +67,15 @@ function MainApp() {
       setSubscription(null);
     }
   }, [user]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const loadPremadeRugs = async () => {
     setIsLoadingRugs(true);
@@ -283,8 +293,8 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-black">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm">
-        <div className="container mx-auto px-2 sm:px-6 py-3 sm:py-6 lg:py-10">
+      <nav className={`fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'py-2' : ''}`}>
+        <div className={`container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -309,7 +319,11 @@ function MainApp() {
               <img
                 src="/2tr-logo-final-transparent.png"
                 alt="Two Tuft Rugs Logo"
-                className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain"
+                className={`object-contain transition-all duration-300 ${
+                  isScrolled
+                    ? 'w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20'
+                    : 'w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40'
+                }`}
               />
             </div>
 
@@ -383,7 +397,7 @@ function MainApp() {
         )}
       </nav>
 
-      <main className="pt-28 sm:pt-36 lg:pt-60">
+      <main className={`transition-all duration-300 ${isScrolled ? 'pt-16 sm:pt-20 lg:pt-24' : 'pt-28 sm:pt-36 lg:pt-60'}`}>
         <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl">
           <img
             src="https://esvrzocrrwabwrvlurpf.supabase.co/storage/v1/object/public/promo/2tr-workstation-full.png"

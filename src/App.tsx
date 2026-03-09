@@ -466,143 +466,6 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
-          <div className="container mx-auto max-w-4xl">
-            <div className="text-center mb-8 sm:mb-12">
-              <div className="flex items-center justify-center mb-4 sm:mb-6">
-                <Package className="w-12 h-12 sm:w-16 sm:h-16 text-orange-500" strokeWidth={1.5} />
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
-              <p className="text-gray-400 text-base sm:text-lg px-4">
-                [Custom Rugs Only]
-              </p>
-              <p className="text-gray-400 text-base sm:text-lg px-4">
-                Enter your tracking number to see the status of your custom rug
-              </p>
-            </div>
-
-            <form onSubmit={handleTrackShipment} className="mb-8 sm:mb-12">
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
-                  <input
-                    type="text"
-                    value={trackingNumber}
-                    onChange={(e) => {
-                      setTrackingNumber(e.target.value.toUpperCase());
-                      setTrackingError(null);
-                    }}
-                    placeholder="Enter your tracking number (e.g., 2TR-20241212-12345)"
-                    className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors text-base sm:text-lg"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isTrackingLoading}
-                  className="px-8 sm:px-10 py-4 sm:py-5 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-base sm:text-lg whitespace-nowrap flex items-center justify-center gap-2"
-                >
-                  {isTrackingLoading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Tracking...
-                    </>
-                  ) : (
-                    'Track Order'
-                  )}
-                </button>
-              </div>
-
-              {trackingError && (
-                <div className="mt-4 p-4 bg-red-900/20 border-2 border-red-600 rounded-lg flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-red-400">{trackingError}</p>
-                </div>
-              )}
-            </form>
-
-            {trackingInfo && (
-              <div className="mb-8 p-6 bg-gray-800/50 rounded-xl border-2 border-gray-700">
-                <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-400 mb-1">Customer Name</p>
-                    <p className="text-white font-medium">{trackingInfo.name}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400 mb-1">Dimensions</p>
-                    <p className="text-white font-medium">{trackingInfo.dimensions}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400 mb-1">Backing Option</p>
-                    <p className="text-white font-medium">{trackingInfo.backing_option}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400 mb-1">Cut Option</p>
-                    <p className="text-white font-medium">{trackingInfo.cut_option || 'N/A'}</p>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <p className="text-gray-400 mb-1">Order Date</p>
-                    <p className="text-white font-medium">
-                      {new Date(trackingInfo.created_at).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <div className="bg-gray-800/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
-              <h3 className="text-2xl font-semibold text-white mb-6">Order Timeline</h3>
-              <div className="space-y-6">
-                {[
-                  { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending' },
-                  { stage: 1, title: 'In Production', description: 'Your rug is being handcrafted', status: 'in_production' },
-                  { stage: 2, title: 'Quality Check', description: 'Final inspection and packaging', status: 'quality_check' },
-                  { stage: 3, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped' },
-                  { stage: 4, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered' }
-                ].map(({ stage, title, description, status }) => {
-                  const currentStage = trackingInfo ? getOrderStageIndex(trackingInfo) : -1;
-                  const isActive = stage <= currentStage;
-                  const isCurrent = stage === currentStage;
-
-                  return (
-                    <div key={stage} className={`flex items-start gap-4 ${!isActive && trackingInfo ? 'opacity-50' : ''}`}>
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
-                        isActive ? 'bg-orange-600' : 'bg-gray-700'
-                      }`}>
-                        <div className={`w-3 h-3 rounded-full ${
-                          isActive ? 'bg-white' : 'bg-gray-500'
-                        }`}></div>
-                      </div>
-                      <div>
-                        <h4 className={`font-medium text-lg mb-1 ${
-                          isCurrent ? 'text-orange-400' : 'text-white'
-                        }`}>
-                          {title}
-                          {isCurrent && ' (Current)'}
-                        </h4>
-                        <p className="text-gray-400">{description}</p>
-                        {trackingInfo && isActive && trackingInfo.updated_at && (
-                          <p className="text-gray-500 text-sm mt-1">
-                            Updated: {new Date(trackingInfo.updated_at).toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit'
-                            })}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
@@ -1371,6 +1234,143 @@ function MainApp() {
           </div>
         </div>
       )}
+
+      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
+              <Package className="w-12 h-12 sm:w-16 sm:h-16 text-orange-500" strokeWidth={1.5} />
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
+            <p className="text-gray-400 text-base sm:text-lg px-4">
+              [Custom Rugs Only]
+            </p>
+            <p className="text-gray-400 text-base sm:text-lg px-4">
+              Enter your tracking number to see the status of your custom rug
+            </p>
+          </div>
+
+          <form onSubmit={handleTrackShipment} className="mb-8 sm:mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
+                <input
+                  type="text"
+                  value={trackingNumber}
+                  onChange={(e) => {
+                    setTrackingNumber(e.target.value.toUpperCase());
+                    setTrackingError(null);
+                  }}
+                  placeholder="Enter your tracking number (e.g., 2TR-20241212-12345)"
+                  className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors text-base sm:text-lg"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isTrackingLoading}
+                className="px-8 sm:px-10 py-4 sm:py-5 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-base sm:text-lg whitespace-nowrap flex items-center justify-center gap-2"
+              >
+                {isTrackingLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Tracking...
+                  </>
+                ) : (
+                  'Track Order'
+                )}
+              </button>
+            </div>
+
+            {trackingError && (
+              <div className="mt-4 p-4 bg-red-900/20 border-2 border-red-600 rounded-lg flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <p className="text-red-400">{trackingError}</p>
+              </div>
+            )}
+          </form>
+
+          {trackingInfo && (
+            <div className="mb-8 p-6 bg-gray-800/50 rounded-xl border-2 border-gray-700">
+              <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="text-gray-400 mb-1">Customer Name</p>
+                  <p className="text-white font-medium">{trackingInfo.name}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 mb-1">Dimensions</p>
+                  <p className="text-white font-medium">{trackingInfo.dimensions}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 mb-1">Backing Option</p>
+                  <p className="text-white font-medium">{trackingInfo.backing_option}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 mb-1">Cut Option</p>
+                  <p className="text-white font-medium">{trackingInfo.cut_option || 'N/A'}</p>
+                </div>
+                <div className="sm:col-span-2">
+                  <p className="text-gray-400 mb-1">Order Date</p>
+                  <p className="text-white font-medium">
+                    {new Date(trackingInfo.created_at).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-gray-800/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
+            <h3 className="text-2xl font-semibold text-white mb-6">Order Timeline</h3>
+            <div className="space-y-6">
+              {[
+                { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending' },
+                { stage: 1, title: 'In Production', description: 'Your rug is being handcrafted', status: 'in_production' },
+                { stage: 2, title: 'Quality Check', description: 'Final inspection and packaging', status: 'quality_check' },
+                { stage: 3, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped' },
+                { stage: 4, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered' }
+              ].map(({ stage, title, description, status }) => {
+                const currentStage = trackingInfo ? getOrderStageIndex(trackingInfo) : -1;
+                const isActive = stage <= currentStage;
+                const isCurrent = stage === currentStage;
+
+                return (
+                  <div key={stage} className={`flex items-start gap-4 ${!isActive && trackingInfo ? 'opacity-50' : ''}`}>
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
+                      isActive ? 'bg-orange-600' : 'bg-gray-700'
+                    }`}>
+                      <div className={`w-3 h-3 rounded-full ${
+                        isActive ? 'bg-white' : 'bg-gray-500'
+                      }`}></div>
+                    </div>
+                    <div>
+                      <h4 className={`font-medium text-lg mb-1 ${
+                        isCurrent ? 'text-orange-400' : 'text-white'
+                      }`}>
+                        {title}
+                        {isCurrent && ' (Current)'}
+                      </h4>
+                      <p className="text-gray-400">{description}</p>
+                      {trackingInfo && isActive && trackingInfo.updated_at && (
+                        <p className="text-gray-500 text-sm mt-1">
+                          Updated: {new Date(trackingInfo.updated_at).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <footer className="bg-black border-t border-gray-800 py-6 px-4">
         <div className="container mx-auto text-center">

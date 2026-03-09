@@ -34,38 +34,41 @@ Deno.serve(async (req: Request) => {
     );
 
     let customer;
-    const { data: existingCustomer, error: customerError } = await supabase
-      .from('stripe_customers')
-      .select('customer_id')
-      .eq('user_id', userId)
-      .maybeSingle();
 
-    if (customerError) {
-      console.error('Error fetching customer:', customerError);
-      throw new Error(`Database error: ${customerError.message}`);
-    }
+    if (userId) {
+      const { data: existingCustomer, error: customerError } = await supabase
+        .from('stripe_customers')
+        .select('customer_id')
+        .eq('user_id', userId)
+        .maybeSingle();
 
-    if (existingCustomer) {
-      customer = await stripe.customers.retrieve(existingCustomer.customer_id);
-      if (customer.deleted) {
-        throw new Error('Customer has been deleted in Stripe');
+      if (customerError) {
+        console.error('Error fetching customer:', customerError);
+        throw new Error(`Database error: ${customerError.message}`);
       }
-    } else {
-      customer = await stripe.customers.create({
-        email: userEmail,
-        metadata: {
-          supabase_user_id: userId,
-        },
-      });
 
-      const { error: insertError } = await supabase.from('stripe_customers').insert({
-        user_id: userId,
-        customer_id: customer.id,
-      });
+      if (existingCustomer) {
+        customer = await stripe.customers.retrieve(existingCustomer.customer_id);
+        if (customer.deleted) {
+          throw new Error('Customer has been deleted in Stripe');
+        }
+      } else {
+        customer = await stripe.customers.create({
+          email: userEmail || undefined,
+          metadata: {
+            supabase_user_id: userId,
+          },
+        });
 
-      if (insertError) {
-        console.error('Error inserting customer:', insertError);
-        throw new Error(`Failed to save customer: ${insertError.message}`);
+        const { error: insertError } = await supabase.from('stripe_customers').insert({
+          user_id: userId,
+          customer_id: customer.id,
+        });
+
+        if (insertError) {
+          console.error('Error inserting customer:', insertError);
+          throw new Error(`Failed to save customer: ${insertError.message}`);
+        }
       }
     }
 
@@ -91,14 +94,21 @@ Deno.serve(async (req: Request) => {
 
     console.log('Creating checkout session with line items:', line_items);
 
-    const session = await stripe.checkout.sessions.create({
-      customer: customer.id,
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       line_items,
       mode,
       success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get('origin')}/`,
       automatic_tax: { enabled: true },
-    });
+    };
+
+    if (customer) {
+      sessionParams.customer = customer.id;
+    } else if (userEmail) {
+      sessionParams.customer_email = userEmail;
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     return new Response(
       JSON.stringify({ url: session.url }),

@@ -15,10 +15,6 @@ export interface UserSubscription {
 export async function createCheckoutSession(priceId: string, mode: 'payment' | 'subscription') {
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
-    throw new Error('User must be authenticated');
-  }
-
   const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`, {
     method: 'POST',
     headers: {
@@ -28,8 +24,8 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
     body: JSON.stringify({
       priceId,
       mode,
-      userId: user.id,
-      userEmail: user.email,
+      userId: user?.id || null,
+      userEmail: user?.email || null,
     }),
   });
 
@@ -45,10 +41,6 @@ export async function createCheckoutSession(priceId: string, mode: 'payment' | '
 export async function createCheckoutSessionForCart(priceIds: string[], mode: 'payment' | 'subscription') {
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
-    throw new Error('User must be authenticated');
-  }
-
   const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`, {
     method: 'POST',
     headers: {
@@ -58,8 +50,8 @@ export async function createCheckoutSessionForCart(priceIds: string[], mode: 'pa
     body: JSON.stringify({
       priceIds,
       mode,
-      userId: user.id,
-      userEmail: user.email,
+      userId: user?.id || null,
+      userEmail: user?.email || null,
     }),
   });
 

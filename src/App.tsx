@@ -37,6 +37,7 @@ function MainApp() {
   const [selectedRugForGallery, setSelectedRugForGallery] = useState<PremadeRug | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showCouponInfo, setShowCouponInfo] = useState(false);
 
   const formatInchesToFeet = (inches: string) => {
     const totalInches = parseInt(inches);
@@ -1060,6 +1061,33 @@ function MainApp() {
                   </div>
 
                   <div className="border-t-2 border-gray-800 pt-6">
+                    <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-2 border-orange-600/30 rounded-lg p-4 mb-6">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
+                          <span className="text-white font-bold text-lg">%</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-white font-semibold text-lg mb-1">Have a Coupon Code?</h4>
+                          <p className="text-gray-300 text-sm mb-3">
+                            You'll be able to enter your promotional code on the next page during checkout.
+                          </p>
+                          <button
+                            onClick={() => setShowCouponInfo(!showCouponInfo)}
+                            className="text-orange-400 hover:text-orange-300 text-sm font-medium underline"
+                          >
+                            {showCouponInfo ? 'Hide details' : 'Learn more'}
+                          </button>
+                          {showCouponInfo && (
+                            <div className="mt-3 text-gray-300 text-sm bg-black/30 rounded-lg p-3 border border-gray-700">
+                              <p className="mb-2">On the checkout page, look for the link that says:</p>
+                              <p className="font-mono text-orange-400 mb-2">"Add promotion code"</p>
+                              <p>Click it to reveal the coupon code field where you can enter your discount code.</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="flex justify-between items-center mb-6">
                       <span className="text-xl text-gray-300">Total:</span>
                       <span className="text-3xl font-bold text-orange-500">

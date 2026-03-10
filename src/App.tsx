@@ -293,10 +293,7 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium">
-        Free Shipping on All Rugs
-      </div>
-      <nav className={`fixed left-0 right-0 z-50 bg-black/90 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'py-2 top-8' : 'top-8'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'py-2' : ''}`}>
         <div className={`container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
@@ -399,6 +396,10 @@ function MainApp() {
           </div>
         )}
       </nav>
+
+      <div className="fixed left-0 right-0 z-40 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium" style={{ top: isScrolled ? '4rem' : '10rem' }}>
+        Free Shipping on All Rugs
+      </div>
 
       <main className={`transition-all duration-300 ${isScrolled ? 'pt-24 sm:pt-28 lg:pt-32' : 'pt-36 sm:pt-44 lg:pt-68'}`}>
         <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl">

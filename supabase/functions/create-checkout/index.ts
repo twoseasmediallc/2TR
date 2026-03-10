@@ -100,6 +100,10 @@ Deno.serve(async (req: Request) => {
       success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get('origin')}/`,
       automatic_tax: { enabled: true },
+      billing_address_collection: 'required',
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA', 'GB', 'AU', 'NZ', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'SE', 'NO', 'DK', 'FI', 'IE', 'AT', 'CH', 'PL', 'PT', 'CZ', 'GR', 'RO', 'HU', 'JP', 'KR', 'SG', 'IN', 'BR', 'MX', 'AR', 'CL', 'CO'],
+      },
     };
 
     if (customer) {

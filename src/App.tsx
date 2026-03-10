@@ -1,17 +1,13 @@
 import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loader2, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './components/AuthProvider';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import { LoginPage } from './pages/LoginPage';
 import { SuccessPage } from './pages/SuccessPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
-import { createCheckoutSession, createCheckoutSessionForCart, getUserSubscription, type UserSubscription } from './lib/stripe';
+import { createCheckoutSession, createCheckoutSessionForCart } from './lib/stripe';
 
 function MainApp() {
-  const { user, signOut } = useAuth();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [selectedDimension, setSelectedDimension] = useState<string>('');
   const [customWidth, setCustomWidth] = useState('');
@@ -36,7 +32,6 @@ function MainApp() {
   const [trackingInfo, setTrackingInfo] = useState<TrackingInfo | null>(null);
   const [trackingError, setTrackingError] = useState<string | null>(null);
   const [isTrackingLoading, setIsTrackingLoading] = useState(false);
-  const [subscription, setSubscription] = useState<UserSubscription | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [selectedRugForGallery, setSelectedRugForGallery] = useState<PremadeRug | null>(null);
@@ -55,18 +50,7 @@ function MainApp() {
 
   useEffect(() => {
     loadPremadeRugs();
-    if (user) {
-      loadUserSubscription();
-    }
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      loadUserSubscription();
-    } else {
-      setSubscription(null);
-    }
-  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,15 +79,6 @@ function MainApp() {
     }
 
     setIsLoadingRugs(false);
-  };
-
-  const loadUserSubscription = async () => {
-    try {
-      const userSubscription = await getUserSubscription();
-      setSubscription(userSubscription);
-    } catch (error) {
-      console.error('Error loading subscription:', error);
-    }
   };
 
   const handleAddToCart = (rug: PremadeRug) => {
@@ -1388,20 +1363,13 @@ function MainApp() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/success" element={
-            <ProtectedRoute>
-              <SuccessPage />
-            </ProtectedRoute>
-          } />
-          <Route path="/" element={<MainApp />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/" element={<MainApp />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

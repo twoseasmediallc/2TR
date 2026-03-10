@@ -44,7 +44,7 @@ export const stripeProducts: StripeProduct[] = [
   },
   {
     priceId: 'price_1SlhNlCWVSnInCPVZ9XE2eQ1',
-    name: 'Live Music',
+    name: 'Cultural Music',
     description: '2\' x 2\' Music note on a lively colored staff (background color may vary)',
     price: 90.00,
     mode: 'payment'

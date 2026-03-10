@@ -8,9 +8,9 @@ export interface StripeProduct {
 
 export const stripeProducts: StripeProduct[] = [
   {
-    priceId: 'price_1SlhNlCWVSnInCPVZ9XE2eQ1',
-    name: 'Live Music',
-    description: '2\' x 2\' Music note on a lively colored staff (background color may vary)',
+    priceId: 'price_1SlhGTCWVSnInCPVRTgVY0QO',
+    name: 'Alive in Motion',
+    description: '2\' x 2\' Abstract artwork of lines in motion (colors may vary)',
     price: 90.00,
     mode: 'payment'
   },
@@ -43,9 +43,9 @@ export const stripeProducts: StripeProduct[] = [
     mode: 'payment'
   },
   {
-    priceId: 'price_1SlhGTCWVSnInCPVRTgVY0QO',
-    name: 'Alive in Motion',
-    description: '2\' x 2\' Abstract artwork of lines in motion (colors may vary)',
+    priceId: 'price_1SlhNlCWVSnInCPVZ9XE2eQ1',
+    name: 'Live Music',
+    description: '2\' x 2\' Music note on a lively colored staff (background color may vary)',
     price: 90.00,
     mode: 'payment'
   }

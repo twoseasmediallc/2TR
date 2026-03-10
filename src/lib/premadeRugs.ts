@@ -33,6 +33,15 @@ export async function fetchPremadeRugs(): Promise<{
       return { data: null, error: error.message };
     }
 
+    if (data) {
+      const sortedData = data.sort((a, b) => {
+        if (a.title === 'Cultural Music') return -1;
+        if (b.title === 'Cultural Music') return 1;
+        return 0;
+      });
+      return { data: sortedData, error: null };
+    }
+
     return { data, error: null };
   } catch (err) {
     console.error('Unexpected error:', err);

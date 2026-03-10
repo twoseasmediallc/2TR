@@ -104,12 +104,14 @@ Deno.serve(async (req: Request) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'CA', 'GB', 'AU', 'NZ', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'SE', 'NO', 'DK', 'FI', 'IE', 'AT', 'CH', 'PL', 'PT', 'CZ', 'GR', 'RO', 'HU', 'JP', 'KR', 'SG', 'IN', 'BR', 'MX', 'AR', 'CL', 'CO'],
       },
+      customer_creation: 'always',
     };
 
     if (customer) {
       sessionParams.customer = customer.id;
-    } else if (userEmail) {
-      sessionParams.customer_email = userEmail;
+      delete sessionParams.customer_creation;
+    } else {
+      sessionParams.customer_creation = 'always';
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams);

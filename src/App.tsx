@@ -293,8 +293,11 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-black">
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'py-2' : ''}`}>
-        <div className={`container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
+        <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium">
+          Free Shipping on All Rugs
+        </div>
+        <div className={`bg-black/90 backdrop-blur-sm container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -397,11 +400,7 @@ function MainApp() {
         )}
       </nav>
 
-      <div className="fixed left-0 right-0 z-40 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium" style={{ top: isScrolled ? '4rem' : '10rem' }}>
-        Free Shipping on All Rugs
-      </div>
-
-      <main className={`transition-all duration-300 ${isScrolled ? 'pt-24 sm:pt-28 lg:pt-32' : 'pt-36 sm:pt-44 lg:pt-68'}`}>
+      <main className={`transition-all duration-300 ${isScrolled ? 'pt-28 sm:pt-32 lg:pt-36' : 'pt-40 sm:pt-48 lg:pt-72'}`}>
         <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl">
           <img
             src="https://esvrzocrrwabwrvlurpf.supabase.co/storage/v1/object/public/promo/2tr-workstation-full.png"

@@ -293,7 +293,10 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-black">
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'py-2' : ''}`}>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium">
+        Free Shipping on All Rugs
+      </div>
+      <nav className={`fixed left-0 right-0 z-50 bg-black/90 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'py-2 top-8' : 'top-8'}`}>
         <div className={`container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
@@ -397,7 +400,7 @@ function MainApp() {
         )}
       </nav>
 
-      <main className={`transition-all duration-300 ${isScrolled ? 'pt-16 sm:pt-20 lg:pt-24' : 'pt-28 sm:pt-36 lg:pt-60'}`}>
+      <main className={`transition-all duration-300 ${isScrolled ? 'pt-24 sm:pt-28 lg:pt-32' : 'pt-36 sm:pt-44 lg:pt-68'}`}>
         <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl">
           <img
             src="https://esvrzocrrwabwrvlurpf.supabase.co/storage/v1/object/public/promo/2tr-workstation-full.png"
@@ -413,7 +416,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="about" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <section id="about" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
           <div className="container mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div>
@@ -466,7 +469,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
@@ -542,7 +545,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
@@ -1235,7 +1238,7 @@ function MainApp() {
         </div>
       )}
 
-      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-28 sm:scroll-mt-36 lg:scroll-mt-60">
+      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-8 sm:mb-12">
             <div className="flex items-center justify-center mb-4 sm:mb-6">

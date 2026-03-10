@@ -182,6 +182,7 @@ Deno.serve(async (req) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'CA', 'GB', 'AU', 'NZ', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'SE', 'NO', 'DK', 'FI', 'IE', 'AT', 'CH', 'PL', 'PT', 'CZ', 'GR', 'RO', 'HU', 'JP', 'KR', 'SG', 'IN', 'BR', 'MX', 'AR', 'CL', 'CO'],
       },
+      allow_promotion_codes: true,
     };
 
     if (customerId) {

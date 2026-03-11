@@ -419,7 +419,7 @@ function MainApp() {
             <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 lg:mb-8 tracking-tight">About Us</h2>
-                <div className="space-y-4 sm:space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed">
+                <div className="space-y-4 sm:space-y-6 text-white text-base sm:text-lg leading-relaxed">
                   <p>
                     Two Tuft Rugs is a handcrafted rug company dedicated to bringing unique,
                     custom-designed rugs to life. Each piece is meticulously crafted with passion
@@ -471,7 +471,7 @@ function MainApp() {
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
-              <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
+              <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
                 Explore our curated collection of handcrafted rugs, ready to ship and transform your space. All pre-made rugs (Mini & Small) include a felt backing!
               </p>
             </div>
@@ -493,8 +493,8 @@ function MainApp() {
               </div>
             ) : premadeRugs.length === 0 ? (
               <div className="bg-gray-800/30 border-2 border-gray-600 rounded-2xl p-12 text-center">
-                <Package className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <p className="text-gray-600 text-lg">No rugs available at the moment. Check back soon!</p>
+                <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-300 text-lg">No rugs available at the moment. Check back soon!</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -518,12 +518,12 @@ function MainApp() {
                           )}
                         </>
                       ) : (
-                        <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-cyan-600 transition-colors" strokeWidth={1.5} />
+                        <Package className="w-16 h-16 sm:w-24 sm:h-24 text-white group-hover:text-cyan-600 transition-colors" strokeWidth={1.5} />
                       )}
                     </div>
                     <div className="p-4 sm:p-6">
                       <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{rug.title || 'Untitled Rug'}</h3>
-                      <p className="text-gray-600 text-sm sm:text-base mb-4 line-clamp-2">{rug.description || 'No description available'}</p>
+                      <p className="text-gray-300 text-sm sm:text-base mb-4 line-clamp-2">{rug.description || 'No description available'}</p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <span className="text-2xl sm:text-3xl font-bold text-cyan-400">
                           ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
@@ -547,7 +547,7 @@ function MainApp() {
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
-              <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
+              <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
                 Bring your vision to life with a one-of-a-kind handcrafted rug designed just for you or your company!
               </p>
             </div>
@@ -557,26 +557,26 @@ function MainApp() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div className="text-center">
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Small</h4>
-                  <p className="text-gray-600 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
+                  <p className="text-gray-300 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $189</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Medium</h4>
-                  <p className="text-gray-600 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
+                  <p className="text-gray-300 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $299</p>
                 </div>
                 <div className="text-center relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-10">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] bg-yellow-500 text-black font-bold text-xs sm:text-sm py-2 px-16 whitespace-nowrap shadow-lg">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] bg-yellow-500 text-white font-bold text-xs sm:text-sm py-2 px-16 whitespace-nowrap shadow-lg">
                       COMING SOON
                     </div>
                   </div>
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
-                  <p className="text-gray-600 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
+                  <p className="text-gray-300 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $449</p>
                 </div>
               </div>
-              <p className="text-gray-600 text-center mt-6 text-sm sm:text-base px-4">
+              <p className="text-gray-300 text-center mt-6 text-sm sm:text-base px-4">
                 Final pricing depends on size, complexity, and materials. We'll provide a detailed quote after consultation. All custom preojects will begin upon receipt of payment and will take a minimum of 1 week for completion.
               </p>
             </div>
@@ -591,7 +591,7 @@ function MainApp() {
                     </div>
                     <div>
                       <h4 className="text-white font-medium text-lg mb-1">Share Your Vision</h4>
-                      <p className="text-gray-600">Tell us about your design ideas, colors, and dimensions</p>
+                      <p className="text-gray-300">Tell us about your design ideas, colors, and dimensions</p>
                     </div>
                   </div>
 
@@ -601,7 +601,7 @@ function MainApp() {
                     </div>
                     <div>
                       <h4 className="text-white font-medium text-lg mb-1">Design Consultation</h4>
-                      <p className="text-gray-600">We'll work together to refine your concept and create a mockup</p>
+                      <p className="text-gray-300">We'll work together to refine your concept and create a mockup</p>
                     </div>
                   </div>
 
@@ -611,7 +611,7 @@ function MainApp() {
                     </div>
                     <div>
                       <h4 className="text-white font-medium text-lg mb-1">Handcrafted Creation</h4>
-                      <p className="text-gray-600">Our artisans bring your design to life with expert tufting</p>
+                      <p className="text-gray-300">Our artisans bring your design to life with expert tufting</p>
                     </div>
                   </div>
 
@@ -621,7 +621,7 @@ function MainApp() {
                     </div>
                     <div>
                       <h4 className="text-white font-medium text-lg mb-1">Quality Delivery</h4>
-                      <p className="text-gray-600">Your custom rug arrives ready to transform your space</p>
+                      <p className="text-gray-300">Your custom rug arrives ready to transform your space</p>
                     </div>
                   </div>
                 </div>
@@ -757,16 +757,16 @@ function MainApp() {
                         htmlFor="design-upload"
                         className="flex flex-col items-center justify-center w-full px-4 py-8 bg-gray-50/50 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors"
                       >
-                        <Upload className="w-12 h-12 text-gray-500 mb-3" strokeWidth={1.5} />
+                        <Upload className="w-12 h-12 text-gray-400 mb-3" strokeWidth={1.5} />
                         {designFile ? (
                           <div className="text-center">
                             <p className="text-white font-medium">{designFile.name}</p>
-                            <p className="text-gray-600 text-sm mt-1">Click to change file</p>
+                            <p className="text-gray-300 text-sm mt-1">Click to change file</p>
                           </div>
                         ) : (
                           <div className="text-center">
                             <p className="text-white font-medium">Click to upload design reference</p>
-                            <p className="text-gray-600 text-sm mt-1">PNG, JPG up to 10MB</p>
+                            <p className="text-gray-300 text-sm mt-1">PNG, JPG up to 10MB</p>
                           </div>
                         )}
                       </label>
@@ -786,7 +786,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "1' x 1'"
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         1' x 1'
@@ -801,7 +801,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "2' x 2'"
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         2' x 2'
@@ -809,7 +809,7 @@ function MainApp() {
                       <button
                         type="button"
                         disabled
-                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-gray-800/50 border-gray-600 text-gray-600 cursor-not-allowed opacity-50"
+                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-gray-800/50 border-gray-600 text-gray-300 cursor-not-allowed opacity-50"
                       >
                         3' x 3'
                       </button>
@@ -819,7 +819,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === 'custom'
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         Custom Size
@@ -828,7 +828,7 @@ function MainApp() {
 
                     {selectedDimension === 'custom' && (
                       <div className="space-y-4">
-                        <p className="text-gray-600 text-sm">Select custom dimensions (12-48 inches)</p>
+                        <p className="text-gray-300 text-sm">Select custom dimensions (12-48 inches)</p>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <label className="block text-white text-sm font-medium mb-2">Width (inches)</label>
@@ -845,7 +845,7 @@ function MainApp() {
                                     key={inches}
                                     value={inches}
                                     disabled={isComingSoon}
-                                    className={isComingSoon ? 'text-gray-500' : ''}
+                                    className={isComingSoon ? 'text-gray-400' : ''}
                                   >
                                     {inches}" {isComingSoon ? '(Coming Soon)' : ''}
                                   </option>
@@ -868,7 +868,7 @@ function MainApp() {
                                     key={inches}
                                     value={inches}
                                     disabled={isComingSoon}
-                                    className={isComingSoon ? 'text-gray-500' : ''}
+                                    className={isComingSoon ? 'text-gray-400' : ''}
                                   >
                                     {inches}" {isComingSoon ? '(Coming Soon)' : ''}
                                   </option>
@@ -890,7 +890,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           cutOption === 'Cut to Dimension Border'
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         Cut to Dimension Border
@@ -901,7 +901,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           cutOption === 'Cut to Image Outline'
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         Cut to Image Outline
@@ -918,7 +918,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           backingOption === 'Non-Slip Floor Finish'
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         Non-Slip Floor Finish
@@ -929,7 +929,7 @@ function MainApp() {
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           backingOption === 'Wall Hanging Finish'
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
-                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
+                            : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
                         Wall Hanging Finish
@@ -976,7 +976,7 @@ function MainApp() {
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Order Summary</h3>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-600 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
               >
                 <X className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
               </button>
@@ -1014,17 +1014,17 @@ function MainApp() {
               ) : (
                 <>
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Name</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Name</h4>
                     <p className="text-white text-lg">{formData.name}</p>
                   </div>
 
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Email</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Email</h4>
                     <p className="text-white text-lg">{formData.email}</p>
                   </div>
 
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Shipping Address</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Shipping Address</h4>
                     <div className="text-white text-lg space-y-1">
                       <p>{formData.shippingAddressLine1}</p>
                       {formData.shippingAddressLine2 && <p>{formData.shippingAddressLine2}</p>}
@@ -1034,13 +1034,13 @@ function MainApp() {
                   </div>
 
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Design Description</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Design Description</h4>
                     <p className="text-white text-lg">{formData.description}</p>
                   </div>
 
                   {designFile && (
                     <div>
-                      <h4 className="text-gray-600 text-sm font-medium mb-2">Design Reference</h4>
+                      <h4 className="text-gray-300 text-sm font-medium mb-2">Design Reference</h4>
                       <div className="bg-gray-50/50 rounded-lg p-4 border-2 border-gray-600">
                         <img
                           src={URL.createObjectURL(designFile)}
@@ -1048,13 +1048,13 @@ function MainApp() {
                           className="w-full h-auto rounded-lg mb-3"
                         />
                         <p className="text-white font-medium">{designFile.name}</p>
-                        <p className="text-gray-600 text-sm">{(designFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                        <p className="text-gray-300 text-sm">{(designFile.size / 1024 / 1024).toFixed(2)} MB</p>
                       </div>
                     </div>
                   )}
 
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Dimensions</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Dimensions</h4>
                     <p className="text-white text-lg">
                       {selectedDimension === 'custom'
                         ? `${formatInchesToFeet(customWidth)} x ${formatInchesToFeet(customHeight)} (Custom)`
@@ -1063,12 +1063,12 @@ function MainApp() {
                   </div>
 
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Cut Option</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Cut Option</h4>
                     <p className="text-white text-lg">{cutOption || 'Not selected'}</p>
                   </div>
 
                   <div>
-                    <h4 className="text-gray-600 text-sm font-medium mb-2">Backing Option</h4>
+                    <h4 className="text-gray-300 text-sm font-medium mb-2">Backing Option</h4>
                     <p className="text-white text-lg">{backingOption || 'Not selected'}</p>
                   </div>
 
@@ -1105,7 +1105,7 @@ function MainApp() {
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Shopping Cart</h3>
               <button
                 onClick={() => setShowCartModal(false)}
-                className="text-gray-600 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
               >
                 <X className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
               </button>
@@ -1114,8 +1114,8 @@ function MainApp() {
             <div className="p-4 sm:p-6">
               {cartItems.length === 0 ? (
                 <div className="text-center py-12">
-                  <ShoppingCart className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 mx-auto mb-4" strokeWidth={1.5} />
-                  <p className="text-gray-600 text-base sm:text-lg">Your cart is empty</p>
+                  <ShoppingCart className="w-16 h-16 sm:w-24 sm:h-24 text-white mx-auto mb-4" strokeWidth={1.5} />
+                  <p className="text-gray-300 text-base sm:text-lg">Your cart is empty</p>
                   <button
                     onClick={() => setShowCartModal(false)}
                     className="mt-6 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors"
@@ -1146,21 +1146,21 @@ function MainApp() {
                             <h4 className="text-xl font-semibold text-white mb-2">
                               {rug.title || 'Untitled Rug'}
                             </h4>
-                            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                            <p className="text-gray-300 text-sm mb-3 line-clamp-2">
                               {rug.description || 'No description available'}
                             </p>
                             <div className="flex items-center gap-4">
                               <p className="text-2xl font-bold text-cyan-400">
                                 ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
                               </p>
-                              <p className="text-gray-600 text-sm">
+                              <p className="text-gray-300 text-sm">
                                 Quantity: {quantity}
                               </p>
                             </div>
                           </div>
                           <button
                             onClick={() => handleRemoveFromCart(rug.id)}
-                            className="text-gray-600 hover:text-red-500 transition-colors self-start"
+                            className="text-gray-300 hover:text-red-500 transition-colors self-start"
                           >
                             <X className="w-6 h-6" strokeWidth={1.5} />
                           </button>
@@ -1177,7 +1177,7 @@ function MainApp() {
                         </div>
                         <div className="flex-1">
                           <h4 className="text-white font-semibold text-lg mb-1">Have a Coupon Code?</h4>
-                          <p className="text-gray-700 text-sm mb-3">
+                          <p className="text-white text-sm mb-3">
                             You'll be able to enter your promotional code on the next page during checkout.
                           </p>
                           <button
@@ -1187,7 +1187,7 @@ function MainApp() {
                             {showCouponInfo ? 'Hide details' : 'Learn more'}
                           </button>
                           {showCouponInfo && (
-                            <div className="mt-3 text-gray-700 text-sm bg-black/30 rounded-lg p-3 border border-gray-600">
+                            <div className="mt-3 text-white text-sm bg-black/30 rounded-lg p-3 border border-gray-600">
                               <p className="mb-2">On the checkout page, look for the link that says:</p>
                               <p className="font-mono text-cyan-600 mb-2">"Add promotion code"</p>
                               <p>Click it to reveal the coupon code field where you can enter your discount code.</p>
@@ -1198,7 +1198,7 @@ function MainApp() {
                     </div>
 
                     <div className="flex justify-between items-center mb-6">
-                      <span className="text-xl text-gray-700">Total:</span>
+                      <span className="text-xl text-white">Total:</span>
                       <span className="text-3xl font-bold text-cyan-400">
                         ${cartItems.reduce((sum, rug) => sum + (rug.price ? parseFloat(rug.price) : 0), 0).toFixed(2)}
                       </span>
@@ -1254,7 +1254,7 @@ function MainApp() {
                 <AlertCircle className="w-6 h-6 text-cyan-400" strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Quantity Limit Reached</h3>
-              <p className="text-gray-700 mb-6">
+              <p className="text-white mb-6">
                 You can only add a maximum of 2 of the same rug to your cart.
               </p>
               <button
@@ -1321,7 +1321,7 @@ function MainApp() {
                     <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                       {selectedRugForGallery.title || 'Untitled Rug'}
                     </h3>
-                    <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto px-4">
+                    <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto px-4">
                       {selectedRugForGallery.description || 'No description available'}
                     </p>
                     <p className="text-3xl sm:text-4xl font-bold text-cyan-400 mt-4 mb-6">
@@ -1340,7 +1340,7 @@ function MainApp() {
                   </div>
                 </>
               ) : (
-                <div className="text-center text-gray-600 py-12">
+                <div className="text-center text-gray-300 py-12">
                   <Package className="w-24 h-24 mx-auto mb-4" strokeWidth={1.5} />
                   <p>No images available</p>
                 </div>
@@ -1357,10 +1357,10 @@ function MainApp() {
               <Package className="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400" strokeWidth={1.5} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
-            <p className="text-gray-600 text-base sm:text-lg px-4">
+            <p className="text-gray-300 text-base sm:text-lg px-4">
               [Custom Rugs Only]
             </p>
-            <p className="text-gray-600 text-base sm:text-lg px-4">
+            <p className="text-gray-300 text-base sm:text-lg px-4">
               Enter your order number to see the status of your custom rug
             </p>
           </div>
@@ -1368,7 +1368,7 @@ function MainApp() {
           <form onSubmit={handleTrackShipment} className="mb-8 sm:mb-12">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
                 <input
                   type="text"
                   value={orderNumber}
@@ -1408,23 +1408,23 @@ function MainApp() {
             <div className="mb-8 p-6 bg-gray-50/50 rounded-xl border-2 border-gray-600">
               <div className="grid sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-gray-600 mb-1">Customer Name</p>
+                  <p className="text-gray-300 mb-1">Customer Name</p>
                   <p className="text-white font-medium">{trackingInfo.name}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600 mb-1">Dimensions</p>
+                  <p className="text-gray-300 mb-1">Dimensions</p>
                   <p className="text-white font-medium">{trackingInfo.dimensions}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600 mb-1">Backing Option</p>
+                  <p className="text-gray-300 mb-1">Backing Option</p>
                   <p className="text-white font-medium">{trackingInfo.backing_option}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600 mb-1">Cut Option</p>
+                  <p className="text-gray-300 mb-1">Cut Option</p>
                   <p className="text-white font-medium">{trackingInfo.cut_option || 'N/A'}</p>
                 </div>
                 <div className="sm:col-span-2">
-                  <p className="text-gray-600 mb-1">Order Date</p>
+                  <p className="text-gray-300 mb-1">Order Date</p>
                   <p className="text-white font-medium">
                     {new Date(trackingInfo.created_at).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -1467,9 +1467,9 @@ function MainApp() {
                         {title}
                         {isCurrent && ' (Current)'}
                       </h4>
-                      <p className="text-gray-600">{description}</p>
+                      <p className="text-gray-300">{description}</p>
                       {trackingInfo && isActive && trackingInfo.updated_at && (
-                        <p className="text-gray-500 text-sm mt-1">
+                        <p className="text-gray-400 text-sm mt-1">
                           Updated: {new Date(trackingInfo.updated_at).toLocaleDateString('en-US', {
                             month: 'short',
                             day: 'numeric',
@@ -1489,7 +1489,7 @@ function MainApp() {
 
       <footer className="bg-gray-800 border-t-2 border-gray-600 py-6 px-4 shadow-inner">
         <div className="container mx-auto text-center">
-          <p className="text-gray-700 text-sm font-medium">
+          <p className="text-white text-sm font-medium">
             Designed, created, and powered by Two Tier Tech LLC (2026)
           </p>
         </div>

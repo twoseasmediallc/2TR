@@ -966,9 +966,9 @@ function MainApp() {
       </main>
 
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-800 rounded-xl sm:rounded-2xl border-2 border-gray-600 max-w-2xl w-full my-4">
-            <div className="sticky top-0 bg-gray-800 border-b-2 border-gray-600 p-4 sm:p-6 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-gray-800 rounded-xl sm:rounded-2xl border-2 border-gray-600 max-w-2xl w-full max-h-[90vh] flex flex-col">
+            <div className="flex-shrink-0 bg-gray-800 border-b-2 border-gray-600 p-4 sm:p-6 flex items-center justify-between rounded-t-xl sm:rounded-t-2xl">
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Order Summary</h3>
               <button
                 onClick={() => setShowModal(false)}
@@ -978,7 +978,7 @@ function MainApp() {
               </button>
             </div>
 
-            <div className="p-4 sm:p-6 space-y-5 sm:space-y-6">
+            <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto">
               {submitStatus ? (
                 <>
                   <div

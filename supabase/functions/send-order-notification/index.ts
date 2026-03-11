@@ -16,6 +16,12 @@ interface OrderNotification {
   backing_option: string;
   cut_option: string;
   design_image?: string;
+  shipping_address_line1: string;
+  shipping_address_line2?: string;
+  shipping_city: string;
+  shipping_state: string;
+  shipping_zip: string;
+  shipping_country: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -73,6 +79,16 @@ Deno.serve(async (req: Request) => {
               <div class="field">
                 <div class="label">Customer Email:</div>
                 <div class="value">${orderData.email}</div>
+              </div>
+
+              <div class="field">
+                <div class="label">Shipping Address:</div>
+                <div class="value">
+                  ${orderData.shipping_address_line1}<br>
+                  ${orderData.shipping_address_line2 ? `${orderData.shipping_address_line2}<br>` : ''}
+                  ${orderData.shipping_city}, ${orderData.shipping_state} ${orderData.shipping_zip}<br>
+                  ${orderData.shipping_country}
+                </div>
               </div>
 
               <div class="field">

@@ -8,6 +8,12 @@ export interface CustomRugOrder {
   backing_option: string;
   cut_option: string;
   design_image?: string;
+  shipping_address_line1: string;
+  shipping_address_line2?: string;
+  shipping_city: string;
+  shipping_state: string;
+  shipping_zip: string;
+  shipping_country: string;
 }
 
 export async function uploadDesignImage(file: File): Promise<string> {
@@ -48,6 +54,12 @@ export async function createCustomRugOrder(
           backing_option: orderData.backing_option,
           cut_option: orderData.cut_option,
           design_image: orderData.design_image,
+          shipping_address_line1: orderData.shipping_address_line1,
+          shipping_address_line2: orderData.shipping_address_line2,
+          shipping_city: orderData.shipping_city,
+          shipping_state: orderData.shipping_state,
+          shipping_zip: orderData.shipping_zip,
+          shipping_country: orderData.shipping_country,
           status: 'pending'
         }
       ])
@@ -82,6 +94,12 @@ export async function createCustomRugOrder(
                 backing_option: orderData.backing_option,
                 cut_option: orderData.cut_option,
                 design_image: orderData.design_image,
+                shipping_address_line1: orderData.shipping_address_line1,
+                shipping_address_line2: orderData.shipping_address_line2,
+                shipping_city: orderData.shipping_city,
+                shipping_state: orderData.shipping_state,
+                shipping_zip: orderData.shipping_zip,
+                shipping_country: orderData.shipping_country,
               }),
             }
           ),
@@ -101,6 +119,12 @@ export async function createCustomRugOrder(
                 dimensions: orderData.dimensions,
                 backing_option: orderData.backing_option,
                 cut_option: orderData.cut_option,
+                shipping_address_line1: orderData.shipping_address_line1,
+                shipping_address_line2: orderData.shipping_address_line2,
+                shipping_city: orderData.shipping_city,
+                shipping_state: orderData.shipping_state,
+                shipping_zip: orderData.shipping_zip,
+                shipping_country: orderData.shipping_country,
               }),
             }
           )

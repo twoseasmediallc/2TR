@@ -23,6 +23,12 @@ function MainApp() {
     name: '',
     email: '',
     description: '',
+    shippingAddressLine1: '',
+    shippingAddressLine2: '',
+    shippingCity: '',
+    shippingState: '',
+    shippingZip: '',
+    shippingCountry: 'United States',
   });
   const [premadeRugs, setPremadeRugs] = useState<PremadeRug[]>([]);
   const [isLoadingRugs, setIsLoadingRugs] = useState(true);
@@ -232,6 +238,12 @@ function MainApp() {
         backing_option: backingOption,
         cut_option: cutOption,
         design_image: imageUrl,
+        shipping_address_line1: formData.shippingAddressLine1,
+        shipping_address_line2: formData.shippingAddressLine2,
+        shipping_city: formData.shippingCity,
+        shipping_state: formData.shippingState,
+        shipping_zip: formData.shippingZip,
+        shipping_country: formData.shippingCountry,
       });
 
       if (result.success) {
@@ -240,7 +252,17 @@ function MainApp() {
           message: `Order submitted successfully! Your order number is: ${result.orderNumber}. We'll contact you soon at ${formData.email}.`,
         });
 
-        setFormData({ name: '', email: '', description: '' });
+        setFormData({
+          name: '',
+          email: '',
+          description: '',
+          shippingAddressLine1: '',
+          shippingAddressLine2: '',
+          shippingCity: '',
+          shippingState: '',
+          shippingZip: '',
+          shippingCountry: 'United States',
+        });
         setDesignFile(null);
         setSelectedDimension('');
         setCustomWidth('');
@@ -632,6 +654,83 @@ function MainApp() {
                     />
                   </div>
 
+                  <div className="space-y-5">
+                    <h4 className="text-white font-semibold text-lg">Shipping Address</h4>
+
+                    <div>
+                      <label className="block text-white font-medium mb-2">Street Address</label>
+                      <input
+                        type="text"
+                        value={formData.shippingAddressLine1}
+                        onChange={(e) => setFormData({ ...formData, shippingAddressLine1: e.target.value })}
+                        required
+                        className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                        placeholder="123 Main Street"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-white font-medium mb-2">Apartment, Suite, etc. (Optional)</label>
+                      <input
+                        type="text"
+                        value={formData.shippingAddressLine2}
+                        onChange={(e) => setFormData({ ...formData, shippingAddressLine2: e.target.value })}
+                        className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                        placeholder="Apt 4B"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-white font-medium mb-2">City</label>
+                        <input
+                          type="text"
+                          value={formData.shippingCity}
+                          onChange={(e) => setFormData({ ...formData, shippingCity: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          placeholder="City"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-white font-medium mb-2">State</label>
+                        <input
+                          type="text"
+                          value={formData.shippingState}
+                          onChange={(e) => setFormData({ ...formData, shippingState: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          placeholder="State"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-white font-medium mb-2">ZIP Code</label>
+                        <input
+                          type="text"
+                          value={formData.shippingZip}
+                          onChange={(e) => setFormData({ ...formData, shippingZip: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          placeholder="12345"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-white font-medium mb-2">Country</label>
+                        <input
+                          type="text"
+                          value={formData.shippingCountry}
+                          onChange={(e) => setFormData({ ...formData, shippingCountry: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          placeholder="United States"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-white font-medium mb-2">Design Description</label>
                     <textarea
@@ -922,6 +1021,16 @@ function MainApp() {
                   <div>
                     <h4 className="text-gray-400 text-sm font-medium mb-2">Email</h4>
                     <p className="text-white text-lg">{formData.email}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-gray-400 text-sm font-medium mb-2">Shipping Address</h4>
+                    <div className="text-white text-lg space-y-1">
+                      <p>{formData.shippingAddressLine1}</p>
+                      {formData.shippingAddressLine2 && <p>{formData.shippingAddressLine2}</p>}
+                      <p>{formData.shippingCity}, {formData.shippingState} {formData.shippingZip}</p>
+                      <p>{formData.shippingCountry}</p>
+                    </div>
                   </div>
 
                   <div>

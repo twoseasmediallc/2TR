@@ -14,6 +14,12 @@ interface CustomerConfirmation {
   dimensions: string;
   backing_option: string;
   cut_option: string;
+  shipping_address_line1: string;
+  shipping_address_line2?: string;
+  shipping_city: string;
+  shipping_state: string;
+  shipping_zip: string;
+  shipping_country: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -66,6 +72,16 @@ Deno.serve(async (req: Request) => {
                 <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Your Order Number</div>
                 <div class="tracking-number">${customerData.orderNumber}</div>
                 <p style="margin-top: 10px; font-size: 12px; color: #666;">Save this number for tracking your order</p>
+              </div>
+
+              <div class="field">
+                <div class="label">Shipping Address:</div>
+                <div class="value">
+                  ${customerData.shipping_address_line1}<br>
+                  ${customerData.shipping_address_line2 ? `${customerData.shipping_address_line2}<br>` : ''}
+                  ${customerData.shipping_city}, ${customerData.shipping_state} ${customerData.shipping_zip}<br>
+                  ${customerData.shipping_country}
+                </div>
               </div>
 
               <div class="field">

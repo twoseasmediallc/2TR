@@ -61,40 +61,69 @@ export async function createCustomRugOrder(
 
     if (data) {
       try {
-        console.log('Sending email notification...');
-        const emailResponse = await fetch(
-          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-order-notification`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            },
-            body: JSON.stringify({
-              orderId: data.id,
-              trackingNumber: data.tracking_number,
-              name: orderData.name,
-              email: orderData.email,
-              description: orderData.description,
-              dimensions: orderData.dimensions,
-              backing_option: orderData.backing_option,
-              cut_option: orderData.cut_option,
-              design_image: orderData.design_image,
-            }),
-          }
-        );
+        console.log('Sending email notifications...');
 
-        const responseText = await emailResponse.text();
-        console.log('Email response status:', emailResponse.status);
-        console.log('Email response:', responseText);
+        const emailPromises = [
+          fetch(
+            `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-order-notification`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+              },
+              body: JSON.stringify({
+                orderId: data.id,
+                trackingNumber: data.tracking_number,
+                name: orderData.name,
+                email: orderData.email,
+                description: orderData.description,
+                dimensions: orderData.dimensions,
+                backing_option: orderData.backing_option,
+                cut_option: orderData.cut_option,
+                design_image: orderData.design_image,
+              }),
+            }
+          ),
+          fetch(
+            `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-customer-confirmation`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+              },
+              body: JSON.stringify({
+                trackingNumber: data.tracking_number,
+                name: orderData.name,
+                email: orderData.email,
+                description: orderData.description,
+                dimensions: orderData.dimensions,
+                backing_option: orderData.backing_option,
+                cut_option: orderData.cut_option,
+              }),
+            }
+          )
+        ];
 
-        if (!emailResponse.ok) {
-          console.error('Email notification failed:', responseText);
+        const [adminResponse, customerResponse] = await Promise.all(emailPromises);
+
+        console.log('Admin email status:', adminResponse.status);
+        console.log('Customer email status:', customerResponse.status);
+
+        if (!adminResponse.ok) {
+          console.error('Admin email notification failed');
         } else {
-          console.log('Email sent successfully!');
+          console.log('Admin email sent successfully!');
+        }
+
+        if (!customerResponse.ok) {
+          console.error('Customer confirmation email failed');
+        } else {
+          console.log('Customer confirmation email sent successfully!');
         }
       } catch (emailError) {
-        console.error('Failed to send email notification:', emailError);
+        console.error('Failed to send email notifications:', emailError);
       }
     }
 

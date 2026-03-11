@@ -290,28 +290,28 @@ function MainApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
         <div className="bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 text-white text-center py-2 px-4 text-sm sm:text-base font-bold shadow-lg">
           Free Shipping on All Rugs
         </div>
-        <div className={`bg-white/95 backdrop-blur-md container mx-auto px-2 sm:px-6 transition-all duration-300 shadow-md ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
+        <div className={`bg-gray-800/95 backdrop-blur-md container mx-auto px-2 sm:px-6 transition-all duration-300 shadow-md ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="lg:hidden text-gray-800 hover:text-cyan-600 transition-colors flex-shrink-0"
+              className="lg:hidden text-white hover:text-cyan-600 transition-colors flex-shrink-0"
             >
               <Menu className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
             </button>
 
             <div className="hidden lg:flex absolute left-0 items-center gap-4 xl:gap-8 whitespace-nowrap">
-              <a href="#" className="text-gray-800 hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+              <a href="#" className="text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 Home
               </a>
-              <a href="#about" className="text-gray-800 hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+              <a href="#about" className="text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 About Us
               </a>
-              <a href="#tracker" className="text-gray-800 hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+              <a href="#tracker" className="text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 Shipment Tracker
               </a>
             </div>
@@ -329,17 +329,17 @@ function MainApp() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 lg:absolute lg:right-0">
-              <a href="#premade" className="hidden lg:block text-gray-800 hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+              <a href="#premade" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Pre-made Rugs
               </a>
-              <a href="#custom" className="hidden lg:block text-gray-800 hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+              <a href="#custom" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Custom Rugs
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 lg:ml-4 flex-shrink-0">
                 <button
                   onClick={() => setShowCartModal(true)}
-                  className="text-gray-800 hover:text-cyan-600 transition-colors relative"
+                  className="text-white hover:text-cyan-600 transition-colors relative"
                 >
                   <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
                   {cartItems.length > 0 && (
@@ -354,41 +354,41 @@ function MainApp() {
         </div>
 
         {showMobileMenu && (
-          <div className="lg:hidden border-t border-gray-300 bg-gray-800/98 backdrop-blur-md max-h-[calc(100vh-120px)] overflow-y-auto shadow-2xl">
+          <div className="lg:hidden border-t border-gray-600 bg-gray-800/98 backdrop-blur-md max-h-[calc(100vh-120px)] overflow-y-auto shadow-2xl">
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-4">
                 <a
                   href="#"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-800 hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Home
                 </a>
                 <a
                   href="#about"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-800 hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   About Us
                 </a>
                 <a
                   href="#tracker"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-800 hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Shipment Tracker
                 </a>
                 <a
                   href="#premade"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-800 hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Pre-made Rugs
                 </a>
                 <a
                   href="#custom"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-800 hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Custom Rugs
                 </a>
@@ -408,7 +408,7 @@ function MainApp() {
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 via-cyan-500/10 to-gray-900/40" />
 
           <div className="relative z-10 text-center sm:text-right px-4 sm:pr-0 max-w-3xl sm:ml-auto sm:mt-8 sm:mr-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight italic font-bold">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-tight italic font-bold">
               Too Tough to Tear,<br />Too Beautiful to Ignore
             </h1>
           </div>
@@ -418,7 +418,7 @@ function MainApp() {
           <div className="container mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 lg:mb-8 tracking-tight">About Us</h2>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 lg:mb-8 tracking-tight">About Us</h2>
                 <div className="space-y-4 sm:space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed">
                   <p>
                     Two Tuft Rugs is a handcrafted rug company dedicated to bringing unique,
@@ -470,7 +470,7 @@ function MainApp() {
         <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
               <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
                 Explore our curated collection of handcrafted rugs, ready to ship and transform your space. All pre-made rugs (Mini & Small) include a felt backing!
               </p>
@@ -486,20 +486,20 @@ function MainApp() {
                 <p className="text-red-400 text-lg">{rugsError}</p>
                 <button
                   onClick={loadPremadeRugs}
-                  className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-gray-900 font-medium rounded-lg transition-colors"
+                  className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors"
                 >
                   Try Again
                 </button>
               </div>
             ) : premadeRugs.length === 0 ? (
-              <div className="bg-white/30 border-2 border-gray-300 rounded-2xl p-12 text-center">
+              <div className="bg-gray-800/30 border-2 border-gray-600 rounded-2xl p-12 text-center">
                 <Package className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                 <p className="text-gray-600 text-lg">No rugs available at the moment. Check back soon!</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {premadeRugs.map((rug) => (
-                  <div key={rug.id} className="group bg-white rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-300 hover:border-cyan-400 hover:shadow-xl hover:shadow-cyan-400/30 transition-all duration-300">
+                  <div key={rug.id} className="group bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-600 hover:border-cyan-400 hover:shadow-xl hover:shadow-cyan-400/30 transition-all duration-300">
                     <div
                       className="aspect-square bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center overflow-hidden cursor-pointer relative"
                       onClick={() => openGallery(rug)}
@@ -512,7 +512,7 @@ function MainApp() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                           {getGalleryImages(rug).length > 1 && (
-                            <div className="absolute bottom-4 right-4 bg-black/70 text-gray-900 px-3 py-1 rounded-full text-sm font-medium">
+                            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
                               {getGalleryImages(rug).length} photos
                             </div>
                           )}
@@ -522,7 +522,7 @@ function MainApp() {
                       )}
                     </div>
                     <div className="p-4 sm:p-6">
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">{rug.title || 'Untitled Rug'}</h3>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{rug.title || 'Untitled Rug'}</h3>
                       <p className="text-gray-600 text-sm sm:text-base mb-4 line-clamp-2">{rug.description || 'No description available'}</p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <span className="text-2xl sm:text-3xl font-bold text-cyan-400">
@@ -530,7 +530,7 @@ function MainApp() {
                         </span>
                         <button
                           onClick={() => handleAddToCart(rug)}
-                          className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-gray-900 font-medium rounded-lg transition-colors"
+                          className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors"
                         >
                           Add to Cart
                         </button>
@@ -546,22 +546,22 @@ function MainApp() {
         <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
               <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
                 Bring your vision to life with a one-of-a-kind handcrafted rug designed just for you or your company!
               </p>
             </div>
 
-            <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg shadow-lg mb-10 sm:mb-12 lg:mb-16">
-              <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6 text-center">Pricing Guide</h3>
+            <div className="bg-gray-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg shadow-lg mb-10 sm:mb-12 lg:mb-16">
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-6 text-center">Pricing Guide</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div className="text-center">
-                  <h4 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Small</h4>
+                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Small</h4>
                   <p className="text-gray-600 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $189</p>
                 </div>
                 <div className="text-center">
-                  <h4 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Medium</h4>
+                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Medium</h4>
                   <p className="text-gray-600 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $299</p>
                 </div>
@@ -571,7 +571,7 @@ function MainApp() {
                       COMING SOON
                     </div>
                   </div>
-                  <h4 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Large</h4>
+                  <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
                   <p className="text-gray-600 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
                   <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $449</p>
                 </div>
@@ -582,124 +582,124 @@ function MainApp() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-12 lg:mb-16">
-              <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6">The Process</h3>
+              <div className="bg-gray-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6">The Process</h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-gray-900 font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       1
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-medium text-lg mb-1">Share Your Vision</h4>
+                      <h4 className="text-white font-medium text-lg mb-1">Share Your Vision</h4>
                       <p className="text-gray-600">Tell us about your design ideas, colors, and dimensions</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-gray-900 font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       2
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-medium text-lg mb-1">Design Consultation</h4>
+                      <h4 className="text-white font-medium text-lg mb-1">Design Consultation</h4>
                       <p className="text-gray-600">We'll work together to refine your concept and create a mockup</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-gray-900 font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       3
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-medium text-lg mb-1">Handcrafted Creation</h4>
+                      <h4 className="text-white font-medium text-lg mb-1">Handcrafted Creation</h4>
                       <p className="text-gray-600">Our artisans bring your design to life with expert tufting</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-gray-900 font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       4
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-medium text-lg mb-1">Quality Delivery</h4>
+                      <h4 className="text-white font-medium text-lg mb-1">Quality Delivery</h4>
                       <p className="text-gray-600">Your custom rug arrives ready to transform your space</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6">Start Your Custom Order</h3>
+              <div className="bg-gray-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6">Start Your Custom Order</h3>
                 <form onSubmit={handleCustomOrderSubmit} className="space-y-5 sm:space-y-6">
                   <div>
-                    <label className="block text-gray-900 font-medium mb-2">Name</label>
+                    <label className="block text-white font-medium mb-2">Name</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                       placeholder="Your name"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-medium mb-2">Email</label>
+                    <label className="block text-white font-medium mb-2">Email</label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
 
                   <div className="space-y-5">
-                    <h4 className="text-gray-900 font-semibold text-lg">Shipping Address</h4>
+                    <h4 className="text-white font-semibold text-lg">Shipping Address</h4>
 
                     <div>
-                      <label className="block text-gray-900 font-medium mb-2">Street Address</label>
+                      <label className="block text-white font-medium mb-2">Street Address</label>
                       <input
                         type="text"
                         value={formData.shippingAddressLine1}
                         onChange={(e) => setFormData({ ...formData, shippingAddressLine1: e.target.value })}
                         required
-                        className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                         placeholder="123 Main Street"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-gray-900 font-medium mb-2">Apartment, Suite, etc. (Optional)</label>
+                      <label className="block text-white font-medium mb-2">Apartment, Suite, etc. (Optional)</label>
                       <input
                         type="text"
                         value={formData.shippingAddressLine2}
                         onChange={(e) => setFormData({ ...formData, shippingAddressLine2: e.target.value })}
-                        className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                         placeholder="Apt 4B"
                       />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-gray-900 font-medium mb-2">City</label>
+                        <label className="block text-white font-medium mb-2">City</label>
                         <input
                           type="text"
                           value={formData.shippingCity}
                           onChange={(e) => setFormData({ ...formData, shippingCity: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="City"
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-900 font-medium mb-2">State</label>
+                        <label className="block text-white font-medium mb-2">State</label>
                         <input
                           type="text"
                           value={formData.shippingState}
                           onChange={(e) => setFormData({ ...formData, shippingState: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="State"
                         />
                       </div>
@@ -707,24 +707,24 @@ function MainApp() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-gray-900 font-medium mb-2">ZIP Code</label>
+                        <label className="block text-white font-medium mb-2">ZIP Code</label>
                         <input
                           type="text"
                           value={formData.shippingZip}
                           onChange={(e) => setFormData({ ...formData, shippingZip: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="12345"
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-900 font-medium mb-2">Country</label>
+                        <label className="block text-white font-medium mb-2">Country</label>
                         <input
                           type="text"
                           value={formData.shippingCountry}
                           onChange={(e) => setFormData({ ...formData, shippingCountry: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="United States"
                         />
                       </div>
@@ -732,19 +732,19 @@ function MainApp() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-medium mb-2">Design Description</label>
+                    <label className="block text-white font-medium mb-2">Design Description</label>
                     <textarea
                       rows={4}
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       required
-                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors resize-none"
                       placeholder="Describe your design ideas, colors, patterns, or inspiration..."
                     />
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-medium mb-2">Upload Design Reference</label>
+                    <label className="block text-white font-medium mb-2">Upload Design Reference</label>
                     <div className="relative">
                       <input
                         type="file"
@@ -755,17 +755,17 @@ function MainApp() {
                       />
                       <label
                         htmlFor="design-upload"
-                        className="flex flex-col items-center justify-center w-full px-4 py-8 bg-gray-50/50 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors"
+                        className="flex flex-col items-center justify-center w-full px-4 py-8 bg-gray-50/50 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors"
                       >
                         <Upload className="w-12 h-12 text-gray-500 mb-3" strokeWidth={1.5} />
                         {designFile ? (
                           <div className="text-center">
-                            <p className="text-gray-900 font-medium">{designFile.name}</p>
+                            <p className="text-white font-medium">{designFile.name}</p>
                             <p className="text-gray-600 text-sm mt-1">Click to change file</p>
                           </div>
                         ) : (
                           <div className="text-center">
-                            <p className="text-gray-900 font-medium">Click to upload design reference</p>
+                            <p className="text-white font-medium">Click to upload design reference</p>
                             <p className="text-gray-600 text-sm mt-1">PNG, JPG up to 10MB</p>
                           </div>
                         )}
@@ -774,7 +774,7 @@ function MainApp() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-medium mb-3">Dimensions</label>
+                    <label className="block text-white font-medium mb-3">Dimensions</label>
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <button
                         type="button"
@@ -785,8 +785,8 @@ function MainApp() {
                         }}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "1' x 1'"
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         1' x 1'
@@ -800,8 +800,8 @@ function MainApp() {
                         }}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "2' x 2'"
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         2' x 2'
@@ -809,7 +809,7 @@ function MainApp() {
                       <button
                         type="button"
                         disabled
-                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-white/50 border-gray-300 text-gray-600 cursor-not-allowed opacity-50"
+                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-gray-800/50 border-gray-600 text-gray-600 cursor-not-allowed opacity-50"
                       >
                         3' x 3'
                       </button>
@@ -818,8 +818,8 @@ function MainApp() {
                         onClick={() => setSelectedDimension('custom')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === 'custom'
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         Custom Size
@@ -831,11 +831,11 @@ function MainApp() {
                         <p className="text-gray-600 text-sm">Select custom dimensions (12-48 inches)</p>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-gray-900 text-sm font-medium mb-2">Width (inches)</label>
+                            <label className="block text-white text-sm font-medium mb-2">Width (inches)</label>
                             <select
                               value={customWidth}
                               onChange={(e) => setCustomWidth(e.target.value)}
-                              className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                              className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                             >
                               <option value="">Select width</option>
                               {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
@@ -854,11 +854,11 @@ function MainApp() {
                             </select>
                           </div>
                           <div>
-                            <label className="block text-gray-900 text-sm font-medium mb-2">Height (inches)</label>
+                            <label className="block text-white text-sm font-medium mb-2">Height (inches)</label>
                             <select
                               value={customHeight}
                               onChange={(e) => setCustomHeight(e.target.value)}
-                              className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
+                              className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                             >
                               <option value="">Select height</option>
                               {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
@@ -882,15 +882,15 @@ function MainApp() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-medium mb-3">Cut Option</label>
+                    <label className="block text-white font-medium mb-3">Cut Option</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <button
                         type="button"
                         onClick={() => setCutOption('Cut to Dimension Border')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           cutOption === 'Cut to Dimension Border'
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         Cut to Dimension Border
@@ -900,8 +900,8 @@ function MainApp() {
                         onClick={() => setCutOption('Cut to Image Outline')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           cutOption === 'Cut to Image Outline'
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         Cut to Image Outline
@@ -910,15 +910,15 @@ function MainApp() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-medium mb-3">Backing Option</label>
+                    <label className="block text-white font-medium mb-3">Backing Option</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <button
                         type="button"
                         onClick={() => setBackingOption('Non-Slip Floor Finish')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           backingOption === 'Non-Slip Floor Finish'
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         Non-Slip Floor Finish
@@ -928,8 +928,8 @@ function MainApp() {
                         onClick={() => setBackingOption('Wall Hanging Finish')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           backingOption === 'Wall Hanging Finish'
-                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-gray-900'
-                            : 'bg-gray-50/50 border-gray-300 text-gray-700 hover:border-cyan-500'
+                            ? 'bg-gradient-to-r from-cyan-500 to-teal-500 border-cyan-600 text-white'
+                            : 'bg-gray-50/50 border-gray-600 text-gray-700 hover:border-cyan-500'
                         }`}
                       >
                         Wall Hanging Finish
@@ -940,7 +940,7 @@ function MainApp() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-gray-900 font-medium rounded-lg transition-colors text-lg"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-lg"
                   >
                     {isSubmitting ? 'Submitting...' : 'Request Approval'}
                   </button>
@@ -971,12 +971,12 @@ function MainApp() {
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl sm:rounded-2xl border-2 border-gray-300 max-w-2xl w-full my-4">
-            <div className="sticky top-0 bg-white border-b-2 border-gray-300 p-4 sm:p-6 flex items-center justify-between">
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Order Summary</h3>
+          <div className="bg-gray-800 rounded-xl sm:rounded-2xl border-2 border-gray-600 max-w-2xl w-full my-4">
+            <div className="sticky top-0 bg-gray-800 border-b-2 border-gray-600 p-4 sm:p-6 flex items-center justify-between">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white">Order Summary</h3>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-gray-600 hover:text-white transition-colors"
               >
                 <X className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
               </button>
@@ -1005,7 +1005,7 @@ function MainApp() {
                         setShowModal(false);
                         setSubmitStatus(null);
                       }}
-                      className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-gray-900 font-medium rounded-lg transition-colors"
+                      className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors"
                     >
                       Close
                     </button>
@@ -1015,17 +1015,17 @@ function MainApp() {
                 <>
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Name</h4>
-                    <p className="text-gray-900 text-lg">{formData.name}</p>
+                    <p className="text-white text-lg">{formData.name}</p>
                   </div>
 
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Email</h4>
-                    <p className="text-gray-900 text-lg">{formData.email}</p>
+                    <p className="text-white text-lg">{formData.email}</p>
                   </div>
 
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Shipping Address</h4>
-                    <div className="text-gray-900 text-lg space-y-1">
+                    <div className="text-white text-lg space-y-1">
                       <p>{formData.shippingAddressLine1}</p>
                       {formData.shippingAddressLine2 && <p>{formData.shippingAddressLine2}</p>}
                       <p>{formData.shippingCity}, {formData.shippingState} {formData.shippingZip}</p>
@@ -1035,19 +1035,19 @@ function MainApp() {
 
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Design Description</h4>
-                    <p className="text-gray-900 text-lg">{formData.description}</p>
+                    <p className="text-white text-lg">{formData.description}</p>
                   </div>
 
                   {designFile && (
                     <div>
                       <h4 className="text-gray-600 text-sm font-medium mb-2">Design Reference</h4>
-                      <div className="bg-gray-50/50 rounded-lg p-4 border-2 border-gray-300">
+                      <div className="bg-gray-50/50 rounded-lg p-4 border-2 border-gray-600">
                         <img
                           src={URL.createObjectURL(designFile)}
                           alt="Design reference"
                           className="w-full h-auto rounded-lg mb-3"
                         />
-                        <p className="text-gray-900 font-medium">{designFile.name}</p>
+                        <p className="text-white font-medium">{designFile.name}</p>
                         <p className="text-gray-600 text-sm">{(designFile.size / 1024 / 1024).toFixed(2)} MB</p>
                       </div>
                     </div>
@@ -1055,7 +1055,7 @@ function MainApp() {
 
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Dimensions</h4>
-                    <p className="text-gray-900 text-lg">
+                    <p className="text-white text-lg">
                       {selectedDimension === 'custom'
                         ? `${formatInchesToFeet(customWidth)} x ${formatInchesToFeet(customHeight)} (Custom)`
                         : selectedDimension || 'Not selected'}
@@ -1064,12 +1064,12 @@ function MainApp() {
 
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Cut Option</h4>
-                    <p className="text-gray-900 text-lg">{cutOption || 'Not selected'}</p>
+                    <p className="text-white text-lg">{cutOption || 'Not selected'}</p>
                   </div>
 
                   <div>
                     <h4 className="text-gray-600 text-sm font-medium mb-2">Backing Option</h4>
-                    <p className="text-gray-900 text-lg">{backingOption || 'Not selected'}</p>
+                    <p className="text-white text-lg">{backingOption || 'Not selected'}</p>
                   </div>
 
                   <div className="flex gap-4 pt-4">
@@ -1079,14 +1079,14 @@ function MainApp() {
                         setSubmitStatus(null);
                       }}
                       disabled={isSubmitting}
-                      className="flex-1 px-6 py-3 bg-gray-50 hover:bg-gray-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-gray-900 font-medium rounded-lg transition-colors"
+                      className="flex-1 px-6 py-3 bg-gray-50 hover:bg-gray-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
                     >
                       Edit Order
                     </button>
                     <button
                       onClick={handleConfirmOrder}
                       disabled={isSubmitting}
-                      className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-gray-900 font-medium rounded-lg transition-colors"
+                      className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
                     >
                       {isSubmitting ? 'Submitting...' : 'Confirm Order'}
                     </button>
@@ -1100,12 +1100,12 @@ function MainApp() {
 
       {showCartModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl sm:rounded-2xl border-2 border-gray-300 max-w-4xl w-full my-4">
-            <div className="sticky top-0 bg-white border-b-2 border-gray-300 p-4 sm:p-6 flex items-center justify-between">
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Shopping Cart</h3>
+          <div className="bg-gray-800 rounded-xl sm:rounded-2xl border-2 border-gray-600 max-w-4xl w-full my-4">
+            <div className="sticky top-0 bg-gray-800 border-b-2 border-gray-600 p-4 sm:p-6 flex items-center justify-between">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white">Shopping Cart</h3>
               <button
                 onClick={() => setShowCartModal(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-gray-600 hover:text-white transition-colors"
               >
                 <X className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
               </button>
@@ -1118,7 +1118,7 @@ function MainApp() {
                   <p className="text-gray-600 text-base sm:text-lg">Your cart is empty</p>
                   <button
                     onClick={() => setShowCartModal(false)}
-                    className="mt-6 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-gray-900 font-medium rounded-lg transition-colors"
+                    className="mt-6 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors"
                   >
                     Continue Shopping
                   </button>
@@ -1131,7 +1131,7 @@ function MainApp() {
                       return (
                         <div
                           key={rug.id}
-                          className="flex gap-4 bg-gray-50/30 rounded-xl p-4 border-2 border-gray-300"
+                          className="flex gap-4 bg-gray-50/30 rounded-xl p-4 border-2 border-gray-600"
                         >
                           {rug.image && (
                             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0">
@@ -1143,7 +1143,7 @@ function MainApp() {
                             </div>
                           )}
                           <div className="flex-1">
-                            <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                            <h4 className="text-xl font-semibold text-white mb-2">
                               {rug.title || 'Untitled Rug'}
                             </h4>
                             <p className="text-gray-600 text-sm mb-3 line-clamp-2">
@@ -1169,14 +1169,14 @@ function MainApp() {
                     })}
                   </div>
 
-                  <div className="border-t-2 border-gray-300 pt-6">
+                  <div className="border-t-2 border-gray-600 pt-6">
                     <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-2 border-cyan-600/30 rounded-lg p-4 mb-6">
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full flex items-center justify-center">
-                          <span className="text-gray-900 font-bold text-lg">%</span>
+                          <span className="text-white font-bold text-lg">%</span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-gray-900 font-semibold text-lg mb-1">Have a Coupon Code?</h4>
+                          <h4 className="text-white font-semibold text-lg mb-1">Have a Coupon Code?</h4>
                           <p className="text-gray-700 text-sm mb-3">
                             You'll be able to enter your promotional code on the next page during checkout.
                           </p>
@@ -1187,7 +1187,7 @@ function MainApp() {
                             {showCouponInfo ? 'Hide details' : 'Learn more'}
                           </button>
                           {showCouponInfo && (
-                            <div className="mt-3 text-gray-700 text-sm bg-black/30 rounded-lg p-3 border border-gray-300">
+                            <div className="mt-3 text-gray-700 text-sm bg-black/30 rounded-lg p-3 border border-gray-600">
                               <p className="mb-2">On the checkout page, look for the link that says:</p>
                               <p className="font-mono text-cyan-600 mb-2">"Add promotion code"</p>
                               <p>Click it to reveal the coupon code field where you can enter your discount code.</p>
@@ -1227,7 +1227,7 @@ function MainApp() {
                         }
                       }}
                       disabled={checkoutLoading === 'cart'}
-                      className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 text-gray-900 font-medium rounded-lg transition-colors text-lg"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg"
                     >
                       {checkoutLoading === 'cart' ? (
                         <>
@@ -1248,18 +1248,18 @@ function MainApp() {
 
       {showLimitModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl border-2 border-cyan-600 max-w-md w-full p-6 my-4">
+          <div className="bg-gray-800 rounded-xl border-2 border-cyan-600 max-w-md w-full p-6 my-4">
             <div className="text-center">
               <div className="mx-auto mb-4 w-12 h-12 bg-gradient-to-r from-cyan-500 to-teal-500/20 rounded-full flex items-center justify-center">
                 <AlertCircle className="w-6 h-6 text-cyan-400" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Quantity Limit Reached</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">Quantity Limit Reached</h3>
               <p className="text-gray-700 mb-6">
                 You can only add a maximum of 2 of the same rug to your cart.
               </p>
               <button
                 onClick={() => setShowLimitModal(false)}
-                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-gray-900 font-medium rounded-lg transition-colors"
+                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors"
               >
                 OK
               </button>
@@ -1276,7 +1276,7 @@ function MainApp() {
           <div className="min-h-screen flex items-center justify-center p-4">
             <button
               onClick={closeGallery}
-              className="fixed top-4 right-4 text-gray-900 hover:text-cyan-600 transition-colors z-10"
+              className="fixed top-4 right-4 text-white hover:text-cyan-600 transition-colors z-10"
             >
               <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={2} />
             </button>
@@ -1287,7 +1287,7 @@ function MainApp() {
             >
               {getGalleryImages(selectedRugForGallery).length > 0 ? (
                 <>
-                  <div className="relative aspect-square sm:aspect-video bg-white rounded-xl overflow-hidden">
+                  <div className="relative aspect-square sm:aspect-video bg-gray-800 rounded-xl overflow-hidden">
                     <img
                       src={getGalleryImages(selectedRugForGallery)[currentImageIndex]}
                       alt={`${selectedRugForGallery.title || 'Rug'} - Image ${currentImageIndex + 1}`}
@@ -1311,14 +1311,14 @@ function MainApp() {
                         <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
                       </button>
 
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
                         {currentImageIndex + 1} / {getGalleryImages(selectedRugForGallery).length}
                       </div>
                     </>
                   )}
 
                   <div className="mt-6 sm:mt-8 text-center pb-8">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                       {selectedRugForGallery.title || 'Untitled Rug'}
                     </h3>
                     <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto px-4">
@@ -1333,7 +1333,7 @@ function MainApp() {
                         handleAddToCart(selectedRugForGallery);
                         closeGallery();
                       }}
-                      className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-gray-900 font-medium rounded-lg transition-colors text-lg"
+                      className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-medium rounded-lg transition-colors text-lg"
                     >
                       Add to Cart
                     </button>
@@ -1356,7 +1356,7 @@ function MainApp() {
             <div className="flex items-center justify-center mb-4 sm:mb-6">
               <Package className="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400" strokeWidth={1.5} />
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
             <p className="text-gray-600 text-base sm:text-lg px-4">
               [Custom Rugs Only]
             </p>
@@ -1377,13 +1377,13 @@ function MainApp() {
                     setTrackingError(null);
                   }}
                   placeholder="Enter your order number (e.g., 2TR-20241212-12345)"
-                  className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-gray-50/50 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors text-base sm:text-lg"
+                  className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors text-base sm:text-lg"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isTrackingLoading}
-                className="px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-gray-900 font-medium rounded-lg transition-colors text-base sm:text-lg whitespace-nowrap flex items-center justify-center gap-2"
+                className="px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-base sm:text-lg whitespace-nowrap flex items-center justify-center gap-2"
               >
                 {isTrackingLoading ? (
                   <>
@@ -1405,27 +1405,27 @@ function MainApp() {
           </form>
 
           {trackingInfo && (
-            <div className="mb-8 p-6 bg-gray-50/50 rounded-xl border-2 border-gray-300">
+            <div className="mb-8 p-6 bg-gray-50/50 rounded-xl border-2 border-gray-600">
               <div className="grid sm:grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="text-gray-600 mb-1">Customer Name</p>
-                  <p className="text-gray-900 font-medium">{trackingInfo.name}</p>
+                  <p className="text-white font-medium">{trackingInfo.name}</p>
                 </div>
                 <div>
                   <p className="text-gray-600 mb-1">Dimensions</p>
-                  <p className="text-gray-900 font-medium">{trackingInfo.dimensions}</p>
+                  <p className="text-white font-medium">{trackingInfo.dimensions}</p>
                 </div>
                 <div>
                   <p className="text-gray-600 mb-1">Backing Option</p>
-                  <p className="text-gray-900 font-medium">{trackingInfo.backing_option}</p>
+                  <p className="text-white font-medium">{trackingInfo.backing_option}</p>
                 </div>
                 <div>
                   <p className="text-gray-600 mb-1">Cut Option</p>
-                  <p className="text-gray-900 font-medium">{trackingInfo.cut_option || 'N/A'}</p>
+                  <p className="text-white font-medium">{trackingInfo.cut_option || 'N/A'}</p>
                 </div>
                 <div className="sm:col-span-2">
                   <p className="text-gray-600 mb-1">Order Date</p>
-                  <p className="text-gray-900 font-medium">
+                  <p className="text-white font-medium">
                     {new Date(trackingInfo.created_at).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
@@ -1437,8 +1437,8 @@ function MainApp() {
             </div>
           )}
 
-          <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-6">Order Timeline</h3>
+          <div className="bg-gray-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-400 shadow-lg">
+            <h3 className="text-2xl font-semibold text-white mb-6">Order Timeline</h3>
             <div className="space-y-6">
               {[
                 { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending' },
@@ -1457,12 +1457,12 @@ function MainApp() {
                       isActive ? 'bg-gradient-to-r from-cyan-500 to-teal-500' : 'bg-gray-700'
                     }`}>
                       <div className={`w-3 h-3 rounded-full ${
-                        isActive ? 'bg-white' : 'bg-gray-500'
+                        isActive ? 'bg-gray-800' : 'bg-gray-500'
                       }`}></div>
                     </div>
                     <div>
                       <h4 className={`font-medium text-lg mb-1 ${
-                        isCurrent ? 'text-cyan-600' : 'text-gray-900'
+                        isCurrent ? 'text-cyan-600' : 'text-white'
                       }`}>
                         {title}
                         {isCurrent && ' (Current)'}
@@ -1487,7 +1487,7 @@ function MainApp() {
         </div>
       </section>
 
-      <footer className="bg-white border-t-2 border-gray-300 py-6 px-4 shadow-inner">
+      <footer className="bg-gray-800 border-t-2 border-gray-600 py-6 px-4 shadow-inner">
         <div className="container mx-auto text-center">
           <p className="text-gray-700 text-sm font-medium">
             Designed, created, and powered by Two Tier Tech LLC (2026)

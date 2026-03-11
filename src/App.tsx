@@ -1075,7 +1075,7 @@ function MainApp() {
                         setSubmitStatus(null);
                       }}
                       disabled={isSubmitting}
-                      className="flex-1 px-6 py-3 bg-gray-50 hover:bg-gray-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+                      className="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors border border-gray-600"
                     >
                       Edit Order
                     </button>

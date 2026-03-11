@@ -291,11 +291,11 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
-        <div className="bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 text-white text-center py-2 px-4 text-sm sm:text-base font-bold shadow-lg">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-800/95 backdrop-blur-md shadow-lg">
+        <div className="bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 text-white text-center py-2 px-4 text-sm sm:text-base font-bold">
           Free Shipping on All Rugs
         </div>
-        <div className={`bg-gray-800/95 backdrop-blur-md container mx-auto px-2 sm:px-6 transition-all duration-300 shadow-md ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -320,11 +320,7 @@ function MainApp() {
               <img
                 src="/2tr-logo-final-transparent.png"
                 alt="Two Tuft Rugs Logo"
-                className={`object-contain transition-all duration-300 ${
-                  isScrolled
-                    ? 'w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20'
-                    : 'w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40'
-                }`}
+                className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20"
               />
             </div>
 
@@ -398,7 +394,7 @@ function MainApp() {
         )}
       </nav>
 
-      <main className={`transition-all duration-300 ${isScrolled ? 'pt-28 sm:pt-32 lg:pt-36' : 'pt-40 sm:pt-48 lg:pt-72'}`}>
+      <main className="pt-28 sm:pt-32">
         <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl border-2 border-cyan-400">
           <img
             src="https://esvrzocrrwabwrvlurpf.supabase.co/storage/v1/object/public/promo/2tr-workstation-full.png"
@@ -414,7 +410,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="about" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
+        <section id="about" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-32">
           <div className="container mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div>
@@ -467,7 +463,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
+        <section id="premade" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-32">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Pre-made Rugs</h2>
@@ -543,7 +539,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
+        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-32">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
@@ -1350,7 +1346,7 @@ function MainApp() {
         </div>
       )}
 
-      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
+      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-32">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-8 sm:mb-12">
             <div className="flex items-center justify-center mb-4 sm:mb-6">

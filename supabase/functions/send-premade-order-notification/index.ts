@@ -99,7 +99,7 @@ Deno.serve(async (req: Request) => {
           <div class="container">
             <div class="header">
               <h1>🎨 New Pre-made Rug Order</h1>
-              <p>Order #${formattedOrderNumber}</p>
+              <p>ID #${formattedOrderNumber}</p>
             </div>
             <div class="content">
               <div class="field">
@@ -162,7 +162,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Two Tuft Rugs <orders@twotuftrugs.com>",
         to: ["orders@twotuftrugs.com"],
-        subject: `New Pre-made Rug Order #${formattedOrderNumber} - ${customer.name || customer.email}`,
+        subject: `New Pre-made Rug ID #${formattedOrderNumber} - ${customer.name || customer.email}`,
         html: emailHtml,
       }),
     });

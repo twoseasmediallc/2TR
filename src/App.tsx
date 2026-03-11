@@ -292,7 +292,7 @@ function MainApp() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
-        <div className="bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 text-gray-900 text-center py-2 px-4 text-sm sm:text-base font-bold shadow-lg">
+        <div className="bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 text-white text-center py-2 px-4 text-sm sm:text-base font-bold shadow-lg">
           Free Shipping on All Rugs
         </div>
         <div className={`bg-white/95 backdrop-blur-md container mx-auto px-2 sm:px-6 transition-all duration-300 shadow-md ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
@@ -343,7 +343,7 @@ function MainApp() {
                 >
                   <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
                   {cartItems.length > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-gray-900 text-xs font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center shadow-lg">
+                    <span className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-xs font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center shadow-lg">
                       {cartItems.length}
                     </span>
                   )}
@@ -1299,14 +1299,14 @@ function MainApp() {
                     <>
                       <button
                         onClick={previousImage}
-                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-gradient-to-r from-cyan-500 to-teal-500 text-gray-900 p-2 sm:p-3 rounded-full transition-colors"
+                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-gradient-to-r from-cyan-500 to-teal-500 text-white p-2 sm:p-3 rounded-full transition-colors"
                       >
                         <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
                       </button>
 
                       <button
                         onClick={nextImage}
-                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-gradient-to-r from-cyan-500 to-teal-500 text-gray-900 p-2 sm:p-3 rounded-full transition-colors"
+                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-gradient-to-r from-cyan-500 to-teal-500 text-white p-2 sm:p-3 rounded-full transition-colors"
                       >
                         <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
                       </button>

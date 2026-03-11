@@ -290,28 +290,28 @@ function MainApp() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
-        <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium">
+        <div className="bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-600 text-white text-center py-2 px-4 text-sm sm:text-base font-medium shadow-lg">
           Free Shipping on All Rugs
         </div>
-        <div className={`bg-black/90 backdrop-blur-sm container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
+        <div className={`bg-slate-900/95 backdrop-blur-md container mx-auto px-2 sm:px-6 transition-all duration-300 ${isScrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-6 lg:py-10'}`}>
           <div className="flex items-center justify-between lg:justify-center relative w-full gap-2 sm:gap-4">
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="lg:hidden text-gray-100 hover:text-orange-500 transition-colors flex-shrink-0"
+              className="lg:hidden text-cyan-100 hover:text-cyan-400 transition-colors flex-shrink-0"
             >
               <Menu className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
             </button>
 
             <div className="hidden lg:flex absolute left-0 items-center gap-4 xl:gap-8 whitespace-nowrap">
-              <a href="#" className="text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+              <a href="#" className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 Home
               </a>
-              <a href="#about" className="text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+              <a href="#about" className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 About Us
               </a>
-              <a href="#tracker" className="text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+              <a href="#tracker" className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 Shipment Tracker
               </a>
             </div>
@@ -329,21 +329,21 @@ function MainApp() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 lg:absolute lg:right-0">
-              <a href="#premade" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+              <a href="#premade" className="hidden lg:block text-cyan-50 hover:text-cyan-400 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Pre-made Rugs
               </a>
-              <a href="#custom" className="hidden lg:block text-gray-100 hover:text-orange-500 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+              <a href="#custom" className="hidden lg:block text-cyan-50 hover:text-cyan-400 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Custom Rugs
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 lg:ml-4 flex-shrink-0">
                 <button
                   onClick={() => setShowCartModal(true)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors relative"
+                  className="text-cyan-100 hover:text-cyan-400 transition-colors relative"
                 >
                   <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
                   {cartItems.length > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-orange-600 text-white text-xs font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                    <span className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-xs font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center shadow-lg">
                       {cartItems.length}
                     </span>
                   )}
@@ -354,41 +354,41 @@ function MainApp() {
         </div>
 
         {showMobileMenu && (
-          <div className="lg:hidden border-t border-gray-800 bg-black/95 backdrop-blur-sm max-h-[calc(100vh-120px)] overflow-y-auto">
+          <div className="lg:hidden border-t border-slate-700 bg-slate-900/98 backdrop-blur-md max-h-[calc(100vh-120px)] overflow-y-auto shadow-2xl">
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-4">
                 <a
                   href="#"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Home
                 </a>
                 <a
                   href="#about"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   About Us
                 </a>
                 <a
                   href="#tracker"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Shipment Tracker
                 </a>
                 <a
                   href="#premade"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Pre-made Rugs
                 </a>
                 <a
                   href="#custom"
                   onClick={() => setShowMobileMenu(false)}
-                  className="text-gray-100 hover:text-orange-500 transition-colors text-lg font-medium tracking-wide py-2"
+                  className="text-cyan-50 hover:text-cyan-400 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Custom Rugs
                 </a>
@@ -399,13 +399,13 @@ function MainApp() {
       </nav>
 
       <main className={`transition-all duration-300 ${isScrolled ? 'pt-28 sm:pt-32 lg:pt-36' : 'pt-40 sm:pt-48 lg:pt-72'}`}>
-        <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl">
+        <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl mx-4 sm:mx-6 lg:mx-8 shadow-2xl border-2 border-cyan-500/20">
           <img
             src="https://esvrzocrrwabwrvlurpf.supabase.co/storage/v1/object/public/promo/2tr-workstation-full.png"
             alt="Two Tuft Rugs Workshop"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-cyan-900/20 to-slate-900/60" />
 
           <div className="relative z-10 text-center sm:text-right px-4 sm:pr-0 max-w-3xl sm:ml-auto sm:mt-8 sm:mr-8">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-tight italic font-bold">
@@ -440,7 +440,7 @@ function MainApp() {
               </div>
 
               <div className="relative">
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-800">
+                <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl border-2 border-cyan-500/30 ring-2 ring-cyan-400/10">
                   <video
                     src="/2trpromo_compressed.mp4"
                     className="w-full h-full object-cover bg-gradient-to-br from-gray-900 to-black"
@@ -478,7 +478,7 @@ function MainApp() {
 
             {isLoadingRugs ? (
               <div className="flex justify-center items-center py-24">
-                <Loader2 className="w-16 h-16 text-orange-500 animate-spin" />
+                <Loader2 className="w-16 h-16 text-cyan-400 animate-spin" />
               </div>
             ) : rugsError ? (
               <div className="bg-red-900/20 border-2 border-red-600 rounded-2xl p-8 text-center">
@@ -486,22 +486,22 @@ function MainApp() {
                 <p className="text-red-400 text-lg">{rugsError}</p>
                 <button
                   onClick={loadPremadeRugs}
-                  className="mt-4 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                  className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-medium rounded-lg transition-colors"
                 >
                   Try Again
                 </button>
               </div>
             ) : premadeRugs.length === 0 ? (
-              <div className="bg-gray-900/30 border-2 border-gray-800 rounded-2xl p-12 text-center">
+              <div className="bg-slate-800/30 border-2 border-slate-700 rounded-2xl p-12 text-center">
                 <Package className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                 <p className="text-gray-400 text-lg">No rugs available at the moment. Check back soon!</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {premadeRugs.map((rug) => (
-                  <div key={rug.id} className="group bg-gray-900/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-orange-500 transition-all duration-300">
+                  <div key={rug.id} className="group bg-gradient-to-br from-slate-800/80 to-slate-700/50 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-slate-700 hover:border-cyan-400 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300">
                     <div
-                      className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden cursor-pointer relative"
+                      className="aspect-square bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center overflow-hidden cursor-pointer relative"
                       onClick={() => openGallery(rug)}
                     >
                       {rug.image ? (
@@ -518,19 +518,19 @@ function MainApp() {
                           )}
                         </>
                       ) : (
-                        <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-orange-500 transition-colors" strokeWidth={1.5} />
+                        <Package className="w-16 h-16 sm:w-24 sm:h-24 text-gray-700 group-hover:text-cyan-400 transition-colors" strokeWidth={1.5} />
                       )}
                     </div>
                     <div className="p-4 sm:p-6">
                       <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{rug.title || 'Untitled Rug'}</h3>
                       <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">{rug.description || 'No description available'}</p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                        <span className="text-2xl sm:text-3xl font-bold text-orange-500">
+                        <span className="text-2xl sm:text-3xl font-bold text-cyan-400">
                           ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
                         </span>
                         <button
                           onClick={() => handleAddToCart(rug)}
-                          className="w-full sm:w-auto px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                          className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-medium rounded-lg transition-colors"
                         >
                           Add to Cart
                         </button>
@@ -543,7 +543,7 @@ function MainApp() {
           </div>
         </section>
 
-        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
+        <section id="custom" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-10 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Custom Rugs</h2>
@@ -552,18 +552,18 @@ function MainApp() {
               </p>
             </div>
 
-            <div className="bg-gray-900/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800 mb-10 sm:mb-12 lg:mb-16">
-              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-6 text-center">Pricing Guide</h3>
+            <div className="bg-gradient-to-br from-slate-800/50 to-slate-700/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-500/20 shadow-lg shadow-cyan-500/5 mb-10 sm:mb-12 lg:mb-16">
+              <h3 className="text-xl sm:text-2xl font-semibold text-cyan-100 mb-6 text-center">Pricing Guide</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div className="text-center">
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Small</h4>
                   <p className="text-gray-400 mb-2 text-sm sm:text-base">Up to 2' x 2'</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $189</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $189</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Medium</h4>
                   <p className="text-gray-400 mb-2 text-sm sm:text-base">3' x 1' to 3' x 3'</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $299</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $299</p>
                 </div>
                 <div className="text-center relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-10">
@@ -573,7 +573,7 @@ function MainApp() {
                   </div>
                   <h4 className="text-lg sm:text-xl font-medium text-white mb-2">Large</h4>
                   <p className="text-gray-400 mb-2 text-sm sm:text-base">4' x 1' to 4' x 4'</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-orange-500">Starting at $449</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-cyan-400">Starting at $449</p>
                 </div>
               </div>
               <p className="text-gray-400 text-center mt-6 text-sm sm:text-base px-4">
@@ -582,11 +582,11 @@ function MainApp() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-12 lg:mb-16">
-              <div className="bg-gray-900/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6">The Process</h3>
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-700/40 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-500/20 shadow-lg">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-cyan-100 mb-6">The Process</h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-teal-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       1
                     </div>
                     <div>
@@ -596,7 +596,7 @@ function MainApp() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-teal-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       2
                     </div>
                     <div>
@@ -606,7 +606,7 @@ function MainApp() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-teal-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       3
                     </div>
                     <div>
@@ -616,7 +616,7 @@ function MainApp() {
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-teal-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
                       4
                     </div>
                     <div>
@@ -627,8 +627,8 @@ function MainApp() {
                 </div>
               </div>
 
-              <div className="bg-gray-900/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6">Start Your Custom Order</h3>
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-700/40 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-500/20 shadow-lg">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-cyan-100 mb-6">Start Your Custom Order</h3>
                 <form onSubmit={handleCustomOrderSubmit} className="space-y-5 sm:space-y-6">
                   <div>
                     <label className="block text-white font-medium mb-2">Name</label>
@@ -637,7 +637,7 @@ function MainApp() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                       placeholder="Your name"
                     />
                   </div>
@@ -649,7 +649,7 @@ function MainApp() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -664,7 +664,7 @@ function MainApp() {
                         value={formData.shippingAddressLine1}
                         onChange={(e) => setFormData({ ...formData, shippingAddressLine1: e.target.value })}
                         required
-                        className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                         placeholder="123 Main Street"
                       />
                     </div>
@@ -675,7 +675,7 @@ function MainApp() {
                         type="text"
                         value={formData.shippingAddressLine2}
                         onChange={(e) => setFormData({ ...formData, shippingAddressLine2: e.target.value })}
-                        className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                         placeholder="Apt 4B"
                       />
                     </div>
@@ -688,7 +688,7 @@ function MainApp() {
                           value={formData.shippingCity}
                           onChange={(e) => setFormData({ ...formData, shippingCity: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="City"
                         />
                       </div>
@@ -699,7 +699,7 @@ function MainApp() {
                           value={formData.shippingState}
                           onChange={(e) => setFormData({ ...formData, shippingState: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="State"
                         />
                       </div>
@@ -713,7 +713,7 @@ function MainApp() {
                           value={formData.shippingZip}
                           onChange={(e) => setFormData({ ...formData, shippingZip: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="12345"
                         />
                       </div>
@@ -724,7 +724,7 @@ function MainApp() {
                           value={formData.shippingCountry}
                           onChange={(e) => setFormData({ ...formData, shippingCountry: e.target.value })}
                           required
-                          className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                           placeholder="United States"
                         />
                       </div>
@@ -738,7 +738,7 @@ function MainApp() {
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       required
-                      className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors resize-none"
                       placeholder="Describe your design ideas, colors, patterns, or inspiration..."
                     />
                   </div>
@@ -755,7 +755,7 @@ function MainApp() {
                       />
                       <label
                         htmlFor="design-upload"
-                        className="flex flex-col items-center justify-center w-full px-4 py-8 bg-gray-800/50 border-2 border-dashed border-gray-700 rounded-lg cursor-pointer hover:border-orange-500 transition-colors"
+                        className="flex flex-col items-center justify-center w-full px-4 py-8 bg-slate-700/50 border-2 border-dashed border-slate-600 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors"
                       >
                         <Upload className="w-12 h-12 text-gray-500 mb-3" strokeWidth={1.5} />
                         {designFile ? (
@@ -785,8 +785,8 @@ function MainApp() {
                         }}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "1' x 1'"
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         1' x 1'
@@ -800,8 +800,8 @@ function MainApp() {
                         }}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === "2' x 2'"
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         2' x 2'
@@ -809,7 +809,7 @@ function MainApp() {
                       <button
                         type="button"
                         disabled
-                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-gray-900/50 border-gray-800 text-gray-600 cursor-not-allowed opacity-50"
+                        className="px-6 py-4 rounded-lg font-medium transition-all border-2 bg-slate-800/50 border-slate-700 text-gray-600 cursor-not-allowed opacity-50"
                       >
                         3' x 3'
                       </button>
@@ -818,8 +818,8 @@ function MainApp() {
                         onClick={() => setSelectedDimension('custom')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           selectedDimension === 'custom'
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         Custom Size
@@ -835,7 +835,7 @@ function MainApp() {
                             <select
                               value={customWidth}
                               onChange={(e) => setCustomWidth(e.target.value)}
-                              className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white focus:border-orange-500 focus:outline-none transition-colors"
+                              className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                             >
                               <option value="">Select width</option>
                               {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
@@ -858,7 +858,7 @@ function MainApp() {
                             <select
                               value={customHeight}
                               onChange={(e) => setCustomHeight(e.target.value)}
-                              className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white focus:border-orange-500 focus:outline-none transition-colors"
+                              className="w-full px-4 py-3 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors"
                             >
                               <option value="">Select height</option>
                               {Array.from({ length: 37 }, (_, i) => i + 12).map(inches => {
@@ -889,8 +889,8 @@ function MainApp() {
                         onClick={() => setCutOption('Cut to Dimension Border')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           cutOption === 'Cut to Dimension Border'
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         Cut to Dimension Border
@@ -900,8 +900,8 @@ function MainApp() {
                         onClick={() => setCutOption('Cut to Image Outline')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           cutOption === 'Cut to Image Outline'
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         Cut to Image Outline
@@ -917,8 +917,8 @@ function MainApp() {
                         onClick={() => setBackingOption('Non-Slip Floor Finish')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           backingOption === 'Non-Slip Floor Finish'
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         Non-Slip Floor Finish
@@ -928,8 +928,8 @@ function MainApp() {
                         onClick={() => setBackingOption('Wall Hanging Finish')}
                         className={`px-6 py-4 rounded-lg font-medium transition-all border-2 ${
                           backingOption === 'Wall Hanging Finish'
-                            ? 'bg-orange-600 border-orange-600 text-white'
-                            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-orange-500'
+                            ? 'bg-gradient-to-r from-cyan-600 to-teal-600 border-cyan-600 text-white'
+                            : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-cyan-500'
                         }`}
                       >
                         Wall Hanging Finish
@@ -940,7 +940,7 @@ function MainApp() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-lg"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-lg"
                   >
                     {isSubmitting ? 'Submitting...' : 'Request Approval'}
                   </button>
@@ -971,8 +971,8 @@ function MainApp() {
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 rounded-xl sm:rounded-2xl border-2 border-gray-800 max-w-2xl w-full my-4">
-            <div className="sticky top-0 bg-gray-900 border-b-2 border-gray-800 p-4 sm:p-6 flex items-center justify-between">
+          <div className="bg-slate-800 rounded-xl sm:rounded-2xl border-2 border-slate-700 max-w-2xl w-full my-4">
+            <div className="sticky top-0 bg-slate-800 border-b-2 border-slate-700 p-4 sm:p-6 flex items-center justify-between">
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Order Summary</h3>
               <button
                 onClick={() => setShowModal(false)}
@@ -1005,7 +1005,7 @@ function MainApp() {
                         setShowModal(false);
                         setSubmitStatus(null);
                       }}
-                      className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                      className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-medium rounded-lg transition-colors"
                     >
                       Close
                     </button>
@@ -1041,7 +1041,7 @@ function MainApp() {
                   {designFile && (
                     <div>
                       <h4 className="text-gray-400 text-sm font-medium mb-2">Design Reference</h4>
-                      <div className="bg-gray-800/50 rounded-lg p-4 border-2 border-gray-700">
+                      <div className="bg-slate-700/50 rounded-lg p-4 border-2 border-slate-600">
                         <img
                           src={URL.createObjectURL(designFile)}
                           alt="Design reference"
@@ -1079,14 +1079,14 @@ function MainApp() {
                         setSubmitStatus(null);
                       }}
                       disabled={isSubmitting}
-                      className="flex-1 px-6 py-3 bg-gray-800 hover:bg-gray-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+                      className="flex-1 px-6 py-3 bg-slate-700 hover:bg-gray-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
                     >
                       Edit Order
                     </button>
                     <button
                       onClick={handleConfirmOrder}
                       disabled={isSubmitting}
-                      className="flex-1 px-6 py-3 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+                      className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
                     >
                       {isSubmitting ? 'Submitting...' : 'Confirm Order'}
                     </button>
@@ -1100,8 +1100,8 @@ function MainApp() {
 
       {showCartModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 rounded-xl sm:rounded-2xl border-2 border-gray-800 max-w-4xl w-full my-4">
-            <div className="sticky top-0 bg-gray-900 border-b-2 border-gray-800 p-4 sm:p-6 flex items-center justify-between">
+          <div className="bg-slate-800 rounded-xl sm:rounded-2xl border-2 border-slate-700 max-w-4xl w-full my-4">
+            <div className="sticky top-0 bg-slate-800 border-b-2 border-slate-700 p-4 sm:p-6 flex items-center justify-between">
               <h3 className="text-2xl sm:text-3xl font-bold text-white">Shopping Cart</h3>
               <button
                 onClick={() => setShowCartModal(false)}
@@ -1118,7 +1118,7 @@ function MainApp() {
                   <p className="text-gray-400 text-base sm:text-lg">Your cart is empty</p>
                   <button
                     onClick={() => setShowCartModal(false)}
-                    className="mt-6 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                    className="mt-6 px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-medium rounded-lg transition-colors"
                   >
                     Continue Shopping
                   </button>
@@ -1131,7 +1131,7 @@ function MainApp() {
                       return (
                         <div
                           key={rug.id}
-                          className="flex gap-4 bg-gray-800/30 rounded-xl p-4 border-2 border-gray-800"
+                          className="flex gap-4 bg-slate-700/30 rounded-xl p-4 border-2 border-slate-700"
                         >
                           {rug.image && (
                             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0">
@@ -1150,7 +1150,7 @@ function MainApp() {
                               {rug.description || 'No description available'}
                             </p>
                             <div className="flex items-center gap-4">
-                              <p className="text-2xl font-bold text-orange-500">
+                              <p className="text-2xl font-bold text-cyan-400">
                                 ${rug.price ? parseFloat(rug.price).toFixed(2) : '0.00'}
                               </p>
                               <p className="text-gray-400 text-sm">
@@ -1169,10 +1169,10 @@ function MainApp() {
                     })}
                   </div>
 
-                  <div className="border-t-2 border-gray-800 pt-6">
-                    <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-2 border-orange-600/30 rounded-lg p-4 mb-6">
+                  <div className="border-t-2 border-slate-700 pt-6">
+                    <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-2 border-cyan-600/30 rounded-lg p-4 mb-6">
                       <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
+                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-full flex items-center justify-center">
                           <span className="text-white font-bold text-lg">%</span>
                         </div>
                         <div className="flex-1">
@@ -1182,14 +1182,14 @@ function MainApp() {
                           </p>
                           <button
                             onClick={() => setShowCouponInfo(!showCouponInfo)}
-                            className="text-orange-400 hover:text-orange-300 text-sm font-medium underline"
+                            className="text-cyan-300 hover:text-orange-300 text-sm font-medium underline"
                           >
                             {showCouponInfo ? 'Hide details' : 'Learn more'}
                           </button>
                           {showCouponInfo && (
-                            <div className="mt-3 text-gray-300 text-sm bg-black/30 rounded-lg p-3 border border-gray-700">
+                            <div className="mt-3 text-gray-300 text-sm bg-black/30 rounded-lg p-3 border border-slate-600">
                               <p className="mb-2">On the checkout page, look for the link that says:</p>
-                              <p className="font-mono text-orange-400 mb-2">"Add promotion code"</p>
+                              <p className="font-mono text-cyan-300 mb-2">"Add promotion code"</p>
                               <p>Click it to reveal the coupon code field where you can enter your discount code.</p>
                             </div>
                           )}
@@ -1199,7 +1199,7 @@ function MainApp() {
 
                     <div className="flex justify-between items-center mb-6">
                       <span className="text-xl text-gray-300">Total:</span>
-                      <span className="text-3xl font-bold text-orange-500">
+                      <span className="text-3xl font-bold text-cyan-400">
                         ${cartItems.reduce((sum, rug) => sum + (rug.price ? parseFloat(rug.price) : 0), 0).toFixed(2)}
                       </span>
                     </div>
@@ -1227,7 +1227,7 @@ function MainApp() {
                         }
                       }}
                       disabled={checkoutLoading === 'cart'}
-                      className="w-full px-8 py-4 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 disabled:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg"
                     >
                       {checkoutLoading === 'cart' ? (
                         <>
@@ -1248,10 +1248,10 @@ function MainApp() {
 
       {showLimitModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 rounded-xl border-2 border-orange-600 max-w-md w-full p-6 my-4">
+          <div className="bg-slate-800 rounded-xl border-2 border-cyan-600 max-w-md w-full p-6 my-4">
             <div className="text-center">
-              <div className="mx-auto mb-4 w-12 h-12 bg-orange-600/20 rounded-full flex items-center justify-center">
-                <AlertCircle className="w-6 h-6 text-orange-500" strokeWidth={2} />
+              <div className="mx-auto mb-4 w-12 h-12 bg-gradient-to-r from-cyan-600 to-teal-600/20 rounded-full flex items-center justify-center">
+                <AlertCircle className="w-6 h-6 text-cyan-400" strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Quantity Limit Reached</h3>
               <p className="text-gray-300 mb-6">
@@ -1259,7 +1259,7 @@ function MainApp() {
               </p>
               <button
                 onClick={() => setShowLimitModal(false)}
-                className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors"
+                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-medium rounded-lg transition-colors"
               >
                 OK
               </button>
@@ -1276,7 +1276,7 @@ function MainApp() {
           <div className="min-h-screen flex items-center justify-center p-4">
             <button
               onClick={closeGallery}
-              className="fixed top-4 right-4 text-white hover:text-orange-500 transition-colors z-10"
+              className="fixed top-4 right-4 text-white hover:text-cyan-400 transition-colors z-10"
             >
               <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={2} />
             </button>
@@ -1287,7 +1287,7 @@ function MainApp() {
             >
               {getGalleryImages(selectedRugForGallery).length > 0 ? (
                 <>
-                  <div className="relative aspect-square sm:aspect-video bg-gray-900 rounded-xl overflow-hidden">
+                  <div className="relative aspect-square sm:aspect-video bg-slate-800 rounded-xl overflow-hidden">
                     <img
                       src={getGalleryImages(selectedRugForGallery)[currentImageIndex]}
                       alt={`${selectedRugForGallery.title || 'Rug'} - Image ${currentImageIndex + 1}`}
@@ -1299,14 +1299,14 @@ function MainApp() {
                     <>
                       <button
                         onClick={previousImage}
-                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-gradient-to-r from-cyan-600 to-teal-600 text-white p-2 sm:p-3 rounded-full transition-colors"
                       >
                         <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
                       </button>
 
                       <button
                         onClick={nextImage}
-                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-orange-600 text-white p-2 sm:p-3 rounded-full transition-colors"
+                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-gradient-to-r from-cyan-600 to-teal-600 text-white p-2 sm:p-3 rounded-full transition-colors"
                       >
                         <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
                       </button>
@@ -1324,7 +1324,7 @@ function MainApp() {
                     <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-4">
                       {selectedRugForGallery.description || 'No description available'}
                     </p>
-                    <p className="text-3xl sm:text-4xl font-bold text-orange-500 mt-4 mb-6">
+                    <p className="text-3xl sm:text-4xl font-bold text-cyan-400 mt-4 mb-6">
                       ${selectedRugForGallery.price ? parseFloat(selectedRugForGallery.price).toFixed(2) : '0.00'}
                     </p>
                     <button
@@ -1333,7 +1333,7 @@ function MainApp() {
                         handleAddToCart(selectedRugForGallery);
                         closeGallery();
                       }}
-                      className="px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors text-lg"
+                      className="px-8 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-medium rounded-lg transition-colors text-lg"
                     >
                       Add to Cart
                     </button>
@@ -1350,11 +1350,11 @@ function MainApp() {
         </div>
       )}
 
-      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
+      <section id="tracker" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-36 sm:scroll-mt-44 lg:scroll-mt-68">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-8 sm:mb-12">
             <div className="flex items-center justify-center mb-4 sm:mb-6">
-              <Package className="w-12 h-12 sm:w-16 sm:h-16 text-orange-500" strokeWidth={1.5} />
+              <Package className="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400" strokeWidth={1.5} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight">Track Your Order</h2>
             <p className="text-gray-400 text-base sm:text-lg px-4">
@@ -1377,13 +1377,13 @@ function MainApp() {
                     setTrackingError(null);
                   }}
                   placeholder="Enter your order number (e.g., 2TR-20241212-12345)"
-                  className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors text-base sm:text-lg"
+                  className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-slate-700/50 border-2 border-slate-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors text-base sm:text-lg"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isTrackingLoading}
-                className="px-8 sm:px-10 py-4 sm:py-5 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-base sm:text-lg whitespace-nowrap flex items-center justify-center gap-2"
+                className="px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors text-base sm:text-lg whitespace-nowrap flex items-center justify-center gap-2"
               >
                 {isTrackingLoading ? (
                   <>
@@ -1405,7 +1405,7 @@ function MainApp() {
           </form>
 
           {trackingInfo && (
-            <div className="mb-8 p-6 bg-gray-800/50 rounded-xl border-2 border-gray-700">
+            <div className="mb-8 p-6 bg-slate-700/50 rounded-xl border-2 border-slate-600">
               <div className="grid sm:grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="text-gray-400 mb-1">Customer Name</p>
@@ -1437,8 +1437,8 @@ function MainApp() {
             </div>
           )}
 
-          <div className="bg-gray-800/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-gray-800">
-            <h3 className="text-2xl font-semibold text-white mb-6">Order Timeline</h3>
+          <div className="bg-gradient-to-br from-slate-800/50 to-slate-700/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 border-cyan-500/20 shadow-lg">
+            <h3 className="text-2xl font-semibold text-cyan-100 mb-6">Order Timeline</h3>
             <div className="space-y-6">
               {[
                 { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending' },
@@ -1454,7 +1454,7 @@ function MainApp() {
                 return (
                   <div key={stage} className={`flex items-start gap-4 ${!isActive && trackingInfo ? 'opacity-50' : ''}`}>
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
-                      isActive ? 'bg-orange-600' : 'bg-gray-700'
+                      isActive ? 'bg-gradient-to-r from-cyan-600 to-teal-600' : 'bg-gray-700'
                     }`}>
                       <div className={`w-3 h-3 rounded-full ${
                         isActive ? 'bg-white' : 'bg-gray-500'
@@ -1462,7 +1462,7 @@ function MainApp() {
                     </div>
                     <div>
                       <h4 className={`font-medium text-lg mb-1 ${
-                        isCurrent ? 'text-orange-400' : 'text-white'
+                        isCurrent ? 'text-cyan-300' : 'text-white'
                       }`}>
                         {title}
                         {isCurrent && ' (Current)'}
@@ -1487,9 +1487,9 @@ function MainApp() {
         </div>
       </section>
 
-      <footer className="bg-black border-t border-gray-800 py-6 px-4">
+      <footer className="bg-slate-900 border-t border-slate-700 py-6 px-4">
         <div className="container mx-auto text-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-slate-400 text-sm">
             Designed, created, and powered by Two Tier Tech LLC (2026)
           </p>
         </div>

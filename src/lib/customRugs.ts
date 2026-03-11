@@ -35,7 +35,7 @@ export async function uploadDesignImage(file: File): Promise<string> {
 
 export async function createCustomRugOrder(
   orderData: CustomRugOrder
-): Promise<{ success: boolean; orderId?: number; trackingNumber?: string; error?: string }> {
+): Promise<{ success: boolean; orderId?: number; orderNumber?: string; error?: string }> {
   try {
     const { data, error } = await supabase
       .from('Custom Rugs')
@@ -51,7 +51,7 @@ export async function createCustomRugOrder(
           status: 'pending'
         }
       ])
-      .select('id, tracking_number')
+      .select('id, order_number')
       .maybeSingle();
 
     if (error) {
@@ -74,7 +74,7 @@ export async function createCustomRugOrder(
               },
               body: JSON.stringify({
                 orderId: data.id,
-                trackingNumber: data.tracking_number,
+                orderNumber: data.order_number,
                 name: orderData.name,
                 email: orderData.email,
                 description: orderData.description,
@@ -94,7 +94,7 @@ export async function createCustomRugOrder(
                 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
               },
               body: JSON.stringify({
-                trackingNumber: data.tracking_number,
+                orderNumber: data.order_number,
                 name: orderData.name,
                 email: orderData.email,
                 description: orderData.description,
@@ -127,7 +127,7 @@ export async function createCustomRugOrder(
       }
     }
 
-    return { success: true, orderId: data?.id, trackingNumber: data?.tracking_number };
+    return { success: true, orderId: data?.id, orderNumber: data?.order_number };
   } catch (err) {
     console.error('Unexpected error:', err);
     return {

@@ -8,7 +8,7 @@ import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tra
 import { createCheckoutSession, createCheckoutSessionForCart } from './lib/stripe';
 
 function MainApp() {
-  const [trackingNumber, setTrackingNumber] = useState('');
+  const [orderNumber, setOrderNumber] = useState('');
   const [selectedDimension, setSelectedDimension] = useState<string>('');
   const [customWidth, setCustomWidth] = useState('');
   const [customHeight, setCustomHeight] = useState('');
@@ -163,8 +163,8 @@ function MainApp() {
   const handleTrackShipment = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!trackingNumber.trim()) {
-      setTrackingError('Please enter a tracking number');
+    if (!orderNumber.trim()) {
+      setTrackingError('Please enter an order number');
       setTrackingInfo(null);
       return;
     }
@@ -173,7 +173,7 @@ function MainApp() {
     setTrackingError(null);
     setTrackingInfo(null);
 
-    const { data, error } = await lookupTracking(trackingNumber);
+    const { data, error } = await lookupTracking(orderNumber);
 
     if (error) {
       setTrackingError(error);
@@ -237,7 +237,7 @@ function MainApp() {
       if (result.success) {
         setSubmitStatus({
           type: 'success',
-          message: `Order submitted successfully! Your tracking number is: ${result.trackingNumber}. We'll contact you soon at ${formData.email}.`,
+          message: `Order submitted successfully! Your order number is: ${result.orderNumber}. We'll contact you soon at ${formData.email}.`,
         });
 
         setFormData({ name: '', email: '', description: '' });
@@ -1252,7 +1252,7 @@ function MainApp() {
               [Custom Rugs Only]
             </p>
             <p className="text-gray-400 text-base sm:text-lg px-4">
-              Enter your tracking number to see the status of your custom rug
+              Enter your order number to see the status of your custom rug
             </p>
           </div>
 
@@ -1262,12 +1262,12 @@ function MainApp() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
                 <input
                   type="text"
-                  value={trackingNumber}
+                  value={orderNumber}
                   onChange={(e) => {
-                    setTrackingNumber(e.target.value.toUpperCase());
+                    setOrderNumber(e.target.value.toUpperCase());
                     setTrackingError(null);
                   }}
-                  placeholder="Enter your tracking number (e.g., 2TR-20241212-12345)"
+                  placeholder="Enter your order number (e.g., 2TR-20241212-12345)"
                   className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 sm:py-5 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none transition-colors text-base sm:text-lg"
                 />
               </div>

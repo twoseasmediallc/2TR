@@ -2,7 +2,7 @@ import { supabase } from './supabase';
 
 export interface TrackingInfo {
   id: number;
-  tracking_number: string;
+  order_number: string;
   status: string;
   name: string;
   email: string;
@@ -18,7 +18,7 @@ export interface TrackingInfo {
   is_delivered: boolean;
 }
 
-export async function lookupTracking(trackingNumber: string): Promise<{
+export async function lookupTracking(orderNumber: string): Promise<{
   data: TrackingInfo | null;
   error: string | null;
 }> {
@@ -26,15 +26,15 @@ export async function lookupTracking(trackingNumber: string): Promise<{
     const { data, error } = await supabase
       .from('Custom Rugs')
       .select('*')
-      .eq('tracking_number', trackingNumber.trim().toUpperCase())
+      .eq('order_number', orderNumber.trim().toUpperCase())
       .maybeSingle();
 
     if (error) {
-      return { data: null, error: 'Failed to lookup tracking number. Please try again.' };
+      return { data: null, error: 'Failed to lookup order number. Please try again.' };
     }
 
     if (!data) {
-      return { data: null, error: 'Tracking number not found. Please check and try again.' };
+      return { data: null, error: 'Order number not found. Please check and try again.' };
     }
 
     return { data: data as TrackingInfo, error: null };

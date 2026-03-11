@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 interface CustomerConfirmation {
-  trackingNumber: string;
+  orderNumber: string;
   name: string;
   email: string;
   description: string;
@@ -63,8 +63,8 @@ Deno.serve(async (req: Request) => {
               <p>We've received your custom rug order and are excited to bring your vision to life! Here are your order details:</p>
 
               <div class="tracking-box">
-                <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Your Tracking Number</div>
-                <div class="tracking-number">${customerData.trackingNumber}</div>
+                <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Your Order Number</div>
+                <div class="tracking-number">${customerData.orderNumber}</div>
                 <p style="margin-top: 10px; font-size: 12px; color: #666;">Save this number for tracking your order</p>
               </div>
 
@@ -122,7 +122,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Two Tuft Rugs <orders@twotuftrugs.com>",
         to: [customerData.email],
-        subject: `Order Confirmation - ${customerData.trackingNumber}`,
+        subject: `Order Confirmation - ${customerData.orderNumber}`,
         html: emailHtml,
       }),
     });

@@ -8,7 +8,7 @@ const corsHeaders = {
 
 interface OrderNotification {
   orderId: number;
-  trackingNumber: string;
+  orderNumber: string;
   name: string;
   email: string;
   description: string;
@@ -57,12 +57,12 @@ Deno.serve(async (req: Request) => {
             <div class="header">
               <h1>🎨 New Custom Rug Order</h1>
               <p>ID #${orderData.orderId}</p>
-              <p>Tracking: ${orderData.trackingNumber}</p>
+              <p>Order Number: ${orderData.orderNumber}</p>
             </div>
             <div class="content">
               <div class="field">
-                <div class="label">Tracking Number:</div>
-                <div class="value" style="background-color: #fff3cd; border-color: #ffc107; font-weight: bold; font-size: 16px;">${orderData.trackingNumber}</div>
+                <div class="label">Order Number:</div>
+                <div class="value" style="background-color: #fff3cd; border-color: #ffc107; font-weight: bold; font-size: 16px;">${orderData.orderNumber}</div>
               </div>
 
               <div class="field">
@@ -125,7 +125,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Two Tuft Rugs <orders@twotuftrugs.com>",
         to: ["orders@twotuftrugs.com"],
-        subject: `New Custom Rug Order ${orderData.trackingNumber} - ${orderData.name}`,
+        subject: `New Custom Rug Order ${orderData.orderNumber} - ${orderData.name}`,
         html: emailHtml,
       }),
     });

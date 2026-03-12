@@ -928,7 +928,7 @@ function MainApp() {
                             : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
-                        Wall Hanging Finish
+                        Wall Hanging Felt Finish
                       </button>
                     </div>
                   </div>

@@ -14,6 +14,7 @@ export interface CustomRugOrder {
   shipping_state: string;
   shipping_zip: string;
   shipping_country: string;
+  coupon_code?: string;
 }
 
 export async function uploadDesignImage(file: File): Promise<string> {
@@ -60,6 +61,7 @@ export async function createCustomRugOrder(
           shipping_state: orderData.shipping_state,
           shipping_zip: orderData.shipping_zip,
           shipping_country: orderData.shipping_country,
+          coupon_code: orderData.coupon_code,
           status: 'pending'
         }
       ])

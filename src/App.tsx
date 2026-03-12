@@ -29,6 +29,7 @@ function MainApp() {
     shippingState: '',
     shippingZip: '',
     shippingCountry: 'United States',
+    couponCode: '',
   });
   const [premadeRugs, setPremadeRugs] = useState<PremadeRug[]>([]);
   const [isLoadingRugs, setIsLoadingRugs] = useState(true);
@@ -244,6 +245,7 @@ function MainApp() {
         shipping_state: formData.shippingState,
         shipping_zip: formData.shippingZip,
         shipping_country: formData.shippingCountry,
+        coupon_code: formData.couponCode || undefined,
       });
 
       if (result.success) {
@@ -262,6 +264,7 @@ function MainApp() {
           shippingState: '',
           shippingZip: '',
           shippingCountry: 'United States',
+          couponCode: '',
         });
         setDesignFile(null);
         setSelectedDimension('');
@@ -933,6 +936,17 @@ function MainApp() {
                     </div>
                   </div>
 
+                  <div>
+                    <label className="block text-white font-medium mb-2">Coupon Code (Optional)</label>
+                    <input
+                      type="text"
+                      value={formData.couponCode}
+                      onChange={(e) => setFormData({ ...formData, couponCode: e.target.value.toUpperCase() })}
+                      className="w-full px-4 py-3 bg-gray-50/50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-colors uppercase"
+                      placeholder="Enter coupon code"
+                    />
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -1067,6 +1081,13 @@ function MainApp() {
                     <h4 className="text-gray-300 text-sm font-medium mb-2">Backing Option</h4>
                     <p className="text-white text-lg">{backingOption || 'Not selected'}</p>
                   </div>
+
+                  {formData.couponCode && (
+                    <div>
+                      <h4 className="text-gray-300 text-sm font-medium mb-2">Coupon Code</h4>
+                      <p className="text-white text-lg font-mono">{formData.couponCode}</p>
+                    </div>
+                  )}
 
                   <div className="flex gap-4 pt-4">
                     <button

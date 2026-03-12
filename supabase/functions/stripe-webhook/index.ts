@@ -100,6 +100,19 @@ async function handleEvent(event: Stripe.Event) {
           currency,
         } = stripeData as Stripe.Checkout.Session;
 
+        // Fetch the payment intent to get the receipt URL
+        let receipt_url = null;
+        if (payment_intent && typeof payment_intent === 'string') {
+          try {
+            const paymentIntentObj = await stripe.paymentIntents.retrieve(payment_intent);
+            if (paymentIntentObj.charges?.data?.[0]?.receipt_url) {
+              receipt_url = paymentIntentObj.charges.data[0].receipt_url;
+            }
+          } catch (piError) {
+            console.error('Error fetching payment intent for receipt URL:', piError);
+          }
+        }
+
         // Insert the order into the stripe_orders table
         const { error: orderError } = await supabase.from('stripe_orders').insert({
           checkout_session_id,
@@ -109,6 +122,7 @@ async function handleEvent(event: Stripe.Event) {
           amount_total,
           currency,
           payment_status,
+          receipt_url,
           status: 'completed', // assuming we want to mark it as completed since payment is successful
         });
 

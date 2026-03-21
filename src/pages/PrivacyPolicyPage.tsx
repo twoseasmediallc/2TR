@@ -15,8 +15,40 @@ export default function PrivacyPolicyPage() {
 
         <h1 className="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
 
-        <div className="bg-gray-800/50 rounded-lg p-8 text-gray-300">
-          <p className="text-lg">Content coming soon...</p>
+        <div className="bg-gray-800/50 rounded-lg p-8 text-gray-300 space-y-6">
+          <p className="text-sm text-gray-400 italic">Last Updated: March 2026</p>
+
+          <p className="text-lg leading-relaxed">
+            We respect your privacy.
+          </p>
+
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-xl font-semibold text-white mb-2">a) Information We Collect</h2>
+              <ul className="list-disc list-inside space-y-1 ml-4 leading-relaxed">
+                <li>Name</li>
+                <li>Email</li>
+                <li>Shipping address</li>
+                <li>Payment details (processed securely via Stripe)</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold text-white mb-2">b) How We Use It</h2>
+              <ul className="list-disc list-inside space-y-1 ml-4 leading-relaxed">
+                <li>To process orders</li>
+                <li>To communicate updates</li>
+                <li>To improve customer experience</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold text-white mb-2">c) Protection</h2>
+              <p className="leading-relaxed">
+                Your data is securely handled and never sold to third parties.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

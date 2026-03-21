@@ -1504,11 +1504,30 @@ function MainApp() {
         </div>
       </section>
 
-      <footer className="bg-gray-800 border-t-2 border-gray-600 py-6 px-4 shadow-inner">
-        <div className="container mx-auto text-center">
-          <p className="text-white text-sm font-medium">
-            Designed, created, and powered by Two Tier Tech LLC (2026)
-          </p>
+      <footer className="bg-gray-800 border-t-2 border-gray-600 py-8 px-4 shadow-inner">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-4">
+            <a href="/terms" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm font-medium">
+              Terms & Conditions
+            </a>
+            <span className="text-gray-600">|</span>
+            <a href="/refund-policy" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm font-medium">
+              Refund Policy
+            </a>
+            <span className="text-gray-600">|</span>
+            <a href="/shipping-policy" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm font-medium">
+              Shipping Policy
+            </a>
+            <span className="text-gray-600">|</span>
+            <a href="/privacy-policy" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm font-medium">
+              Privacy Policy
+            </a>
+          </div>
+          <div className="text-center">
+            <p className="text-white text-sm font-medium">
+              Designed, created, and powered by Two Tier Tech LLC (2026)
+            </p>
+          </div>
         </div>
       </footer>
     </div>

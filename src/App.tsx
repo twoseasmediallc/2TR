@@ -2,6 +2,10 @@ import { ShoppingCart, Package, Search, Upload, X, CheckCircle, AlertCircle, Loa
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { SuccessPage } from './pages/SuccessPage';
+import TermsPage from './pages/TermsPage';
+import RefundPolicyPage from './pages/RefundPolicyPage';
+import ShippingPolicyPage from './pages/ShippingPolicyPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
@@ -1539,6 +1543,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/success" element={<SuccessPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/refund-policy" element={<RefundPolicyPage />} />
+        <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/" element={<MainApp />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

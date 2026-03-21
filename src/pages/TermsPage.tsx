@@ -70,14 +70,14 @@ export default function TermsPage() {
 
               <div className="space-y-3 mt-3">
                 <div>
-                  <h3 className="text-lg font-medium text-white mb-1">i) Design Submission</h3>
+                  <h3 className="text-lg font-medium text-white mb-1">a) Design Submission</h3>
                   <p className="leading-relaxed">
                     Customers may submit logos, images, or ideas for custom rugs.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium text-white mb-1">ii) Mockups (if applicable)</h3>
+                  <h3 className="text-lg font-medium text-white mb-1">b) Mockups (if applicable)</h3>
                   <p className="leading-relaxed mb-2">
                     If a mockup is provided:
                   </p>
@@ -88,7 +88,7 @@ export default function TermsPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium text-white mb-1">iii) Color & Detail Disclaimer</h3>
+                  <h3 className="text-lg font-medium text-white mb-1">c) Color & Detail Disclaimer</h3>
                   <p className="leading-relaxed mb-2">
                     Due to materials and lighting:
                   </p>
@@ -99,7 +99,7 @@ export default function TermsPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium text-white mb-1">iv) Artistic Interpretation</h3>
+                  <h3 className="text-lg font-medium text-white mb-1">d) Artistic Interpretation</h3>
                   <p className="leading-relaxed">
                     Some designs may be slightly adapted to ensure durability and quality.
                   </p>

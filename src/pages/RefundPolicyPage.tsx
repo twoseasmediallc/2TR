@@ -31,7 +31,7 @@ export default function RefundPolicyPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-white mb-2">Exceptions (We Take Care of Our People)</h2>
+              <h2 className="text-xl font-semibold text-white mb-2">a) Exceptions (We Take Care of Our People)</h2>
               <p className="leading-relaxed mb-3">
                 We will only offer a resolution if:
               </p>
@@ -45,7 +45,7 @@ export default function RefundPolicyPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-white mb-2">Non-Refundable Situations</h2>
+              <h2 className="text-xl font-semibold text-white mb-2">b) Non-Refundable Situations</h2>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Minor variations in color or texture</li>
                 <li>Change of mind after ordering</li>

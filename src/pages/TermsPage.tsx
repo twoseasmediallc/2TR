@@ -64,6 +64,48 @@ export default function TermsPage() {
                 Two Tuft Rugs is not liable for any indirect, incidental, or consequential damages related to the use of our products.
               </p>
             </div>
+
+            <div>
+              <h2 className="text-xl font-semibold text-white mb-2">7. Custom Order Policy</h2>
+
+              <div className="space-y-3 mt-3">
+                <div>
+                  <h3 className="text-lg font-medium text-white mb-1">i) Design Submission</h3>
+                  <p className="leading-relaxed">
+                    Customers may submit logos, images, or ideas for custom rugs.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-medium text-white mb-1">ii) Mockups (if applicable)</h3>
+                  <p className="leading-relaxed mb-2">
+                    If a mockup is provided:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>Customer approval is required before production</li>
+                    <li>Approval = final confirmation</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-medium text-white mb-1">iii) Color & Detail Disclaimer</h3>
+                  <p className="leading-relaxed mb-2">
+                    Due to materials and lighting:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>Colors may vary slightly from digital designs</li>
+                    <li>Fine details may be adjusted for tufting feasibility</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-medium text-white mb-1">iv) Artistic Interpretation</h3>
+                  <p className="leading-relaxed">
+                    Some designs may be slightly adapted to ensure durability and quality.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

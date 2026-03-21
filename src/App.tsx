@@ -49,6 +49,7 @@ function MainApp() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showCouponInfo, setShowCouponInfo] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const formatInchesToFeet = (inches: string) => {
     const totalInches = parseInt(inches);
@@ -221,6 +222,14 @@ function MainApp() {
   };
 
   const handleConfirmOrder = async () => {
+    if (!agreedToTerms) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'You must agree to the Terms & Conditions before proceeding.',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -276,6 +285,7 @@ function MainApp() {
         setCustomHeight('');
         setBackingOption('');
         setCutOption('');
+        setAgreedToTerms(false);
         setTimeout(() => {
           setShowModal(false);
           setSubmitStatus(null);
@@ -1093,6 +1103,30 @@ function MainApp() {
                     </div>
                   )}
 
+                  <div className="border-t border-gray-700 pt-6 mt-6">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={agreedToTerms}
+                        onChange={(e) => setAgreedToTerms(e.target.checked)}
+                        className="mt-1 w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-500 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-800 cursor-pointer"
+                      />
+                      <span className="text-gray-300 text-sm leading-relaxed group-hover:text-white transition-colors">
+                        I agree to the{' '}
+                        <a
+                          href="/terms"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-cyan-400 hover:text-cyan-300 underline"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Terms & Conditions
+                        </a>{' '}
+                        and understand that all sales are final for custom products.
+                      </span>
+                    </label>
+                  </div>
+
                   <div className="flex gap-4 pt-4">
                     <button
                       onClick={() => {
@@ -1106,7 +1140,7 @@ function MainApp() {
                     </button>
                     <button
                       onClick={handleConfirmOrder}
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || !agreedToTerms}
                       className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
                     >
                       {isSubmitting ? 'Submitting...' : 'Confirm Order'}

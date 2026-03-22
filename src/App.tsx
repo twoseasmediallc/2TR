@@ -425,7 +425,7 @@ function MainApp() {
 
           <div className="absolute top-8 sm:top-12 left-0 right-0 z-30 pointer-events-none flex justify-center px-4">
             <div className="diagonal-banner bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl px-8 sm:px-12 md:px-16 py-3 sm:py-4 shadow-2xl transform -rotate-3">
-              Custom Orders Presale Open Until March 31st
+              Custom Orders Presale Open Now Until March 31st!!!
             </div>
           </div>
 

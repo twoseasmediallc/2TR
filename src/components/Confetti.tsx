@@ -17,24 +17,25 @@ export default function Confetti() {
       'linear-gradient(45deg, #ff4500, #ff6347)',
     ];
 
-    const confettiPieces = 30;
+    const confettiPieces = 50;
 
     for (let i = 0; i < confettiPieces; i++) {
       const confetti = document.createElement('div');
       confetti.className = 'confetti-piece';
       confetti.style.cssText = `
         position: absolute;
-        width: ${Math.random() * 8 + 6}px;
-        height: ${Math.random() * 25 + 20}px;
+        width: ${Math.random() * 12 + 10}px;
+        height: ${Math.random() * 35 + 30}px;
         background: ${colors[Math.floor(Math.random() * colors.length)]};
         left: ${Math.random() * 100}%;
         top: -50px;
-        border-radius: 2px;
+        border-radius: 3px;
         opacity: 1;
         animation: confetti-fall ${Math.random() * 2 + 3}s linear infinite;
         animation-delay: ${Math.random() * 2}s;
         pointer-events: none;
         z-index: 20;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
       `;
       containerRef.current.appendChild(confetti);
     }

@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(50vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-10px);
+  }
+}
+
+.confetti-container::before,
+.confetti-container::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 30px;
+  border-radius: 2px;
+  animation: confetti-fall 4s linear infinite;
+}
+
+.confetti-container::before {
+  left: 10%;
+  background: linear-gradient(45deg, #ff0080, #ff8c00);
+  animation-delay: 0s;
+}
+
+.confetti-container::after {
+  left: 20%;
+  background: linear-gradient(45deg, #00ff88, #00d4ff);
+  animation-delay: 0.5s;
+}
+
+.confetti-container {
+  --confetti-colors: #ff0080, #ff8c00, #00ff88, #00d4ff, #8b00ff, #ffff00, #ff1493, #00bfff;
+}
+
+.diagonal-banner {
+  animation: bounce-slow 3s ease-in-out infinite;
+}

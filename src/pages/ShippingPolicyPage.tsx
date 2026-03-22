@@ -20,21 +20,21 @@ export default function ShippingPolicyPage() {
 
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-semibold text-white mb-2">a) Processing Time</h2>
+              <h2 className="text-xl font-semibold text-white mb-2">A) Processing Time</h2>
               <p className="leading-relaxed">
                 All rugs are handmade and require 5-7 business days before shipment.
               </p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-white mb-2">b) Shipping Time</h2>
+              <h2 className="text-xl font-semibold text-white mb-2">B) Shipping Time</h2>
               <p className="leading-relaxed">
                 Shipping typically takes 3-5 business days depending on location.
               </p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-white mb-2">c) Shipping Responsibility</h2>
+              <h2 className="text-xl font-semibold text-white mb-2">C) Shipping Responsibility</h2>
               <p className="leading-relaxed mb-3">
                 Once your order is shipped:
               </p>

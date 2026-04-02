@@ -6,7 +6,6 @@ import TermsPage from './pages/TermsPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import Confetti from './components/Confetti';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
@@ -420,14 +419,6 @@ function MainApp() {
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 via-cyan-500/10 to-gray-900/40" />
-
-          <Confetti />
-
-          <div className="absolute top-8 sm:top-12 left-0 right-0 z-30 pointer-events-none flex justify-center px-4">
-            <div className="diagonal-banner bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl px-8 sm:px-12 md:px-16 py-3 sm:py-4 shadow-2xl transform -rotate-3">
-              Custom Orders Presale Open Now Until March 31st!!!
-            </div>
-          </div>
 
           <div className="relative z-10 text-center sm:text-right px-4 sm:pr-0 max-w-3xl sm:ml-auto sm:mt-8 sm:mr-8">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-tight italic font-bold">

@@ -69,12 +69,6 @@ Deno.serve(async (req: Request) => {
 
               <p>We've received your custom rug order and are excited to bring your vision to life! Here are your order details:</p>
 
-              <div class="tracking-box">
-                <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Your Order Number</div>
-                <div class="tracking-number">${customerData.orderNumber}</div>
-                <p style="margin-top: 10px; font-size: 12px; color: #666;">Save this number for tracking your order</p>
-              </div>
-
               <div class="field">
                 <div class="label">Shipping Address:</div>
                 <div class="value">

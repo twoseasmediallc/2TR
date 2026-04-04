@@ -20,6 +20,7 @@ interface CustomerConfirmation {
   shipping_state: string;
   shipping_zip: string;
   shipping_country: string;
+  coupon_code?: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -103,6 +104,13 @@ Deno.serve(async (req: Request) => {
                 <div class="label">Backing Option:</div>
                 <div class="value">${customerData.backing_option}</div>
               </div>
+
+              ${customerData.coupon_code ? `
+              <div class="field">
+                <div class="label">Coupon Code:</div>
+                <div class="value">${customerData.coupon_code}</div>
+              </div>
+              ` : ''}
 
               <div class="note">
                 <strong>📧 What's Next?</strong>

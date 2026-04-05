@@ -62,7 +62,6 @@ Deno.serve(async (req: Request) => {
           <div class="container">
             <div class="header">
               <h1>🎨 New Custom Rug Order</h1>
-              <p>ID #${orderData.orderId}</p>
               <p>Order Number: ${orderData.orderNumber}</p>
             </div>
             <div class="content">

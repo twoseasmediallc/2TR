@@ -22,6 +22,7 @@ interface OrderNotification {
   shipping_state: string;
   shipping_zip: string;
   shipping_country: string;
+  coupon_code?: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -109,6 +110,13 @@ Deno.serve(async (req: Request) => {
                 <div class="label">Backing Option:</div>
                 <div class="value">${orderData.backing_option}</div>
               </div>
+
+              ${orderData.coupon_code ? `
+              <div class="field">
+                <div class="label">Coupon Code:</div>
+                <div class="value" style="background-color: #d4edda; border-color: #28a745; font-weight: bold; font-size: 16px;">${orderData.coupon_code}</div>
+              </div>
+              ` : ''}
 
               ${orderData.design_image ? `
                 <div class="field">

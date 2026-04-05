@@ -102,6 +102,7 @@ export async function createCustomRugOrder(
                 shipping_state: orderData.shipping_state,
                 shipping_zip: orderData.shipping_zip,
                 shipping_country: orderData.shipping_country,
+                coupon_code: orderData.coupon_code,
               }),
             }
           ),
@@ -127,6 +128,7 @@ export async function createCustomRugOrder(
                 shipping_state: orderData.shipping_state,
                 shipping_zip: orderData.shipping_zip,
                 shipping_country: orderData.shipping_country,
+                coupon_code: orderData.coupon_code,
               }),
             }
           )

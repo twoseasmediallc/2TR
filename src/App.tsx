@@ -906,7 +906,7 @@ function MainApp() {
                             : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
-                        Cut to Dimension Border
+                        Cut to Dimension Border (+$15)
                       </button>
                       <button
                         type="button"
@@ -934,7 +934,7 @@ function MainApp() {
                             : 'bg-gray-50/50 border-gray-600 text-white hover:border-cyan-500'
                         }`}
                       >
-                        Non-Slip Floor Finish
+                        Non-Slip Floor Finish (+$15)
                       </button>
                       <button
                         type="button"

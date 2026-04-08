@@ -1498,9 +1498,10 @@ function MainApp() {
               {[
                 { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending' },
                 { stage: 1, title: 'In Production', description: 'Your rug is being handcrafted', status: 'in_production' },
-                { stage: 2, title: 'Quality Check', description: 'Final inspection and packaging', status: 'quality_check' },
-                { stage: 3, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped' },
-                { stage: 4, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered' }
+                { stage: 2, title: 'Post-Production', description: 'Finishing touches and preparation', status: 'post_production' },
+                { stage: 3, title: 'Quality Check', description: 'Final inspection and packaging', status: 'quality_check' },
+                { stage: 4, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped' },
+                { stage: 5, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered' }
               ].map(({ stage, title, description, status }) => {
                 const currentStage = trackingInfo ? getOrderStageIndex(trackingInfo) : -1;
                 const isActive = stage <= currentStage;

@@ -13,6 +13,7 @@ export interface TrackingInfo {
   updated_at: string;
   is_order_placed: boolean;
   is_in_production: boolean;
+  is_post_production: boolean;
   is_quality_check: boolean;
   is_shipped: boolean;
   is_delivered: boolean;
@@ -44,9 +45,10 @@ export async function lookupTracking(orderNumber: string): Promise<{
 }
 
 export function getOrderStageIndex(trackingInfo: TrackingInfo): number {
-  if (trackingInfo.is_delivered) return 4;
-  if (trackingInfo.is_shipped) return 3;
-  if (trackingInfo.is_quality_check) return 2;
+  if (trackingInfo.is_delivered) return 5;
+  if (trackingInfo.is_shipped) return 4;
+  if (trackingInfo.is_quality_check) return 3;
+  if (trackingInfo.is_post_production) return 2;
   if (trackingInfo.is_in_production) return 1;
   if (trackingInfo.is_order_placed) return 0;
   return 0;
@@ -56,6 +58,7 @@ export function getOrderStageLabel(status: string): string {
   const labels: { [key: string]: string } = {
     'pending': 'Order Placed',
     'in_production': 'In Production',
+    'post_production': 'Post-Production',
     'quality_check': 'Quality Check',
     'shipped': 'Shipped',
     'delivered': 'Delivered'

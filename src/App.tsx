@@ -1569,6 +1569,12 @@ function MainApp() {
               </svg>
               Leave a Review
             </a>
+            <a
+              href="/review#customer-reviews"
+              className="mt-4 inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-base font-medium underline underline-offset-4"
+            >
+              Read Customer Reviews
+            </a>
           </div>
         </div>
       </section>

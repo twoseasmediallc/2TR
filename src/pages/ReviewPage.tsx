@@ -222,7 +222,7 @@ export default function ReviewPage() {
         </div>
 
         {postedReviews.length > 0 && (
-          <div className="mt-16">
+          <div id="customer-reviews" className="mt-16">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-white mb-2">What Our Customers Say</h2>
               <p className="text-gray-400">Verified reviews from real 2TR customers</p>

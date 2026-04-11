@@ -6,6 +6,7 @@ import TermsPage from './pages/TermsPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import ReviewPage from './pages/ReviewPage';
 import { uploadDesignImage, createCustomRugOrder } from './lib/customRugs';
 import { fetchPremadeRugs, type PremadeRug } from './lib/premadeRugs';
 import { lookupTracking, getOrderStageIndex, type TrackingInfo } from './lib/tracking';
@@ -1543,6 +1544,35 @@ function MainApp() {
         </div>
       </section>
 
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-gray-900">
+        <div className="container mx-auto max-w-3xl text-center">
+          <div className="bg-gray-800 rounded-2xl border-2 border-gray-700 p-8 sm:p-12">
+            <div className="flex items-center justify-center gap-1 mb-5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <svg key={i} className="w-7 h-7 text-cyan-400 fill-cyan-400" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+              Love Your Rug?
+            </h2>
+            <p className="text-gray-300 text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+              We'd love to hear about your experience. Your feedback helps us create even better rugs and lets others know what to expect.
+            </p>
+            <a
+              href="/review"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-semibold rounded-xl transition-colors text-lg shadow-lg shadow-cyan-500/20"
+            >
+              <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              Leave a Review
+            </a>
+          </div>
+        </div>
+      </section>
+
       <footer className="bg-gray-800 border-t-2 border-gray-600 py-8 px-4 shadow-inner">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-4">
@@ -1582,6 +1612,7 @@ function App() {
         <Route path="/refund-policy" element={<RefundPolicyPage />} />
         <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/review" element={<ReviewPage />} />
         <Route path="/" element={<MainApp />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

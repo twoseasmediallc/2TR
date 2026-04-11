@@ -346,11 +346,11 @@ function MainApp() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 lg:absolute lg:right-0">
-              <a href="#reviews" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
-                Customer Reviews
-              </a>
               <a href="#tracker" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Shipment Tracker
+              </a>
+              <a href="#reviews" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+                Customer Reviews
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 lg:ml-4 flex-shrink-0">
@@ -403,18 +403,18 @@ function MainApp() {
                   Custom Rugs
                 </a>
                 <a
-                  href="#reviews"
-                  onClick={() => setShowMobileMenu(false)}
-                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
-                >
-                  Customer Reviews
-                </a>
-                <a
                   href="#tracker"
                   onClick={() => setShowMobileMenu(false)}
                   className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Shipment Tracker
+                </a>
+                <a
+                  href="#reviews"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                >
+                  Customer Reviews
                 </a>
               </div>
             </div>

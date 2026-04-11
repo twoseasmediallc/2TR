@@ -601,7 +601,7 @@ function MainApp() {
                 </div>
               </div>
               <p className="text-gray-300 text-center mt-6 text-sm sm:text-base px-4">
-                Final pricing depends on size, complexity, and materials. We'll provide a detailed quote after consultation. All custom preojects will begin upon receipt of payment and will take a minimum of 1 week for completion.
+                Final pricing depends on size, complexity, and materials. We'll provide a detailed quote after consultation. All custom projects will begin upon receipt of payment and will take a minimum of 1 week for completion.
               </p>
             </div>
 

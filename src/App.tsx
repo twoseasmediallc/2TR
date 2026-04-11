@@ -329,8 +329,8 @@ function MainApp() {
               <a href="#about" className="text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
                 About Us
               </a>
-              <a href="#tracker" className="text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
-                Shipment Tracker
+              <a href="#premade" className="text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide">
+                Pre-made Rugs
               </a>
             </div>
 
@@ -343,8 +343,8 @@ function MainApp() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 lg:absolute lg:right-0">
-              <a href="#premade" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
-                Pre-made Rugs
+              <a href="#tracker" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+                Shipment Tracker
               </a>
               <a href="#custom" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Custom Rugs
@@ -386,18 +386,18 @@ function MainApp() {
                   About Us
                 </a>
                 <a
-                  href="#tracker"
-                  onClick={() => setShowMobileMenu(false)}
-                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
-                >
-                  Shipment Tracker
-                </a>
-                <a
                   href="#premade"
                   onClick={() => setShowMobileMenu(false)}
                   className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >
                   Pre-made Rugs
+                </a>
+                <a
+                  href="#tracker"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
+                >
+                  Shipment Tracker
                 </a>
                 <a
                   href="#custom"

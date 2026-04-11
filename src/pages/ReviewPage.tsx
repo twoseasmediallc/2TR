@@ -1,7 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Star, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+
+interface Review {
+  id: string;
+  name: string;
+  rating: number;
+  review_text: string;
+  created_at: string;
+}
 
 export default function ReviewPage() {
   const [name, setName] = useState('');
@@ -12,6 +20,19 @@ export default function ReviewPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [postedReviews, setPostedReviews] = useState<Review[]>([]);
+
+  useEffect(() => {
+    async function fetchPostedReviews() {
+      const { data } = await supabase
+        .from('reviews')
+        .select('id, name, rating, review_text, created_at')
+        .eq('post', true)
+        .order('created_at', { ascending: false });
+      if (data) setPostedReviews(data);
+    }
+    fetchPostedReviews();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -46,6 +67,14 @@ export default function ReviewPage() {
     }
 
     setSubmitted(true);
+  }
+
+  function formatDate(dateStr: string) {
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   }
 
   if (submitted) {
@@ -191,6 +220,43 @@ export default function ReviewPage() {
             </button>
           </form>
         </div>
+
+        {postedReviews.length > 0 && (
+          <div className="mt-16">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-white mb-2">What Our Customers Say</h2>
+              <p className="text-gray-400">Verified reviews from real 2TR customers</p>
+            </div>
+            <div className="space-y-4">
+              {postedReviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="bg-gray-800/50 rounded-xl border border-gray-700 p-6"
+                >
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div>
+                      <p className="font-semibold text-white">{review.name}</p>
+                      <p className="text-gray-500 text-sm">{formatDate(review.created_at)}</p>
+                    </div>
+                    <div className="flex items-center gap-0.5 shrink-0">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          className={`w-4 h-4 ${
+                            star <= review.rating
+                              ? 'text-cyan-400 fill-cyan-400'
+                              : 'text-gray-600'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-gray-300 leading-relaxed">{review.review_text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

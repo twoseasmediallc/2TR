@@ -349,7 +349,7 @@ function MainApp() {
               <a href="#tracker" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Shipment Tracker
               </a>
-              <a href="#reviews" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
+              <a href="/review" className="hidden lg:block text-white hover:text-cyan-600 transition-colors text-lg xl:text-xl font-medium tracking-wide text-center leading-tight max-w-[120px] xl:max-w-none xl:whitespace-nowrap">
                 Customer Reviews
               </a>
 
@@ -410,7 +410,7 @@ function MainApp() {
                   Shipment Tracker
                 </a>
                 <a
-                  href="#reviews"
+                  href="/review"
                   onClick={() => setShowMobileMenu(false)}
                   className="text-white hover:text-cyan-600 transition-colors text-lg font-medium tracking-wide py-2"
                 >

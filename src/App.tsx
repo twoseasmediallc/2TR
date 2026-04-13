@@ -1507,16 +1507,17 @@ function MainApp() {
             <h3 className="text-2xl font-semibold text-white mb-6">Order Timeline</h3>
             <div className="space-y-6">
               {[
-                { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending' },
-                { stage: 1, title: 'In Production', description: 'Your rug is being handcrafted', status: 'in_production' },
-                { stage: 2, title: 'Post-Production', description: 'Finishing touches and preparation', status: 'post_production' },
-                { stage: 3, title: 'Quality Check', description: 'Final inspection and packaging', status: 'quality_check' },
-                { stage: 4, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped' },
-                { stage: 5, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered' }
-              ].map(({ stage, title, description, status }) => {
+                { stage: 0, title: 'Order Placed', description: 'Your custom rug order has been received', status: 'pending', timestampKey: 'order_placed_at' as const },
+                { stage: 1, title: 'In Production', description: 'Your rug is being handcrafted', status: 'in_production', timestampKey: 'in_production_at' as const },
+                { stage: 2, title: 'Post-Production', description: 'Finishing touches and preparation', status: 'post_production', timestampKey: 'post_production_at' as const },
+                { stage: 3, title: 'Quality Check', description: 'Final inspection and packaging', status: 'quality_check', timestampKey: 'quality_check_at' as const },
+                { stage: 4, title: 'Shipped', description: 'On its way to your doorstep', status: 'shipped', timestampKey: 'shipped_at' as const },
+                { stage: 5, title: 'Delivered', description: 'Enjoy your custom rug!', status: 'delivered', timestampKey: 'delivered_at' as const }
+              ].map(({ stage, title, description, status, timestampKey }) => {
                 const currentStage = trackingInfo ? getOrderStageIndex(trackingInfo) : -1;
                 const isActive = stage <= currentStage;
                 const isCurrent = stage === currentStage;
+                const stageTimestamp = trackingInfo ? trackingInfo[timestampKey] : null;
 
                 return (
                   <div key={stage} className={`flex items-start gap-4 ${!isActive && trackingInfo ? 'opacity-50' : ''}`}>
@@ -1535,11 +1536,12 @@ function MainApp() {
                         {isCurrent && ' (Current)'}
                       </h4>
                       <p className="text-gray-300">{description}</p>
-                      {trackingInfo && isActive && trackingInfo.updated_at && (
+                      {trackingInfo && isActive && stageTimestamp && (
                         <p className="text-gray-400 text-sm mt-1">
-                          Updated: {new Date(trackingInfo.updated_at).toLocaleDateString('en-US', {
+                          {new Date(stageTimestamp).toLocaleDateString('en-US', {
                             month: 'short',
                             day: 'numeric',
+                            year: 'numeric',
                             hour: '2-digit',
                             minute: '2-digit'
                           })}

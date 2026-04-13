@@ -17,6 +17,12 @@ export interface TrackingInfo {
   is_quality_check: boolean;
   is_shipped: boolean;
   is_delivered: boolean;
+  order_placed_at: string | null;
+  in_production_at: string | null;
+  post_production_at: string | null;
+  quality_check_at: string | null;
+  shipped_at: string | null;
+  delivered_at: string | null;
 }
 
 export async function lookupTracking(orderNumber: string): Promise<{
